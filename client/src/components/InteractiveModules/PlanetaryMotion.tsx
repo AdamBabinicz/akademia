@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -27,7 +26,7 @@ export function PlanetaryMotion() {
 
   useEffect(() => {
     let animationId: number;
-    
+
     if (isRunning) {
       const animate = () => {
         setPlanets(prev => prev.map(planet => ({
@@ -38,7 +37,7 @@ export function PlanetaryMotion() {
       };
       animationId = requestAnimationFrame(animate);
     }
-    
+
     return () => {
       if (animationId) {
         cancelAnimationFrame(animationId);
@@ -63,7 +62,7 @@ export function PlanetaryMotion() {
           </CardTitle>
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-6">
         <div className="text-muted-foreground">
           <FormattedMessage 
@@ -81,7 +80,7 @@ export function PlanetaryMotion() {
               boxShadow: '0 0 20px #fbbf24, 0 0 40px #f59e0b, 0 0 60px #d97706' 
             }}
           />
-          
+
           {/* Orbital paths */}
           {planets.map((planet, index) => (
             <div
@@ -93,7 +92,7 @@ export function PlanetaryMotion() {
               }}
             />
           ))}
-          
+
           {/* Planets */}
           {planets.map((planet, index) => (
             <div
@@ -123,7 +122,7 @@ export function PlanetaryMotion() {
               {speed[0]}x
             </span>
           </div>
-          
+
           <Slider
             value={speed}
             onValueChange={setSpeed}
@@ -134,7 +133,7 @@ export function PlanetaryMotion() {
             aria-label="Prędkość animacji"
             data-testid="speed-slider"
           />
-          
+
           <div className="flex gap-2 justify-center">
             <Button
               onClick={() => setIsRunning(!isRunning)}
@@ -154,7 +153,7 @@ export function PlanetaryMotion() {
                 </>
               )}
             </Button>
-            
+
             <Button
               onClick={resetAnimation}
               variant="outline"
