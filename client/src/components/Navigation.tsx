@@ -66,7 +66,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
     { href: "/electromagnetism", label: "Elektromagnetyzm", icon: "globe" },
     { href: "/optics", label: "Optyka", icon: "eye" },
     { href: "/modern-physics", label: "Fizyka współczesna", icon: "microscope" },
-    { href: "/earth-and-space", label: "Ziemia i kosmos", icon: "maximize" }, // Added "Ziemia i kosmos"
+    { href: "/earth-space", label: "Ziemia i kosmos", icon: "maximize" }, // Corrected link for "Ziemia i kosmos"
   ];
 
   return (
