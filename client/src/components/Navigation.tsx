@@ -56,6 +56,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
     ruler: Ruler,
     bookmark: Bookmark,
     maximize: Maximize,
+    sun: Sun,
   };
 
   const navigationItems = [
