@@ -68,30 +68,28 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
 
   // Animacja
   useEffect(() => {
-    if (!isRunning || !canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!isRunning) return;
 
     const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-
       setBalls(prevBalls => {
         const newBalls = [...prevBalls];
 
         // Aktualizuj pozycje kulek
-        newBalls.forEach((ball, index) => {
+        newBalls.forEach((ball) => {
           ball.x += ball.vx;
           ball.y += ball.vy;
 
+          // Tłumienie
+          ball.vx *= 0.999;
+          ball.vy *= 0.999;
+
           // Odbicie od ścian
           if (ball.x <= ball.radius || ball.x >= width - ball.radius) {
-            ball.vx *= -0.9;
+            ball.vx *= -0.8;
             ball.x = Math.max(ball.radius, Math.min(width - ball.radius, ball.x));
           }
           if (ball.y <= ball.radius || ball.y >= height - ball.radius) {
-            ball.vy *= -0.9;
+            ball.vy *= -0.8;
             ball.y = Math.max(ball.radius, Math.min(height - ball.radius, ball.y));
           }
         });
@@ -111,23 +109,28 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
               const sin = Math.sin(angle);
               const cos = Math.cos(angle);
 
-              // Transfer prędkości
+              // Prędkości przed kolizją
               const vx1 = ball1.vx * cos + ball1.vy * sin;
               const vy1 = ball1.vy * cos - ball1.vx * sin;
               const vx2 = ball2.vx * cos + ball2.vy * sin;
               const vy2 = ball2.vy * cos - ball2.vx * sin;
 
-              ball1.vx = vx2 * cos - vy1 * sin;
-              ball1.vy = vy1 * cos + vx2 * sin;
-              ball2.vx = vx1 * cos - vy2 * sin;
-              ball2.vy = vy2 * cos + vx1 * sin;
+              // Transfer prędkości (uproszczony)
+              const tempVx1 = vx1;
+              ball1.vx = (vx2 * cos - vy1 * sin) * 0.8;
+              ball1.vy = (vy1 * cos + vx2 * sin) * 0.8;
+              ball2.vx = (tempVx1 * cos - vy2 * sin) * 0.8;
+              ball2.vy = (vy2 * cos + tempVx1 * sin) * 0.8;
 
               // Rozdziel kulki
               const overlap = ball1.radius + ball2.radius - distance;
-              ball1.x -= overlap * 0.5 * cos;
-              ball1.y -= overlap * 0.5 * sin;
-              ball2.x += overlap * 0.5 * cos;
-              ball2.y += overlap * 0.5 * sin;
+              const moveX = overlap * 0.5 * cos;
+              const moveY = overlap * 0.5 * sin;
+              
+              ball1.x -= moveX;
+              ball1.y -= moveY;
+              ball2.x += moveX;
+              ball2.y += moveY;
 
               // Symulacja szybkości sygnału
               if (ball1.isElectron || ball2.isElectron) {
@@ -140,17 +143,19 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
         return newBalls;
       });
 
-      animationRef.current = requestAnimationFrame(animate);
+      if (isRunning) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
     };
 
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isRunning, width, height]);
+  }, [isRunning, width, height, balls.length]);
 
   // Rysowanie kulek
   useEffect(() => {

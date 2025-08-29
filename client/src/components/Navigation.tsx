@@ -228,39 +228,44 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
           </div>
 
           {/* Language and Theme Controls */}
-          <div className="mt-8 pt-6 border-t border-border space-y-4">
+          <div className="mt-6 pt-4 border-t border-border space-y-4">
             {/* Language Selector */}
-            <div>
-              <label className="text-sm font-medium text-foreground block mb-2">
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                 Język / Language
               </label>
               <select 
                 value={currentLanguage} 
                 onChange={(e) => onLanguageChange(e.target.value as Language)}
-                className="w-full p-2 bg-background border border-border rounded-lg text-foreground"
+                className="w-full p-2 bg-muted border border-border rounded-lg text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-primary"
               >
-                <option value="pl">Polski</option>
-                <option value="en">English</option>
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="en">🇬🇧 English</option>
               </select>
             </div>
 
             {/* Theme Toggle */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-foreground">
-                {theme === 'dark' ? 'Tryb ciemny' : 'Tryb jasny'}
-              </span>
-              <Button
-                onClick={onThemeToggle}
-                variant="outline"
-                size="sm"
-                className="p-2"
-                aria-label={`Przełącz na ${theme === 'dark' ? 'jasny' : 'ciemny'} motyw`}
-              >
-                {theme === 'dark' ? 
-                  <Sun className="w-4 h-4" /> : 
-                  <Moon className="w-4 h-4" />
-                }
-              </Button>
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                Motyw / Theme
+              </label>
+              <div className="flex items-center justify-between p-2 bg-muted rounded-lg">
+                <span className="text-sm font-medium text-foreground">
+                  {theme === 'dark' ? '🌙 Tryb ciemny' : '☀️ Tryb jasny'}
+                </span>
+                <Button
+                  onClick={onThemeToggle}
+                  variant="outline"
+                  size="sm"
+                  className="h-8 w-8 p-0"
+                  aria-label={`Przełącz na ${theme === 'dark' ? 'jasny' : 'ciemny'} motyw`}
+                >
+                  {theme === 'dark' ? 
+                    <Sun className="w-4 h-4" /> : 
+                    <Moon className="w-4 h-4" />
+                  }
+                </Button>
+              </div>
             </div>
           </div>
         </div>
