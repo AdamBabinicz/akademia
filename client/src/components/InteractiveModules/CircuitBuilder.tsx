@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Cpu, Battery, Lightbulb, Minus, Power, Move } from 'lucide-react';
 
@@ -45,12 +45,12 @@ export function CircuitBuilder() {
     };
 
     setComponents(prev => [...prev, newComponent]);
-    
+
     // Simple circuit completion check
     const hasBattery = [...components, newComponent].some(c => c.type === 'battery');
     const hasBulb = [...components, newComponent].some(c => c.type === 'bulb');
     const hasWires = [...components, newComponent].filter(c => c.type === 'wire').length >= 2;
-    
+
     setCircuitClosed(hasBattery && hasBulb && hasWires);
   };
 
@@ -99,7 +99,7 @@ export function CircuitBuilder() {
           <p className="text-muted-foreground mb-6">
             <FormattedMessage id="circuit.remember" />
           </p>
-          
+
           {/* Component Palette */}
           <div className="space-y-4">
             <h4 className="font-semibold text-card-foreground">Komponenty:</h4>
@@ -116,7 +116,7 @@ export function CircuitBuilder() {
           <h4 className="text-sm font-medium text-muted-foreground mb-4">
             <FormattedMessage id="circuit.buildArea" />
           </h4>
-          
+
           <div
             className="w-full h-full bg-background border-2 border-dashed border-border rounded-lg relative"
             onDragOver={handleDragOver}
@@ -149,7 +149,7 @@ export function CircuitBuilder() {
               })
             )}
           </div>
-          
+
           <div className="mt-4 flex justify-between items-center">
             <span className="text-sm text-muted-foreground">
               <FormattedMessage id="circuit.status" />:

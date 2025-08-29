@@ -126,7 +126,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
               const overlap = ball1.radius + ball2.radius - distance;
               const moveX = overlap * 0.5 * cos;
               const moveY = overlap * 0.5 * sin;
-              
+
               ball1.x -= moveX;
               ball1.y -= moveY;
               ball2.x += moveX;
