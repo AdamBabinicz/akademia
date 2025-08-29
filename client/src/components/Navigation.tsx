@@ -110,7 +110,8 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
         aria-label="Menu główne"
         data-testid="vertical-nav"
       >
-        <div className="p-6">
+        <div className="h-full overflow-y-auto">
+          <div className="p-6 pb-8">
           {/* Logo and Brand */}
           <div className="flex items-center gap-3 mb-8">
             <div className="w-10 h-10 bg-sidebar-primary rounded-lg flex items-center justify-center">
@@ -231,13 +232,14 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
           <div className="mt-6 pt-4 border-t border-border space-y-4">
             {/* Language Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                 Język / Language
               </label>
               <select 
                 value={currentLanguage} 
                 onChange={(e) => onLanguageChange(e.target.value as Language)}
-                className="w-full p-2 bg-muted border border-border rounded-lg text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+                className="w-full p-3 bg-background border-2 border-border rounded-lg text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-primary appearance-none cursor-pointer"
+                style={{ minHeight: '40px' }}
               >
                 <option value="pl">🇵🇱 Polski</option>
                 <option value="en">🇬🇧 English</option>
@@ -246,10 +248,10 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
 
             {/* Theme Toggle */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+              <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                 Motyw / Theme
               </label>
-              <div className="flex items-center justify-between p-2 bg-muted rounded-lg">
+              <div className="flex items-center justify-between p-3 bg-background border-2 border-border rounded-lg min-h-[40px]">
                 <span className="text-sm font-medium text-foreground">
                   {theme === 'dark' ? '🌙 Tryb ciemny' : '☀️ Tryb jasny'}
                 </span>
@@ -257,7 +259,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                   onClick={onThemeToggle}
                   variant="outline"
                   size="sm"
-                  className="h-8 w-8 p-0"
+                  className="h-8 w-8 p-0 border-2 hover:bg-primary hover:text-primary-foreground"
                   aria-label={`Przełącz na ${theme === 'dark' ? 'jasny' : 'ciemny'} motyw`}
                 >
                   {theme === 'dark' ? 
@@ -268,6 +270,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
               </div>
             </div>
           </div>
+        </div>
         </div>
       </motion.nav>
     </>
