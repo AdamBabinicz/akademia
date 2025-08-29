@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(28, 30%, 8%);
+  --foreground: hsl(43, 20%, 92%);
+  --card: hsl(28, 25%, 12%);
+  --card-foreground: hsl(43, 15%, 90%);
+  --popover: hsl(28, 25%, 12%);
+  --popover-foreground: hsl(43, 15%, 90%);
+  --primary: hsl(43, 74%, 66%);
+  --primary-foreground: hsl(28, 30%, 8%);
+  --secondary: hsl(28, 20%, 18%);
+  --secondary-foreground: hsl(43, 15%, 85%);
+  --muted: hsl(28, 15%, 15%);
+  --muted-foreground: hsl(43, 10%, 65%);
+  --accent: hsl(43, 84%, 58%);
+  --accent-foreground: hsl(28, 30%, 8%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(0, 85%, 97%);
+  --border: hsl(28, 15%, 22%);
+  --input: hsl(28, 15%, 22%);
+  --ring: hsl(43, 74%, 66%);
+  --chart-1: hsl(43, 74%, 66%);
+  --chart-2: hsl(28, 45%, 55%);
+  --chart-3: hsl(43, 84%, 58%);
+  --chart-4: hsl(28, 35%, 45%);
+  --chart-5: hsl(43, 64%, 48%);
+  --sidebar: hsl(28, 25%, 12%);
+  --sidebar-foreground: hsl(43, 15%, 90%);
+  --sidebar-primary: hsl(43, 74%, 66%);
+  --sidebar-primary-foreground: hsl(28, 30%, 8%);
+  --sidebar-accent: hsl(43, 84%, 58%);
+  --sidebar-accent-foreground: hsl(28, 30%, 8%);
+  --sidebar-border: hsl(28, 15%, 22%);
+  --sidebar-ring: hsl(43, 74%, 66%);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Source Sans Pro", serif;
+  --font-mono: "Fira Code", monospace;
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  line-height: 1.6;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Navigation animations */
+.nav-active {
+  transform: translateX(0);
+}
+
+.nav-hidden {
+  transform: translateX(-100%);
+}
+
+/* Interactive module styling */
+.interactive-module {
+  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(28, 20%, 14%) 100%);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Electron animation */
+.electron-dot {
+  width: 6px;
+  height: 6px;
+  background: hsl(var(--primary));
+  border-radius: 50%;
+  position: absolute;
+  animation: chaotic-movement 3s infinite ease-in-out;
+}
+
+@keyframes chaotic-movement {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(15px, -10px); }
+  50% { transform: translate(-8px, 12px); }
+  75% { transform: translate(10px, 8px); }
+}
+
+.drift-animation {
+  animation: electron-drift 4s linear infinite;
+}
+
+@keyframes electron-drift {
+  0% { transform: translateX(-50px); }
+  100% { transform: translateX(250px); }
+}
+
+/* Billiard ball styling */
+.billiard-ball {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(43, 64%, 48%) 100%);
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.billiard-impact {
+  animation: billiard-impact 0.5s ease-out;
+}
+
+@keyframes billiard-impact {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Circuit component styling */
+.circuit-component {
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+.circuit-component:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+.circuit-component:active {
+  cursor: grabbing;
+}
+
+/* Earth orbit animation */
+.earth-orbit {
+  animation: earth-rotation 20s linear infinite;
+}
+
+@keyframes earth-rotation {
+  0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+}
+
+/* Wave animation for AC current */
+.wave-animation {
+  animation: wave-motion 2s ease-in-out infinite;
+}
+
+@keyframes wave-motion {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Taste receptor styling */
+.taste-receptor {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(var(--muted));
+  transition: background-color 0.3s ease;
+}
+
+.taste-receptor.active {
+  background: hsl(var(--accent));
+  box-shadow: 0 0 8px hsl(var(--accent));
+}
+
+/* Scale zoom animations */
+.scale-zoom {
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.hidden-module {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.visible-module {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Slider styling */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: hsl(var(--muted));
+  outline: none;
+  border-radius: 0.5rem;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  cursor: pointer;
+  border: 2px solid hsl(var(--background));
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  cursor: pointer;
+  border: 2px solid hsl(var(--background));
+}
+
+/* Progress bar animations */
+.progress-fill {
+  transition: width 0.3s ease;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .electron-dot,
+  .drift-animation,
+  .wave-animation,
+  .earth-orbit {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: hsl(43, 50%, 40%);
+    --muted: hsl(28, 25%, 20%);
+  }
+}
