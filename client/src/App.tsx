@@ -47,6 +47,11 @@ function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
           <Route path="/" component={() => <Home language={currentLanguage} />} />
           <Route path="/electricity-magnetism" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
           <Route path="/electricity-magnetism/current-basics" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
+          <Route path="/modern-physics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Fizyka Nowoczesna - w przygotowaniu</h1></div>} />
+          <Route path="/optics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Optyka - w przygotowaniu</h1></div>} />
+          <Route path="/electromagnetism" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Elektromagnetyzm - w przygotowaniu</h1></div>} />
+          <Route path="/thermodynamics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Termodynamika - w przygotowaniu</h1></div>} />
+          <Route path="/mechanics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Mechanika - w przygotowaniu</h1></div>} />
           <Route path="/earth-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
           <Route path="/microworld" component={() => <Microworld language={currentLanguage} />} />
           <Route path="/perception" component={() => <Perception language={currentLanguage} />} />
