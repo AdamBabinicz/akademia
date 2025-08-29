@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Maximize, Clock } from 'lucide-react';
+import { Ruler, Clock, Bookmark } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { DailyFact } from '@/components/DailyFact';
 import { ScaleExplorer } from '@/components/InteractiveModules/ScaleExplorer';
 import { Language } from '@/types/education';
@@ -22,17 +23,20 @@ export default function Scale({ language }: ScaleProps) {
           <div className="flex items-center justify-between">
             <div className="ml-16 lg:ml-0">
               <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
-                Zabawa skalą wszechświata
+                Skale Wszechświata
               </h1>
               <p className="text-muted-foreground mt-2">
-                Podróż od najmniejszych cząstek do największych galaktyk
+                Podróżuj od atomów do galaktyk i odkryj ogrom Wszechświata
               </p>
             </div>
             <div className="flex items-center gap-4">
               <div className="hidden md:flex items-center gap-2 bg-muted rounded-lg p-2">
                 <Clock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">~20 min</span>
+                <span className="text-sm text-muted-foreground">~30 min</span>
               </div>
+              <Button variant="outline" size="sm">
+                <Bookmark className="w-4 h-4" />
+              </Button>
             </div>
           </div>
         </div>
@@ -92,7 +96,7 @@ export default function Scale({ language }: ScaleProps) {
             
             <div className="bg-muted rounded-lg p-6 h-64 flex items-center justify-center">
               <div className="text-center text-muted-foreground">
-                <Maximize className="w-16 h-16 mx-auto mb-4 text-primary" />
+                <Ruler className="w-16 h-16 mx-auto mb-4 text-primary" />
                 <p className="text-sm">Logarytmiczna reprezentacja skali</p>
               </div>
             </div>
