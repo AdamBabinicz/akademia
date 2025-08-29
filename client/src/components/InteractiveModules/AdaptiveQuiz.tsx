@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Brain, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
