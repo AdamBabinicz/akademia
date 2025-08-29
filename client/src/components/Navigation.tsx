@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, 
@@ -19,7 +19,10 @@ import {
   Sun,
   Moon,
   BookOpen,
-  Ruler
+  Ruler,
+  Home,
+  HelpCircle,
+  Scale
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -36,6 +39,8 @@ interface NavigationProps {
 export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeToggle }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
+  const navRef = useRef<HTMLDivElement>(null);
+  const intl = useIntl();
 
   const toggleNav = () => setIsOpen(!isOpen);
   const closeNav = () => setIsOpen(false);
@@ -57,10 +62,13 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
     bookmark: Bookmark,
     maximize: Maximize,
     sun: Sun,
+    home: Home,
+    helpcircle: HelpCircle,
+    scale: Scale,
   };
 
   const navigationItems = [
-    { href: "/", label: "Strona główna", icon: "atom" },
+    { href: "/", label: "Strona główna", icon: "home" },
     { href: "/mechanics", label: "Mechanika", icon: "zap" },
     { href: "/thermodynamics", label: "Termodynamika", icon: "sun" },
     { href: "/electromagnetism", label: "Elektromagnetyzm", icon: "globe" },
@@ -100,6 +108,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
 
       {/* Vertical Navigation */}
       <motion.nav
+        ref={navRef}
         initial="hidden"
         animate={isOpen ? "visible" : "hidden"}
         variants={navVariants}
@@ -118,124 +127,147 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
               <Atom className="w-6 h-6 text-sidebar-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-sidebar-foreground">
-                <FormattedMessage id="app.title" defaultMessage="Interaktywna Nauka" />
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                <FormattedMessage id="app.subtitle" defaultMessage="Physics Learning Hub" />
-              </p>
+              <h1 className="text-lg font-bold text-sidebar-foreground">{intl.formatMessage({ id: 'app.title' })}</h1>
+              <p className="text-xs text-sidebar-muted-foreground">{intl.formatMessage({ id: 'app.subtitle' })}</p>
             </div>
           </div>
 
           {/* Current Section Indicator */}
-          <div className="mb-6 p-3 bg-primary/10 rounded-lg border border-primary/20">
-            <p className="text-xs font-medium text-primary uppercase tracking-wide">
-              <FormattedMessage id="nav.currentSection" defaultMessage="Aktualna sekcja" />
-            </p>
-            <p className="text-sm font-semibold text-foreground">
-              {navigationItems.find(item => item.href === location)?.label || <FormattedMessage id="nav.homepage" defaultMessage="Strona główna" />}
-            </p>
-          </div>
+          {location !== '/' && (
+            <div className="mb-6 p-3 bg-primary/10 rounded-lg border border-primary/20">
+              <p className="text-xs font-medium text-primary uppercase tracking-wide">
+                {intl.formatMessage({ id: 'nav.currentSection' })}
+              </p>
+              <p className="text-sm font-semibold text-foreground">
+                {navigationItems.find(item => item.href === location)?.label || <FormattedMessage id="nav.homepage" defaultMessage="Strona główna" />}
+              </p>
+            </div>
+          )}
 
-          {/* Main Navigation */}
-          <div className="space-y-2">
+          {/* Main Sections */}
+          <div className="mb-6">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-              <FormattedMessage id="nav.mainSections" defaultMessage="Główne sekcje" />
+              {intl.formatMessage({ id: 'nav.mainSections' })}
             </h3>
-            {navigationItems.map((item) => {
-              const IconComponent = iconMap[item.icon as keyof typeof iconMap];
-              const isActive = location === item.href;
+            <nav className="space-y-1">
+              <Link href="/">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <Home className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.home' })}
+                </a>
+              </Link>
 
-              return (
-                <Link key={item.href} href={item.href} onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
-                  <motion.div
-                    className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
-                      isActive 
-                        ? 'bg-primary text-primary-foreground shadow-md border border-primary/30' 
-                        : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
-                    }`}
-                    whileHover={{ x: 4, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <IconComponent className={`w-5 h-5 ${isActive ? 'text-primary-foreground' : 'text-primary'}`} />
-                    <div className="flex-1">
-                      <span className="font-medium">{item.label}</span>
-                      {isActive && (
-                        <div className="w-2 h-2 bg-primary-foreground rounded-full ml-auto" />
-                      )}
-                    </div>
-                    {isActive && (
-                      <motion.div
-                        className="w-1 h-6 bg-primary-foreground rounded-full"
-                        initial={{ scaleY: 0 }}
-                        animate={{ scaleY: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    )}
-                  </motion.div>
-                </Link>
-              );
-            })}
+              <Link href="/mechanics">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/mechanics' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <span className="w-4 h-4 text-center">⚙️</span>
+                  {intl.formatMessage({ id: 'nav.mechanics' })}
+                </a>
+              </Link>
+
+              <Link href="/thermodynamics">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/thermodynamics' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <span className="w-4 h-4 text-center">🌡️</span>
+                  {intl.formatMessage({ id: 'nav.thermodynamics' })}
+                </a>
+              </Link>
+
+              <Link href="/electromagnetism">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/electromagnetism' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <Zap className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.electromagnetism' })}
+                </a>
+              </Link>
+
+              <Link href="/optics">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/optics' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <span className="w-4 h-4 text-center">👁️</span>
+                  {intl.formatMessage({ id: 'nav.optics' })}
+                </a>
+              </Link>
+
+              <Link href="/modern-physics">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/modern-physics' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <Atom className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.modernPhysics' })}
+                </a>
+              </Link>
+
+              <Link href="/earth-space">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location.startsWith('/earth') 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <Globe className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.earthSpace' })}
+                </a>
+              </Link>
+            </nav>
           </div>
-
-          <Separator className="my-4" />
 
           {/* Additional Tools */}
-          <div className="mt-8 space-y-2">
+          <div className="mb-6">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-              <FormattedMessage id="nav.additionalTools" defaultMessage="Dodatkowe narzędzia" />
+              {intl.formatMessage({ id: 'nav.additionalTools' })}
             </h3>
+            <nav className="space-y-1">
+              <Link href="/quiz">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/quiz' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <HelpCircle className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.quiz' })}
+                </a>
+              </Link>
 
-            <Link href="/quiz" onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
-              <motion.div
-                className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
-                  location === '/quiz'
-                    ? 'bg-secondary text-secondary-foreground shadow-md border border-secondary/30' 
-                    : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
-                }`}
-                whileHover={{ x: 4, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <BookOpen className="w-5 h-5 text-secondary" />
-                <span className="font-medium">
-                  <FormattedMessage id="nav.quiz" defaultMessage="Quiz interaktywny" />
-                </span>
-              </motion.div>
-            </Link>
+              <Link href="/facts">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/facts' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <Lightbulb className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.facts' })}
+                </a>
+              </Link>
 
-            <Link href="/facts" onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
-              <motion.div
-                className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
-                  location === '/facts'
-                    ? 'bg-secondary text-secondary-foreground shadow-md border border-secondary/30' 
-                    : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
-                }`}
-                whileHover={{ x: 4, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Lightbulb className="w-5 h-5 text-secondary" />
-                <span className="font-medium">
-                  <FormattedMessage id="nav.facts" defaultMessage="Ciekawe fakty" />
-                </span>
-              </motion.div>
-            </Link>
-
-            <Link href="/scale" onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
-              <motion.div
-                className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
-                  location === '/scale'
-                    ? 'bg-secondary text-secondary-foreground shadow-md border border-secondary/30' 
-                    : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
-                }`}
-                whileHover={{ x: 4, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Ruler className="w-5 h-5 text-secondary" />
-                <span className="font-medium">
-                  <FormattedMessage id="nav.scale" defaultMessage="Skale wszechświata" />
-                </span>
-              </motion.div>
-            </Link>
+              <Link href="/scale">
+                <a className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location === '/scale' 
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`}>
+                  <Scale className="w-4 h-4" />
+                  {intl.formatMessage({ id: 'nav.scale' })}
+                </a>
+              </Link>
+            </nav>
           </div>
 
           {/* Language and Theme Controls */}
@@ -243,45 +275,48 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
             {/* Language Selector */}
             <div className="space-y-2">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                <FormattedMessage id="nav.languageLabel" defaultMessage="Język / Language" />
+                {intl.formatMessage({ id: 'nav.language' })}
               </label>
               <select 
                 value={currentLanguage} 
                 onChange={(e) => {
                   onLanguageChange(e.target.value as Language);
-                  closeNav(); // Close navigation after changing language
+                  setIsOpen(false);
                 }}
                 className="w-full p-3 bg-background border-2 border-border rounded-lg text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-primary appearance-none cursor-pointer"
                 style={{ minHeight: '40px' }}
               >
                 <option value="pl">🇵🇱 Polski</option>
                 <option value="en">🇬🇧 English</option>
-                <option value="hu">🇭🇺 Magyar</option> 
+                <option value="hu">🇭🇺 Magyar</option>
               </select>
             </div>
 
             {/* Theme Toggle */}
             <div className="space-y-2">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                <FormattedMessage id="nav.themeLabel" defaultMessage="Motyw / Theme" />
+                {intl.formatMessage({ id: 'nav.theme' })}
               </label>
               <div className="flex items-center justify-between p-3 bg-background border-2 border-border rounded-lg min-h-[40px]">
                 <span className="text-sm font-medium text-foreground">
                   {theme === 'dark' ? 
-                    <FormattedMessage id="nav.darkTheme" defaultMessage="🌙 Tryb ciemny" /> : 
-                    <FormattedMessage id="nav.lightTheme" defaultMessage="☀️ Tryb jasny" />
+                    `🌙 ${intl.formatMessage({ id: 'theme.dark' })}` : 
+                    `☀️ ${intl.formatMessage({ id: 'theme.light' })}`
                   }
                 </span>
                 <Button
-                  onClick={() => { onThemeToggle(); closeNav(); }} // Close navigation after toggling theme
+                  onClick={() => {
+                    onThemeToggle();
+                    setIsOpen(false);
+                  }}
                   variant="outline"
                   size="sm"
                   className="h-8 w-8 p-0 border-2 hover:bg-primary hover:text-primary-foreground"
                   aria-label={`Przełącz na ${theme === 'dark' ? 'jasny' : 'ciemny'} motyw`}
                 >
                   {theme === 'dark' ? 
-                    <Sun className="w-4 h-4" /> : 
-                    <Moon className="w-4 h-4" />
+                    <Sun className="h-4 w-4" /> : 
+                    <Moon className="h-4 w-4" />
                   }
                 </Button>
               </div>
