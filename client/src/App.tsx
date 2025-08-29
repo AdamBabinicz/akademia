@@ -30,23 +30,24 @@ function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
 }) {
 
   return (
-    <IntlProvider 
-      locale={currentLanguage} 
+    <IntlProvider
+      locale={currentLanguage}
       messages={messages[currentLanguage]}
       defaultLocale="pl"
     >
       <div className="min-h-screen bg-background text-foreground">
-        <Navigation 
+        <Navigation
           currentLanguage={currentLanguage}
           onLanguageChange={setCurrentLanguage}
           theme={theme}
           onThemeToggle={toggleTheme}
         />
-        
+
         <Switch>
           <Route path="/" component={() => <Home language={currentLanguage} />} />
-          <Route path="/electricity-magnetism" component={() => <ElectricityMagnetism language={currentLanguage} />} />
-          <Route path="/earth-space" component={() => <EarthSpace language={currentLanguage} />} />
+          <Route path="/electricity-magnetism" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
+          <Route path="/electricity-magnetism/current-basics" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
+          <Route path="/earth-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
           <Route path="/microworld" component={() => <Microworld language={currentLanguage} />} />
           <Route path="/perception" component={() => <Perception language={currentLanguage} />} />
           <Route path="/quiz" component={() => <Quiz language={currentLanguage} />} />
@@ -67,7 +68,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AppContextProvider>
-          <Router 
+          <Router
             currentLanguage={currentLanguage}
             setCurrentLanguage={setCurrentLanguage}
             theme={theme}
