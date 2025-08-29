@@ -17,7 +17,9 @@ import {
   Clock,
   Bookmark,
   Sun,
-  Moon
+  Moon,
+  BookOpen,
+  Ruler
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -47,8 +49,24 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
     zap: Zap,
     globe: Globe,
     microscope: Microscope,
-    eye: Eye
+    eye: Eye,
+    atom: Atom,
+    bookopen: BookOpen,
+    lightbulb: Lightbulb,
+    ruler: Ruler,
+    bookmark: Bookmark,
+    maximize: Maximize,
   };
+
+  const navigationItems = [
+    { href: "/", label: "Strona główna", icon: "atom" },
+    { href: "/mechanics", label: "Mechanika", icon: "zap" },
+    { href: "/thermodynamics", label: "Termodynamika", icon: "sun" },
+    { href: "/electromagnetism", label: "Elektromagnetyzm", icon: "globe" },
+    { href: "/optics", label: "Optyka", icon: "eye" },
+    { href: "/modern-physics", label: "Fizyka współczesna", icon: "microscope" },
+    { href: "/earth-and-space", label: "Ziemia i kosmos", icon: "maximize" }, // Added "Ziemia i kosmos"
+  ];
 
   return (
     <>
@@ -103,155 +121,147 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
             </div>
           </div>
 
-          {/* Language Switcher */}
-          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg" role="group" aria-label="Wybór języka">
-            {Object.entries(LANGUAGES).map(([code, lang]) => (
-              <Button
-                key={code}
-                variant={currentLanguage === code ? "default" : "ghost"}
-                size="sm"
-                onClick={() => onLanguageChange(code as Language)}
-                className="flex-1 text-xs"
-                aria-label={`Zmień język na ${lang.name}`}
-                data-testid={`lang-${code}`}
-              >
-                {lang.flag} {code.toUpperCase()}
-              </Button>
-            ))}
+          {/* Current Section Indicator */}
+          <div className="mb-6 p-3 bg-primary/10 rounded-lg border border-primary/20">
+            <p className="text-xs font-medium text-primary uppercase tracking-wide">
+              Aktualna sekcja
+            </p>
+            <p className="text-sm font-semibold text-foreground">
+              {navigationItems.find(item => item.href === location)?.label || 'Strona główna'}
+            </p>
           </div>
 
-          {/* Theme Toggle */}
-          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg" role="group" aria-label="Przełącznik motywu">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onThemeToggle}
-              className="flex-1 text-xs"
-              aria-label={theme === 'dark' ? 'Przełącz na motyw jasny' : 'Przełącz na motyw ciemny'}
-              data-testid="theme-toggle"
-            >
-              {theme === 'dark' ? (
-                <>
-                  <Sun className="w-4 h-4 mr-2" />
-                  <FormattedMessage id="theme.light" defaultMessage="JASNY" />
-                </>
-              ) : (
-                <>
-                  <Moon className="w-4 h-4 mr-2" />
-                  <FormattedMessage id="theme.dark" defaultMessage="CIEMNY" />
-                </>
-              )}
-            </Button>
-          </div>
+          {/* Main Navigation */}
+          <div className="space-y-2">
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Główne sekcje
+            </h3>
+            {navigationItems.map((item) => {
+              const IconComponent = iconMap[item.icon];
+              const isActive = location === item.href;
 
-          {/* Navigation Menu */}
-          <nav className="space-y-2" role="navigation" aria-label="Menu kategorii">
-            <div className="mb-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                <FormattedMessage id="nav.categories" defaultMessage="Kategorie" />
-              </h3>
-            </div>
-            
-            {/* Categories */}
-            {CATEGORIES.map((category) => {
-              const IconComponent = iconMap[category.icon as keyof typeof iconMap] || Atom;
-              const isActive = location.includes(category.id);
-              
               return (
-                <div key={category.id} className="mb-4">
-                  <Link href={`/${category.id}`}>
-                    <Button
-                      variant={isActive ? "default" : "ghost"}
-                      className="w-full justify-between p-3"
-                      onClick={closeNav}
-                      aria-label={`Przejdź do sekcji ${category.titlePl}`}
-                      data-testid={`nav-category-${category.id}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <IconComponent className="w-5 h-5" />
-                        <span className="font-medium">{category.titlePl}</span>
-                      </div>
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
-                  
-                  {/* Topics submenu */}
-                  {isActive && category.topics.length > 0 && (
-                    <div className="ml-8 mt-2 space-y-2">
-                      {category.topics.map((topic) => (
-                        <Link key={topic.id} href={`/${category.id}/${topic.id}`}>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="w-full justify-start text-sm text-muted-foreground hover:text-primary"
-                            onClick={closeNav}
-                            aria-label={`Przejdź do tematu ${topic.titlePl} (czas: ${topic.estimatedTime} minut)`}
-                            data-testid={`nav-topic-${topic.id}`}
-                          >
-                            <div className="flex items-center justify-between w-full">
-                              <span>{topic.titlePl}</span>
-                              <div className="flex items-center gap-1 text-xs">
-                                <Clock className="w-3 h-3" />
-                                <span>{topic.estimatedTime}min</span>
-                              </div>
-                            </div>
-                          </Button>
-                        </Link>
-                      ))}
+                <Link key={item.href} href={item.href} onClick={closeNav}>
+                  <motion.div
+                    className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
+                      isActive 
+                        ? 'bg-primary text-primary-foreground shadow-md border border-primary/30' 
+                        : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
+                    }`}
+                    whileHover={{ x: 4, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <IconComponent className={`w-5 h-5 ${isActive ? 'text-primary-foreground' : 'text-primary'}`} />
+                    <div className="flex-1">
+                      <span className="font-medium">{item.label}</span>
+                      {isActive && (
+                        <div className="w-2 h-2 bg-primary-foreground rounded-full ml-auto" />
+                      )}
                     </div>
-                  )}
-                </div>
+                    {isActive && (
+                      <motion.div
+                        className="w-1 h-6 bg-primary-foreground rounded-full"
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    )}
+                  </motion.div>
+                </Link>
               );
             })}
+          </div>
 
-            <Separator className="my-4" />
+          <Separator className="my-4" />
 
-            {/* Interactive Modules */}
+          {/* Additional Tools */}
+          <div className="mt-8 space-y-2">
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Dodatkowe narzędzia
+            </h3>
+
+            <Link href="/quiz" onClick={closeNav}>
+              <motion.div
+                className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
+                  location === '/quiz'
+                    ? 'bg-secondary text-secondary-foreground shadow-md border border-secondary/30' 
+                    : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
+                }`}
+                whileHover={{ x: 4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BookOpen className="w-5 h-5 text-secondary" />
+                <span className="font-medium">Quiz interaktywny</span>
+              </motion.div>
+            </Link>
+
+            <Link href="/facts" onClick={closeNav}>
+              <motion.div
+                className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
+                  location === '/facts'
+                    ? 'bg-secondary text-secondary-foreground shadow-md border border-secondary/30' 
+                    : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
+                }`}
+                whileHover={{ x: 4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Lightbulb className="w-5 h-5 text-secondary" />
+                <span className="font-medium">Ciekawe fakty</span>
+              </motion.div>
+            </Link>
+
+            <Link href="/scale" onClick={closeNav}>
+              <motion.div
+                className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
+                  location === '/scale'
+                    ? 'bg-secondary text-secondary-foreground shadow-md border border-secondary/30' 
+                    : 'hover:bg-muted text-foreground hover:shadow-sm border border-transparent hover:border-border'
+                }`}
+                whileHover={{ x: 4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Ruler className="w-5 h-5 text-secondary" />
+                <span className="font-medium">Skale wszechświata</span>
+              </motion.div>
+            </Link>
+          </div>
+
+          {/* Language and Theme Controls */}
+          <div className="mt-8 pt-6 border-t border-border space-y-4">
+            {/* Language Selector */}
             <div>
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-                <FormattedMessage id="nav.interactive" defaultMessage="Moduły interaktywne" />
-              </h3>
-              
-              <Link href="/quiz">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start p-3 mb-2"
-                  onClick={closeNav}
-                  aria-label="Otwórz quiz adaptacyjny"
-                  data-testid="nav-quiz"
-                >
-                  <Brain className="w-5 h-5 mr-3" />
-                  <FormattedMessage id="nav.quiz" defaultMessage="Quiz adaptacyjny" />
-                </Button>
-              </Link>
-              
-              <Link href="/facts">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start p-3 mb-2"
-                  onClick={closeNav}
-                  aria-label="Zobacz ciekawostkę dnia"
-                  data-testid="nav-facts"
-                >
-                  <Lightbulb className="w-5 h-5 mr-3" />
-                  <FormattedMessage id="nav.facts" defaultMessage="Ciekawostka dnia" />
-                </Button>
-              </Link>
-              
-              <Link href="/scale">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start p-3"
-                  onClick={closeNav}
-                  aria-label="Otwórz eksplorator skali"
-                  data-testid="nav-scale"
-                >
-                  <Maximize className="w-5 h-5 mr-3" />
-                  <FormattedMessage id="nav.scale" defaultMessage="Zabawa skalą" />
-                </Button>
-              </Link>
+              <label className="text-sm font-medium text-foreground block mb-2">
+                Język / Language
+              </label>
+              <select 
+                value={currentLanguage} 
+                onChange={(e) => onLanguageChange(e.target.value as Language)}
+                className="w-full p-2 bg-background border border-border rounded-lg text-foreground"
+              >
+                <option value="pl">Polski</option>
+                <option value="en">English</option>
+              </select>
             </div>
-          </nav>
+
+            {/* Theme Toggle */}
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-foreground">
+                {theme === 'dark' ? 'Tryb ciemny' : 'Tryb jasny'}
+              </span>
+              <Button
+                onClick={onThemeToggle}
+                variant="outline"
+                size="sm"
+                className="p-2"
+                aria-label={`Przełącz na ${theme === 'dark' ? 'jasny' : 'ciemny'} motyw`}
+              >
+                {theme === 'dark' ? 
+                  <Sun className="w-4 h-4" /> : 
+                  <Moon className="w-4 h-4" />
+                }
+              </Button>
+            </div>
+          </div>
         </div>
       </motion.nav>
     </>

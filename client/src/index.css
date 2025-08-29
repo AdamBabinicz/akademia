@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
@@ -36,7 +35,7 @@
     --input: 40 12% 85%;
     --ring: 43 74% 49%;
     --radius: 0.5rem;
-    
+
     /* Chart colors for light theme */
     --chart-1: 43 74% 49%;
     --chart-2: 25 65% 55%;
@@ -47,32 +46,32 @@
 
   .dark {
     /* Dark theme - deep browns and warm golds */
-    --background: 25 25% 8%;
-    --foreground: 45 15% 88%;
-    --card: 30 20% 12%;
-    --card-foreground: 45 12% 85%;
-    --popover: 30 20% 12%;
-    --popover-foreground: 45 12% 85%;
-    --primary: 43 84% 65%;
-    --primary-foreground: 25 25% 8%;
-    --secondary: 35 15% 18%;
-    --secondary-foreground: 45 12% 75%;
-    --muted: 30 12% 16%;
-    --muted-foreground: 40 8% 55%;
-    --accent: 35 25% 22%;
-    --accent-foreground: 45 12% 85%;
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 35 15% 20%;
-    --input: 35 15% 20%;
-    --ring: 43 84% 65%;
-    
+    --background: 25 20% 8%;
+    --foreground: 45 85% 88%;
+    --card: 30 15% 12%;
+    --card-foreground: 45 85% 88%;
+    --popover: 30 15% 12%;
+    --popover-foreground: 45 85% 88%;
+    --primary: 45 93% 65%;
+    --primary-foreground: 25 20% 8%;
+    --secondary: 40 25% 18%;
+    --secondary-foreground: 45 85% 88%;
+    --muted: 35 20% 15%;
+    --muted-foreground: 45 40% 65%;
+    --accent: 45 70% 45%;
+    --accent-foreground: 25 20% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 45 85% 88%;
+    --border: 35 25% 22%;
+    --input: 35 25% 22%;
+    --ring: 45 93% 65%;
+
     /* Chart colors for dark theme */
-    --chart-1: 43 84% 65%;
-    --chart-2: 35 75% 60%;
-    --chart-3: 25 55% 55%;
-    --chart-4: 45 45% 70%;
-    --chart-5: 30 50% 50%;
+    --chart-1: 45 93% 65%;
+    --chart-2: 25 60% 45%;
+    --chart-3: 35 70% 50%;
+    --chart-4: 50 80% 60%;
+    --chart-5: 40 75% 55%;
   }
 }
 
@@ -84,44 +83,44 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
-  
+
   /* Ensure smooth transitions for all interactive elements */
   button, input, textarea, select {
     @apply transition-all duration-200 ease-in-out;
   }
-  
+
   /* Custom scrollbar for dark theme */
   .dark ::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   .dark ::-webkit-scrollbar-track {
     background: hsl(var(--muted));
   }
-  
+
   .dark ::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
     border-radius: 4px;
   }
-  
+
   .dark ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--accent));
   }
-  
+
   /* Light theme scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: hsl(var(--muted));
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
     border-radius: 4px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--accent));
   }
@@ -148,6 +147,33 @@
   }
 }
 
+@keyframes earth-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.earth-orbit {
+  animation: earth-orbit 8s linear infinite;
+}
+
+@keyframes dna-helix {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.dna-helix {
+  animation: dna-helix 4s linear infinite;
+  transform-style: preserve-3d;
+}
+
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out;
 }
@@ -158,11 +184,11 @@
 
 /* Special theme-aware gradients */
 .bg-gradient-warm {
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1));
+  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
 }
 
 .dark .bg-gradient-warm {
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.1));
+  background: linear-gradient(135deg, hsl(30 25% 15%) 0%, hsl(40 30% 20%) 100%);
 }
 
 /* Navigation improvements */
@@ -178,17 +204,22 @@
 
 /* Card enhancements */
 .card-interactive {
-  transition: all 0.3s ease;
-  cursor: pointer;
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  border: 1px solid hsl(var(--border));
+}
+
+.dark .card-interactive {
+  background: linear-gradient(145deg, hsl(30 20% 14%) 0%, hsl(35 25% 16%) 100%);
+  border: 1px solid hsl(40 30% 25%);
 }
 
 .card-interactive:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px hsl(var(--primary) / 0.15);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .dark .card-interactive:hover {
-  box-shadow: 0 8px 25px hsl(var(--primary) / 0.2);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  border-color: hsl(45 50% 35%);
 }
 
 /* Button enhancements */
@@ -202,6 +233,19 @@
 .btn-primary:hover {
   background: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--primary) / 0.8));
   box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+/* Przyciski w ciemnym motywie */
+.dark .btn-primary {
+  background: linear-gradient(135deg, hsl(45 93% 65%) 0%, hsl(40 85% 60%) 100%);
+  color: hsl(25 20% 8%);
+  border: none;
+}
+
+.dark .btn-primary:hover {
+  background: linear-gradient(135deg, hsl(45 93% 70%) 0%, hsl(40 85% 65%) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Interactive module styles */
@@ -283,7 +327,7 @@
   :root {
     --border: 30 15% 70%;
   }
-  
+
   .dark {
     --border: 45 15% 40%;
     --muted-foreground: 45 15% 70%;
