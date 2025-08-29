@@ -138,7 +138,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
               Główne sekcje
             </h3>
             {navigationItems.map((item) => {
-              const IconComponent = iconMap[item.icon];
+              const IconComponent = iconMap[item.icon as keyof typeof iconMap];
               const isActive = location === item.href;
 
               return (

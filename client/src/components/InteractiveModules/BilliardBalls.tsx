@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -34,7 +33,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
       const newBalls: Ball[] = [];
       const ballRadius = 15;
       const spacing = 35;
-      
+
       // Tworzymy rząd kulek reprezentujących atomy
       for (let i = 0; i < 10; i++) {
         newBalls.push({
@@ -48,7 +47,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
           isElectron: false
         });
       }
-      
+
       // Dodajemy "elektron" - czerwoną kulkę
       newBalls.push({
         id: 10,
@@ -60,10 +59,10 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
         color: '#ef4444', // czerwony - elektron
         isElectron: true
       });
-      
+
       setBalls(newBalls);
     };
-    
+
     initBalls();
   }, [height]);
 
@@ -77,15 +76,15 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      
+
       setBalls(prevBalls => {
         const newBalls = [...prevBalls];
-        
+
         // Aktualizuj pozycje kulek
         newBalls.forEach((ball, index) => {
           ball.x += ball.vx;
           ball.y += ball.vy;
-          
+
           // Odbicie od ścian
           if (ball.x <= ball.radius || ball.x >= width - ball.radius) {
             ball.vx *= -0.9;
@@ -96,7 +95,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             ball.y = Math.max(ball.radius, Math.min(height - ball.radius, ball.y));
           }
         });
-        
+
         // Kolizje między kulkami
         for (let i = 0; i < newBalls.length; i++) {
           for (let j = i + 1; j < newBalls.length; j++) {
@@ -105,31 +104,31 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             const dx = ball2.x - ball1.x;
             const dy = ball2.y - ball1.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            
+
             if (distance < ball1.radius + ball2.radius) {
               // Kolizja! Transfer energii
               const angle = Math.atan2(dy, dx);
               const sin = Math.sin(angle);
               const cos = Math.cos(angle);
-              
+
               // Transfer prędkości
               const vx1 = ball1.vx * cos + ball1.vy * sin;
               const vy1 = ball1.vy * cos - ball1.vx * sin;
               const vx2 = ball2.vx * cos + ball2.vy * sin;
               const vy2 = ball2.vy * cos - ball2.vx * sin;
-              
+
               ball1.vx = vx2 * cos - vy1 * sin;
               ball1.vy = vy1 * cos + vx2 * sin;
               ball2.vx = vx1 * cos - vy2 * sin;
               ball2.vy = vy2 * cos + vx1 * sin;
-              
+
               // Rozdziel kulki
               const overlap = ball1.radius + ball2.radius - distance;
               ball1.x -= overlap * 0.5 * cos;
               ball1.y -= overlap * 0.5 * sin;
               ball2.x += overlap * 0.5 * cos;
               ball2.y += overlap * 0.5 * sin;
-              
+
               // Symulacja szybkości sygnału
               if (ball1.isElectron || ball2.isElectron) {
                 setSignalSpeed(prev => prev + 1);
@@ -137,15 +136,15 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             }
           }
         }
-        
+
         return newBalls;
       });
-      
+
       animationRef.current = requestAnimationFrame(animate);
     };
-    
+
     animate();
-    
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -157,12 +156,12 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
+
     ctx.clearRect(0, 0, width, height);
-    
+
     balls.forEach(ball => {
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
@@ -171,7 +170,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
       ctx.strokeStyle = ball.isElectron ? '#dc2626' : '#475569';
       ctx.lineWidth = 2;
       ctx.stroke();
-      
+
       if (ball.isElectron) {
         // Dodaj świecenie dla elektronu
         ctx.shadowBlur = 10;
@@ -193,7 +192,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
   const handleReset = () => {
     setIsRunning(false);
     setSignalSpeed(0);
-    
+
     // Reset pozycji kulek
     setBalls(prevBalls => {
       const newBalls = [...prevBalls];
@@ -272,14 +271,14 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             Popchnij elektron
           </Button>
         </div>
-        
+
         <div className="bg-muted p-3 rounded-lg">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-medium">Szybkość sygnału:</span>
             <Badge variant="secondary">{signalSpeed}</Badge>
           </div>
         </div>
-        
+
         <div className="border border-border rounded-lg overflow-hidden">
           <canvas
             ref={canvasRef}
@@ -289,7 +288,7 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             style={{ background: 'hsl(var(--card))' }}
           />
         </div>
-        
+
         <div className="bg-muted p-4 rounded-lg text-sm">
           <h4 className="font-semibold mb-2">Jak to działa:</h4>
           <ul className="space-y-1 text-muted-foreground">
