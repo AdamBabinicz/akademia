@@ -1,0 +1,80 @@
+Cel: Zbuduj kompletną, bogatą w interaktywne moduły, edukacyjną aplikację webową "Interaktywna Nauka".
+Stos Technologiczny:
+Framework: React 18+ (z Vite)
+Język: TypeScript
+Stylizacja: Tailwind CSS (skonfiguruj z niestandardowym, nie-czarnym ciemnym motywem opartym na brązach i złocie, zapewniając dobry kontrast. Rozbuduj o własne tokeny kolorów).
+Internacjonalizacja: react-intl (obsługa pl (domyślny), en, hu).
+Animacje: framer-motion
+Komponenty UI: shadcn/ui (dostosowane do React/Vite)
+Ikony: lucide-react
+Walidacja Formularzy: react-hook-form + zod
+Matematyka: KaTeX (react-katex)
+Wizualizacja Danych: Do integracji dynamicznych wykresów użyj recharts lub chart.js (z wrapperem React).
+Modele 3D: Do implementacji modeli 3D użyj react-three-fiber (lub proste, pre-renderowane animacje/GIFy jako alternatywa dla początkowej wersji).
+Dostępność: react-aria lub implementacja wzorców ARIA.
+Treści: MDX (z remark/rehype do renderowania plików .mdx).
+Narzędzia Deweloperskie: ESLint, Prettier, Jest, React Testing Library, Playwright, axe-core.
+PWA: Konfiguracja manifestu i service worker'a dla cachowania podstawowych assetów.
+Hosting: Konfiguracja dla Firebase Hosting (Firestore/Functions opcjonalne, domyślnie wyłączone).
+Architektura:
+Projekt ma być modułowy: dużo małych plików, łatwy do refaktoryzacji.
+Dane strukturalne JSON-LD (schema.org) dla każdej strony.
+Implementacja Routing z react-router-dom.
+Unikalny Navbar:
+Stwórz oryginalny, nietradycyjny pasek nawigacyjny. Propozycja: pionowy pasek nawigacyjny z wysuwanym menu lub kołowy (circular) navbar. Skup się na innowacyjnym UX/UI, z uwzględnieniem dostępności.
+Wymagana Treść i Moduły Interaktywne:
+Implementuj poniższe tematy jako strony MDX, zawierające tekst. Kluczowe jest zintegrowanie dedykowanych interaktywnych modułów z odpowiednimi sekcjami treści. Każdy moduł powinien być odrębnym komponentem, łatwym do włączenia w pliki MDX.
+Kategoria: Elektryczność i magnetyzm
+Czym jest prąd? (Definicja, elektrony swobodne w metalach).
+Czy elektrony w kablu się poruszają? (Chaotyczny ruch bez napięcia, powolny dryf z napięciem, prędkość dryfu).
+Moduł interaktywny: Symulacja w czasie rzeczywistym dryfu elektronów w przewodniku (wizualizacja chaotycznego ruchu vs. powolny dryf po przyłożeniu napięcia).
+Skąd więc bierzemy „szybki” prąd? (Szybkość sygnału elektrycznego vs. prędkość dryfu elektronów, analogia z kulkami bilardowymi).
+Moduł interaktywny: Eksperyment wirtualny z kulkami bilardowymi w rurze, gdzie użytkownik "popycha" pierwszą kulkę i obserwuje natychmiastowy ruch ostatniej.
+Podsumowanie (Elektrony wolno, fala pola szybko).
+Prąd w gniazdku (Prąd zmienny, drgania elektronów, energia przez falę elektromagnetyczną).
+Moduł interaktywny: Animacja zależna od wejścia użytkownika – suwakiem zmieniaj częstotliwość prądu zmiennego, obserwując wizualizację drgań elektronów.
+Baterie (Magazyn energii chemicznej, ruch ładunków, prąd powstaje w obwodzie).
+Moduł interaktywny: Przeciągnij i upuść – budowanie prostego obwodu z baterii, żarówki i przewodów, aby "zaświecić" żarówkę i zrozumieć zamknięty obwód.
+Kategoria: Ziemia i kosmos
+Pory roku (Nachylenie osi Ziemi, a nie odległość od Słońca).
+Moduł interaktywny: Model 3D Ziemi z zaznaczoną osią obrotu i jej nachyleniem, obracający się wokół Słońca (użytkownik może obracać model Ziemi, zmieniać porę roku, obserwując kąt padania światła).
+Grawitacja (Zakrzywienie czasoprzestrzeni w teorii względności).
+Moduł interaktywny: Symulacja w czasie rzeczywistym zakrzywienia siatki czasoprzestrzeni przez obiekty o różnej masie.
+Wschód i zachód Słońca (Obrót Ziemi wokół własnej osi).
+Moduł interaktywny: Mapy interaktywne – globus Ziemi z oznaczonym obszarem dnia i nocy, który obraca się, symulując wschody i zachody Słońca w różnych miejscach.
+Kategoria: Mikroświat
+Cząsteczki wody we wrzątku (Ciśnienie pary wodnej równoważy ciśnienie atmosferyczne).
+Moduł interaktywny: Dynamiczne wykresy – wizualizacja zależności ciśnienia pary wodnej od temperatury, z punktem wrzenia zaznaczonym, gdy wykres zrówna się z ciśnieniem atmosferycznym (użytkownik może zmieniać temperaturę).
+Kolor obiektów (Obiekty pochłaniają barwy i odbijają tylko swoją).
+Moduł interaktywny: Eksperyment wirtualny – "oświetlanie" wirtualnego obiektu (np. czerwonego kubka) światłem o różnych barwach, obserwując, jak zmienia się jego postrzegany kolor.
+Atomy (Elektrony jako chmura prawdopodobieństwa, a nie orbity).
+Moduł interaktywny: Interaktywne porównania – suwakiem porównaj klasyczny model planetarny atomu z modelem kwantowym (chmura prawdopodobieństwa elektronów).
+Kategoria: Percepcja i człowiek
+Smak języka (Każda część języka czuje wszystkie smaki).
+Moduł interaktywny: Kolorowanie danych – interaktywna mapa języka, gdzie użytkownik "aplikuje" smaki i widzi aktywację receptorów w całym obszarze, a nie tylko w konkretnych sekcjach.
+Widzenie barw (Oko odbiera fale, mózg interpretuje jako barwy).
+Moduł interaktywny: Mini-gra logiczna – dopasowanie długości fali światła do koloru, który interpretuje mózg, z wyjaśnieniem iluzji optycznych.
+Ciężar ciała w wodzie (Siła wyporu, masa się nie zmienia).
+Moduł interaktywny: Eksperyment wirtualny – symulacja ważenia obiektu w powietrzu i w wodzie, wizualizująca siłę wyporu. Użytkownik może zmieniać gęstość obiektu i cieczy.
+Dodatkowe Moduły Interaktywne (niezależne od konkretnych tematów, do integracji na stronie głównej lub jako osobne sekcje):
+Quiz adaptacyjny: Moduł sprawdzający wiedzę na dowolny temat, dostosowujący trudność pytań do odpowiedzi użytkownika.
+Losowe ciekawostki ("Fact of the Day"): Sekcja na stronie głównej lub w bocznym panelu, wyświetlająca codziennie nową, losową ciekawostkę z bazy danych.
+Zabawa skalą: Moduł "wow", pozwalający użytkownikowi na interaktywne powiększanie/zmniejszanie obiektów, od subatomowych cząstek, przez obiekty codzienne, Ziemię, aż po galaktyki.
+Instrukcje dla Agenta Replit:
+Zainicjuj nowy projekt React z Vite i TypeScript.
+Zainstaluj wszystkie wymagane zależności, w tym te dla wizualizacji danych (recharts/chart.js) i modeli 3D (react-three-fiber lub alternatywa).
+Skonfiguruj Tailwind CSS z niestandardowym ciemnym motywem (brązy, złoto, dobry kontrast), zapewniając dostępność.
+Skonfiguruj react-intl dla pl, en, hu.
+Zaprojektuj i zaimplementuj unikalny pasek nawigacyjny (pionowy z wysuwanym menu LUB kołowy), z pełną obsługą dostępności.
+Stwórz bazową, modułową strukturę folderów.
+Utwórz generyczne komponenty UI (Button, Card) i komponenty dla MDX (MathBlock, ImageWithCaption).
+Zaimplementuj dynamiczne ładowanie treści MDX.
+Zintegruj KaTeX dla renderowania matematyki.
+Utwórz pliki MDX dla wszystkich podanych tematów i zintegruj je z routingiem.
+Dla każdego wspomnianego tematu, zaprojektuj i zaimplementuj przypisany mu interaktywny moduł. Upewnij się, że moduły są łatwo włączalne w pliki MDX.
+Dodaj ogólne moduły interaktywne (Quiz adaptacyjny, Losowe ciekawostki, Zabawa skalą) jako osobne sekcje lub elementy UI.
+Zadbaj o wysoką dostępność (ARIA attributes, semantyczny HTML, kontrast kolorów).
+Skonfiguruj ESLint, Prettier, Jest, React Testing Library i Playwright.
+Zaimplementuj podstawową konfigurację PWA.
+Zapewnij działający build projektu.
+Generuj obrazy dla każdego z podrozdziałów tematów oraz dla każdego interaktywnego modułu, aby wizualizować jego działanie lub kontekst.
