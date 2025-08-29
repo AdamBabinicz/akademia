@@ -58,6 +58,7 @@ function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
           <Route path="/thermodynamics" component={() => <Thermodynamics language={currentLanguage} />} />
           <Route path="/mechanics" component={() => <Mechanics language={currentLanguage} />} />
           <Route path="/earth-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
+          <Route path="/earth-and-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
           <Route path="/microworld" component={() => <Microworld language={currentLanguage} />} />
           <Route path="/perception" component={() => <Perception language={currentLanguage} />} />
           <Route path="/quiz" component={() => <Quiz language={currentLanguage} />} />

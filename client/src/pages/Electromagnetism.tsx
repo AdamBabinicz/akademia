@@ -228,7 +228,7 @@ export default function Electromagnetism({ language }: ElectromagnetismProps) {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded text-center">
                   <div className="font-semibold text-purple-800 dark:text-purple-200">Fale radiowe</div>
-                  <div className="text-xs text-purple-600 dark:text-purple-300">λ > 1m</div>
+                  <div className="text-xs text-purple-600 dark:text-purple-300">λ &gt; 1m</div>
                 </div>
                 
                 <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded text-center">
