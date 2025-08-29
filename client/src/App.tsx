@@ -24,6 +24,7 @@ import NotFound from "@/pages/not-found";
 
 function Router() {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('pl');
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <IntlProvider 
@@ -35,6 +36,8 @@ function Router() {
         <Navigation 
           currentLanguage={currentLanguage}
           onLanguageChange={setCurrentLanguage}
+          theme={theme}
+          onThemeToggle={toggleTheme}
         />
         
         <Switch>

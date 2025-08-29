@@ -15,7 +15,9 @@ import {
   Maximize,
   ChevronRight,
   Clock,
-  Bookmark
+  Bookmark,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -25,13 +27,16 @@ import { Language } from '@/types/education';
 interface NavigationProps {
   currentLanguage: Language;
   onLanguageChange: (lang: Language) => void;
+  theme: 'light' | 'dark';
+  onThemeToggle: () => void;
 }
 
-export function Navigation({ currentLanguage, onLanguageChange }: NavigationProps) {
+export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeToggle }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
 
   const toggleNav = () => setIsOpen(!isOpen);
+  const closeNav = () => setIsOpen(false);
 
   const navVariants = {
     hidden: { x: '-100%' },
@@ -77,7 +82,7 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
         animate={isOpen ? "visible" : "hidden"}
         variants={navVariants}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed left-0 top-0 h-full w-80 bg-sidebar border-r border-sidebar-border z-50"
+        className="fixed left-0 top-0 h-full w-80 bg-sidebar/95 backdrop-blur-sm border-r border-sidebar-border z-50 shadow-2xl"
         data-testid="vertical-nav"
       >
         <div className="p-6">
@@ -108,6 +113,29 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
             ))}
           </div>
 
+          {/* Theme Toggle */}
+          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onThemeToggle}
+              className="flex-1 text-xs"
+              data-testid="theme-toggle"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-4 h-4 mr-2" />
+                  <FormattedMessage id="theme.light" defaultMessage="JASNY" />
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 mr-2" />
+                  <FormattedMessage id="theme.dark" defaultMessage="CIEMNY" />
+                </>
+              )}
+            </Button>
+          </div>
+
           {/* Navigation Menu */}
           <nav className="space-y-2">
             <div className="mb-4">
@@ -127,6 +155,7 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
                     <Button
                       variant={isActive ? "default" : "ghost"}
                       className="w-full justify-between p-3"
+                      onClick={closeNav}
                       data-testid={`nav-category-${category.id}`}
                     >
                       <div className="flex items-center gap-3">
@@ -146,6 +175,7 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
                             variant="ghost"
                             size="sm"
                             className="w-full justify-start text-sm text-muted-foreground hover:text-primary"
+                            onClick={closeNav}
                             data-testid={`nav-topic-${topic.id}`}
                           >
                             <div className="flex items-center justify-between w-full">
@@ -176,6 +206,7 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
                 <Button
                   variant="ghost"
                   className="w-full justify-start p-3 mb-2"
+                  onClick={closeNav}
                   data-testid="nav-quiz"
                 >
                   <Brain className="w-5 h-5 mr-3" />
@@ -187,6 +218,7 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
                 <Button
                   variant="ghost"
                   className="w-full justify-start p-3 mb-2"
+                  onClick={closeNav}
                   data-testid="nav-facts"
                 >
                   <Lightbulb className="w-5 h-5 mr-3" />
@@ -198,6 +230,7 @@ export function Navigation({ currentLanguage, onLanguageChange }: NavigationProp
                 <Button
                   variant="ghost"
                   className="w-full justify-start p-3"
+                  onClick={closeNav}
                   data-testid="nav-scale"
                 >
                   <Maximize className="w-5 h-5 mr-3" />

@@ -3,6 +3,8 @@ import { createIntl, createIntlCache } from 'react-intl';
 export const messages = {
   pl: {
     'nav.home': 'Strona główna',
+    'nav.categories': 'Kategorie',
+    'nav.interactive': 'Moduły interaktywne',
     'nav.electricity': 'Elektryczność i magnetyzm',
     'nav.earth': 'Ziemia i kosmos',
     'nav.micro': 'Mikroświat',
@@ -26,9 +28,13 @@ export const messages = {
     'circuit.switch': 'Przełącznik',
     'scale.level': 'Skala',
     'time.estimate': '~{time} min',
+    'theme.light': 'JASNY',
+    'theme.dark': 'CIEMNY',
   },
   en: {
     'nav.home': 'Home',
+    'nav.categories': 'Categories',
+    'nav.interactive': 'Interactive Modules',
     'nav.electricity': 'Electricity and Magnetism',
     'nav.earth': 'Earth and Space',
     'nav.micro': 'Microworld',
@@ -52,9 +58,13 @@ export const messages = {
     'circuit.switch': 'Switch',
     'scale.level': 'Scale',
     'time.estimate': '~{time} min',
+    'theme.light': 'LIGHT',
+    'theme.dark': 'DARK',
   },
   hu: {
     'nav.home': 'Főoldal',
+    'nav.categories': 'Kategóriák',
+    'nav.interactive': 'Interaktív modulok',
     'nav.electricity': 'Elektromosság és mágnesség',
     'nav.earth': 'Föld és űr',
     'nav.micro': 'Mikrovilág',
@@ -78,6 +88,8 @@ export const messages = {
     'circuit.switch': 'Kapcsoló',
     'scale.level': 'Méretarány',
     'time.estimate': '~{time} perc',
+    'theme.light': 'VILÁGOS',
+    'theme.dark': 'SÖTÉT',
   }
 };
 
