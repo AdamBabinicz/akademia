@@ -154,10 +154,10 @@ export function CircuitBuilder() {
             <span className="text-sm text-muted-foreground">
               <FormattedMessage id="circuit.status" />:
             </span>
-            <span 
+            <span
               className={`px-3 py-1 rounded-full text-xs font-medium ${
-                circuitClosed 
-                  ? 'bg-primary text-primary-foreground' 
+                circuitClosed
+                  ? 'bg-primary text-primary-foreground'
                   : 'bg-destructive text-destructive-foreground'
               }`}
               data-testid="circuit-status"

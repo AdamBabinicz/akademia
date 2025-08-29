@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Lightbulb } from 'lucide-react';
 import { Language } from '@/types/education';
@@ -29,7 +29,7 @@ export function DailyFact({ language }: DailyFactProps) {
   };
 
   return (
-    <div 
+    <div
       className="bg-gradient-to-r from-accent to-primary p-6 rounded-xl text-accent-foreground mb-8"
       data-testid="daily-fact"
     >

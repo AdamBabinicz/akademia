@@ -9,7 +9,7 @@ import { Navigation } from "@/components/Navigation";
 import { useTheme } from "@/hooks/useTheme";
 import { messages } from "@/lib/i18n";
 import { Language } from "@/types/education";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // Pages
 import Home from "@/pages/Home";
