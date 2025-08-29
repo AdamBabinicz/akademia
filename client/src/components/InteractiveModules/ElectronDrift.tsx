@@ -89,6 +89,7 @@ export function ElectronDrift() {
               max={12}
               step={1}
               className="w-full"
+              aria-label="Ustaw napięcie w woltach"
               data-testid="voltage-slider"
             />
             
@@ -96,6 +97,7 @@ export function ElectronDrift() {
               <Button
                 variant="secondary"
                 onClick={resetSimulation}
+                aria-label="Zresetuj symulację dryfu elektronów"
                 data-testid="reset-button"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
@@ -105,6 +107,7 @@ export function ElectronDrift() {
               <Button
                 variant="default"
                 onClick={() => setIsPlaying(!isPlaying)}
+                aria-label={isPlaying ? "Zatrzymaj symulację" : "Uruchom symulację"}
                 data-testid="play-pause-button"
               >
                 {isPlaying ? (

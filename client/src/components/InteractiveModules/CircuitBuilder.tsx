@@ -74,6 +74,9 @@ export function CircuitBuilder() {
         className="circuit-component p-4 bg-secondary rounded-lg border-2 border-dashed border-border text-center cursor-grab"
         draggable
         onDragStart={(e) => handleDragStart(e, type)}
+        role="button"
+        tabIndex={0}
+        aria-label={`Przeciągnij komponent ${componentNames[type].pl} do obszaru budowy obwodu`}
         data-testid={`component-${type}`}
       >
         <div className={`w-8 h-8 ${colorClasses[type]} rounded mx-auto mb-2 flex items-center justify-center`}>
@@ -123,6 +126,8 @@ export function CircuitBuilder() {
             className="w-full h-full bg-background border-2 border-dashed border-border rounded-lg relative"
             onDragOver={handleDragOver}
             onDrop={handleDrop}
+            role="application"
+            aria-label="Obszar budowy obwodu - upuść tutaj komponenty"
             data-testid="circuit-drop-zone"
           >
             {components.length === 0 ? (

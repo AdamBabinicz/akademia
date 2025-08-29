@@ -86,6 +86,7 @@ export function ScaleExplorer() {
                 max={SCALE_LEVELS.length - 1}
                 step={1}
                 className="w-full"
+                aria-label="Wybierz skal\u0119 wszech\u015bwiata - od quark\u00f3w do galaktyk"
                 data-testid="scale-slider"
               />
               

@@ -56,7 +56,9 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
       <Button
         onClick={toggleNav}
         className="fixed top-4 left-4 z-[60] p-3 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground"
-        aria-label="Toggle navigation menu"
+        aria-label={isOpen ? 'Zamknij menu nawigacyjne' : 'Otwórz menu nawigacyjne'}
+        aria-expanded={isOpen}
+        aria-controls="main-navigation"
         data-testid="nav-toggle"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -71,6 +73,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={toggleNav}
+            aria-hidden="true"
             data-testid="nav-overlay"
           />
         )}
@@ -83,6 +86,9 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
         variants={navVariants}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed left-0 top-0 h-full w-80 bg-sidebar/95 backdrop-blur-sm border-r border-sidebar-border z-50 shadow-2xl"
+        id="main-navigation"
+        role="navigation"
+        aria-label="Menu główne"
         data-testid="vertical-nav"
       >
         <div className="p-6">
@@ -98,7 +104,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
           </div>
 
           {/* Language Switcher */}
-          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg">
+          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg" role="group" aria-label="Wybór języka">
             {Object.entries(LANGUAGES).map(([code, lang]) => (
               <Button
                 key={code}
@@ -106,6 +112,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                 size="sm"
                 onClick={() => onLanguageChange(code as Language)}
                 className="flex-1 text-xs"
+                aria-label={`Zmień język na ${lang.name}`}
                 data-testid={`lang-${code}`}
               >
                 {lang.flag} {code.toUpperCase()}
@@ -114,12 +121,13 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
           </div>
 
           {/* Theme Toggle */}
-          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg">
+          <div className="flex gap-1 mb-6 p-1 bg-muted rounded-lg" role="group" aria-label="Przełącznik motywu">
             <Button
               variant="ghost"
               size="sm"
               onClick={onThemeToggle}
               className="flex-1 text-xs"
+              aria-label={theme === 'dark' ? 'Przełącz na motyw jasny' : 'Przełącz na motyw ciemny'}
               data-testid="theme-toggle"
             >
               {theme === 'dark' ? (
@@ -137,7 +145,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
           </div>
 
           {/* Navigation Menu */}
-          <nav className="space-y-2">
+          <nav className="space-y-2" role="navigation" aria-label="Menu kategorii">
             <div className="mb-4">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
                 <FormattedMessage id="nav.categories" defaultMessage="Kategorie" />
@@ -156,6 +164,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                       variant={isActive ? "default" : "ghost"}
                       className="w-full justify-between p-3"
                       onClick={closeNav}
+                      aria-label={`Przejdź do sekcji ${category.titlePl}`}
                       data-testid={`nav-category-${category.id}`}
                     >
                       <div className="flex items-center gap-3">
@@ -176,6 +185,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                             size="sm"
                             className="w-full justify-start text-sm text-muted-foreground hover:text-primary"
                             onClick={closeNav}
+                            aria-label={`Przejdź do tematu ${topic.titlePl} (czas: ${topic.estimatedTime} minut)`}
                             data-testid={`nav-topic-${topic.id}`}
                           >
                             <div className="flex items-center justify-between w-full">
@@ -207,6 +217,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                   variant="ghost"
                   className="w-full justify-start p-3 mb-2"
                   onClick={closeNav}
+                  aria-label="Otwórz quiz adaptacyjny"
                   data-testid="nav-quiz"
                 >
                   <Brain className="w-5 h-5 mr-3" />
@@ -219,6 +230,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                   variant="ghost"
                   className="w-full justify-start p-3 mb-2"
                   onClick={closeNav}
+                  aria-label="Zobacz ciekawostkę dnia"
                   data-testid="nav-facts"
                 >
                   <Lightbulb className="w-5 h-5 mr-3" />
@@ -231,6 +243,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                   variant="ghost"
                   className="w-full justify-start p-3"
                   onClick={closeNav}
+                  aria-label="Otwórz eksplorator skali"
                   data-testid="nav-scale"
                 >
                   <Maximize className="w-5 h-5 mr-3" />

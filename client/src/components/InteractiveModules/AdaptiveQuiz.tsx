@@ -127,6 +127,9 @@ export function AdaptiveQuiz({ language }: AdaptiveQuizProps) {
                   variant={selectedAnswer === option.id ? "default" : "outline"}
                   className="w-full p-4 text-left justify-start h-auto"
                   onClick={() => handleAnswerSelect(option.id)}
+                  aria-label={`Wybierz odpowiedź ${option.id.toUpperCase()}: ${getOptionText(option)}`}
+                  role="radio"
+                  aria-checked={selectedAnswer === option.id}
                   data-testid={`option-${option.id}`}
                 >
                   {option.id.toUpperCase()}) {getOptionText(option)}
@@ -140,6 +143,7 @@ export function AdaptiveQuiz({ language }: AdaptiveQuizProps) {
               variant="outline"
               onClick={handlePrevious}
               disabled={currentQuestion === 0}
+              aria-label="Przejdź do poprzedniego pytania"
               data-testid="previous-button"
             >
               <FormattedMessage id="quiz.previous" defaultMessage="Poprzednie" />
@@ -161,6 +165,7 @@ export function AdaptiveQuiz({ language }: AdaptiveQuizProps) {
             <Button
               onClick={handleNext}
               disabled={!selectedAnswer}
+              aria-label={currentQuestion === questions.length - 1 ? "Zakończ quiz" : "Przejdź do następnego pytania"}
               data-testid="next-button"
             >
               <FormattedMessage id="quiz.next" defaultMessage="Następne" />

@@ -61,6 +61,7 @@ export function ACCurrent() {
               max={100}
               step={1}
               className="w-full"
+              aria-label="Ustaw częstotliwość prądu zmiennego w hercach"
               data-testid="frequency-slider"
             />
             
@@ -69,6 +70,7 @@ export function ACCurrent() {
                 variant="outline"
                 size="sm"
                 onClick={() => setPresetFrequency(50)}
+                aria-label="Ustaw częstotliwość na 50 Hz (standard europejski)"
                 data-testid="freq-50"
               >
                 50 Hz (EU)
@@ -77,6 +79,7 @@ export function ACCurrent() {
                 variant="outline"
                 size="sm"
                 onClick={() => setPresetFrequency(60)}
+                aria-label="Ustaw częstotliwość na 60 Hz (standard amerykański)"
                 data-testid="freq-60"
               >
                 60 Hz (US)
