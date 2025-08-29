@@ -43,6 +43,12 @@ export const messages = {
     'circuit.dragComponent': 'Przeciągnij komponent {component} do obszaru budowy obwodu',
     'billiard.description': 'Analogia z kulkami bilardowymi pomaga zrozumieć, jak natychmiastowy sygnał może powstać przy powolnym ruchu poszczególnych elementów.',
     'billiard.pushFirst': 'Popchnij pierwszą kulkę',
+    'planetaryMotion.title': 'Ruch planet wokół Słońca',
+    'planetaryMotion.description': 'Obserwuj jak planety poruszają się wokół Słońca z różnymi prędkościami zgodnie z prawami Keplera.',
+    'planetaryMotion.speed': 'Prędkość animacji',
+    'common.pause': 'Pauza',
+    'common.play': 'Odtwórz',
+    'common.reset': 'Reset'
   },
   en: {
     'nav.home': 'Home',
@@ -86,6 +92,12 @@ export const messages = {
     'circuit.dragComponent': 'Drag {component} component to circuit construction area',
     'billiard.description': 'The billiard ball analogy helps understand how an instantaneous signal can arise from slow movement of individual elements.',
     'billiard.pushFirst': 'Push the first ball',
+    'planetaryMotion.title': 'Planetary Motion Around the Sun',
+    'planetaryMotion.description': 'Observe how planets move around the Sun with different speeds according to Kepler\'s laws.',
+    'planetaryMotion.speed': 'Animation Speed',
+    'common.pause': 'Pause',
+    'common.play': 'Play',
+    'common.reset': 'Reset'
   },
   hu: {
     'nav.home': 'Főoldal',
@@ -128,7 +140,7 @@ export const messages = {
     'circuit.open': 'Nyitott',
     'circuit.dragComponent': 'Húzza a(z) {component} komponenst az áramkör építési területre',
     'billiard.description': 'A biliárd golyó analógia segít megérteni, hogyan keletkezhet azonnali jel az egyes elemek lassú mozgásából.',
-    'billiard.pushFirst': 'Tolja meg az első golyót',
+    'billiard.pushFirst': 'Tolja meg az első golyót'
   }
 };
 

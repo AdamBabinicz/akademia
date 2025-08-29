@@ -9,15 +9,15 @@
   --background: hsl(43, 50%, 95%);
   --foreground: hsl(28, 40%, 12%);
   --card: hsl(43, 30%, 92%);
-  --card-foreground: hsl(28, 80%, 8%);
+  --card-foreground: hsl(28, 35%, 15%);
   --popover: hsl(43, 30%, 92%);
-  --popover-foreground: hsl(28, 80%, 8%);
+  --popover-foreground: hsl(28, 35%, 15%);
   --primary: hsl(43, 74%, 45%);
   --primary-foreground: hsl(43, 50%, 95%);
   --secondary: hsl(43, 20%, 85%);
-  --secondary-foreground: hsl(28, 90%, 5%);
+  --secondary-foreground: hsl(28, 35%, 20%);
   --muted: hsl(43, 15%, 88%);
-  --muted-foreground: hsl(28, 90%, 8%);
+  --muted-foreground: hsl(28, 25%, 45%);
   --accent: hsl(43, 84%, 40%);
   --accent-foreground: hsl(43, 50%, 95%);
   --destructive: hsl(0, 72%, 50%);
@@ -31,7 +31,7 @@
   --chart-4: hsl(28, 35%, 55%);
   --chart-5: hsl(43, 64%, 35%);
   --sidebar: hsl(43, 30%, 90%);
-  --sidebar-foreground: hsl(28, 95%, 3%);
+  --sidebar-foreground: hsl(28, 35%, 15%);
   --sidebar-primary: hsl(43, 74%, 45%);
   --sidebar-primary-foreground: hsl(43, 50%, 95%);
   --sidebar-accent: hsl(43, 84%, 40%);
@@ -42,42 +42,6 @@
   --font-serif: "Source Sans Pro", serif;
   --font-mono: "Fira Code", monospace;
   --radius: 0.5rem;
-}
-
-/* Dark theme - brązowo-złote odcienie zgodnie z opisem projektu */
-.dark {
-  --background: hsl(28, 30%, 8%);
-  --foreground: hsl(43, 30%, 95%);
-  --card: hsl(28, 25%, 12%);
-  --card-foreground: hsl(43, 30%, 95%);
-  --popover: hsl(28, 25%, 12%);
-  --popover-foreground: hsl(43, 30%, 95%);
-  --primary: hsl(43, 74%, 66%);
-  --primary-foreground: hsl(28, 30%, 8%);
-  --secondary: hsl(28, 20%, 18%);
-  --secondary-foreground: hsl(43, 30%, 95%);
-  --muted: hsl(28, 15%, 15%);
-  --muted-foreground: hsl(43, 30%, 90%);
-  --accent: hsl(43, 84%, 58%);
-  --accent-foreground: hsl(28, 30%, 8%);
-  --destructive: hsl(0, 62%, 50%);
-  --destructive-foreground: hsl(0, 85%, 97%);
-  --border: hsl(28, 15%, 22%);
-  --input: hsl(28, 15%, 22%);
-  --ring: hsl(43, 74%, 66%);
-  --chart-1: hsl(43, 74%, 66%);
-  --chart-2: hsl(28, 45%, 55%);
-  --chart-3: hsl(43, 84%, 58%);
-  --chart-4: hsl(28, 35%, 45%);
-  --chart-5: hsl(43, 64%, 48%);
-  --sidebar: hsl(28, 25%, 10%);
-  --sidebar-foreground: hsl(43, 40%, 98%);
-  --sidebar-primary: hsl(43, 74%, 66%);
-  --sidebar-primary-foreground: hsl(28, 30%, 8%);
-  --sidebar-accent: hsl(43, 84%, 58%);
-  --sidebar-accent-foreground: hsl(28, 30%, 8%);
-  --sidebar-border: hsl(28, 15%, 22%);
-  --sidebar-ring: hsl(43, 74%, 66%);
 }
 
 .light {
@@ -115,6 +79,42 @@
   --sidebar-ring: hsl(43, 74%, 45%);
 }
 
+/* Dark theme - brązowo-złote odcienie */
+.dark {
+  --background: hsl(28, 30%, 8%);
+  --foreground: hsl(43, 30%, 95%);
+  --card: hsl(28, 25%, 12%);
+  --card-foreground: hsl(43, 30%, 95%);
+  --popover: hsl(28, 25%, 12%);
+  --popover-foreground: hsl(43, 30%, 95%);
+  --primary: hsl(43, 74%, 66%);
+  --primary-foreground: hsl(28, 30%, 8%);
+  --secondary: hsl(28, 20%, 18%);
+  --secondary-foreground: hsl(43, 30%, 95%);
+  --muted: hsl(28, 15%, 15%);
+  --muted-foreground: hsl(43, 30%, 90%);
+  --accent: hsl(43, 84%, 58%);
+  --accent-foreground: hsl(28, 30%, 8%);
+  --destructive: hsl(0, 62%, 50%);
+  --destructive-foreground: hsl(0, 85%, 97%);
+  --border: hsl(28, 15%, 22%);
+  --input: hsl(28, 15%, 22%);
+  --ring: hsl(43, 74%, 66%);
+  --chart-1: hsl(43, 74%, 66%);
+  --chart-2: hsl(28, 45%, 55%);
+  --chart-3: hsl(43, 84%, 58%);
+  --chart-4: hsl(28, 35%, 45%);
+  --chart-5: hsl(43, 64%, 48%);
+  --sidebar: hsl(28, 25%, 10%);
+  --sidebar-foreground: hsl(43, 40%, 98%);
+  --sidebar-primary: hsl(43, 74%, 66%);
+  --sidebar-primary-foreground: hsl(28, 30%, 8%);
+  --sidebar-accent: hsl(43, 84%, 58%);
+  --sidebar-accent-foreground: hsl(28, 30%, 8%);
+  --sidebar-border: hsl(28, 15%, 22%);
+  --sidebar-ring: hsl(43, 74%, 66%);
+}
+
 * {
   border-color: hsl(var(--border));
 }
@@ -124,6 +124,7 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
@@ -134,7 +135,41 @@ body {
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+
+  .interactive-module {
+    @apply bg-card border border-border shadow-lg transition-all duration-300;
+  }
+
+  .interactive-module:hover {
+    @apply shadow-xl;
+  }
 }
+
+/* Dodatkowe style dla lepszego wyglądu w ciemnym motywie */
+@layer components {
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: hsla(var(--card), 0.8);
+    border: 1px solid hsla(var(--border), 0.5);
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 20px hsla(var(--primary), 0.3);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Animacje dla przejścia między motywami */
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 
 /* Navigation animations */
 .nav-active {

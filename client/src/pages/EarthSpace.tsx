@@ -4,6 +4,8 @@ import { Globe, Clock, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DailyFact } from '@/components/DailyFact';
 import { Language } from '@/types/education';
+import { BilliardBalls } from '@/components/InteractiveModules/BilliardBalls';
+import { PlanetaryMotion } from '@/components/InteractiveModules/PlanetaryMotion';
 
 interface EarthSpaceProps {
   language: Language;
@@ -67,6 +69,12 @@ export default function EarthSpace({ language }: EarthSpaceProps) {
             i cyklach dnia i nocy. Sprawdź inne sekcje w międzyczasie!
           </p>
         </motion.div>
+
+        {/* Planetary Motion Section */}
+        <section className="grid gap-8">
+          <PlanetaryMotion />
+          <BilliardBalls />
+        </section>
       </div>
     </div>
   );
