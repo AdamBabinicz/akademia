@@ -3,6 +3,8 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { FormattedMessage } from 'react-intl';
 import { Clock, Bookmark, ChevronRight } from 'lucide-react';
+import electricityImage from '@assets/generated_images/Electricity_magnetism_physics_education_895d06c0.png';
+import circuitImage from '@assets/generated_images/Circuit_building_electronics_education_51a63173.png';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { DailyFact } from '@/components/DailyFact';
@@ -26,26 +28,40 @@ export default function ElectricityMagnetism({ language }: ElectricityMagnetismP
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-card border-b border-border py-6 px-6 lg:px-12"
+        className="relative bg-card border-b border-border py-12 px-6 lg:px-12 overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
+          style={{ backgroundImage: `url(${electricityImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/85 to-background/70" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="ml-16 lg:ml-0">
-              <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
+              <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 {category.titlePl}
               </h1>
-              <p className="text-muted-foreground mt-2">
+              <p className="text-muted-foreground text-lg mb-6">
                 Poznaj tajniki przepływu prądu i zachowania elektronów
               </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2 bg-muted rounded-lg p-2">
-                <Clock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">~45 min</span>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 bg-muted rounded-lg p-3">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">~45 min</span>
+                </div>
+                <Button variant="outline" size="sm">
+                  <Bookmark className="w-4 h-4" />
+                </Button>
               </div>
-              <Button variant="outline" size="sm">
-                <Bookmark className="w-4 h-4" />
-              </Button>
+            </div>
+            
+            <div className="hidden lg:block">
+              <img 
+                src={electricityImage} 
+                alt="Elektryczność i magnetyzm" 
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
             </div>
           </div>
         </div>

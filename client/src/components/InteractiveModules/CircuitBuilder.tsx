@@ -21,12 +21,6 @@ export function CircuitBuilder() {
     switch: Power
   };
 
-  const componentNames = {
-    battery: { pl: 'Bateria', en: 'Battery', hu: 'Elem' },
-    bulb: { pl: 'Żarówka', en: 'Bulb', hu: 'Izzó' },
-    wire: { pl: 'Przewód', en: 'Wire', hu: 'Vezeték' },
-    switch: { pl: 'Przełącznik', en: 'Switch', hu: 'Kapcsoló' }
-  };
 
   const handleDragStart = (e: React.DragEvent, componentType: string) => {
     e.dataTransfer.setData('componentType', componentType);
@@ -76,13 +70,15 @@ export function CircuitBuilder() {
         onDragStart={(e) => handleDragStart(e, type)}
         role="button"
         tabIndex={0}
-        aria-label={`Przeciągnij komponent ${componentNames[type].pl} do obszaru budowy obwodu`}
+        aria-label={`circuit.dragComponent`}
         data-testid={`component-${type}`}
       >
         <div className={`w-8 h-8 ${colorClasses[type]} rounded mx-auto mb-2 flex items-center justify-center`}>
           <IconComponent className="w-4 h-4 text-primary-foreground" />
         </div>
-        <span className="text-sm">{componentNames[type].pl}</span>
+        <span className="text-sm">
+          <FormattedMessage id={`circuit.${type}`} />
+        </span>
       </div>
     );
   };
@@ -101,8 +97,7 @@ export function CircuitBuilder() {
       <div className="grid lg:grid-cols-2 gap-8">
         <div>
           <p className="text-muted-foreground mb-6">
-            Przeciągnij komponenty, aby zbudować działający obwód. 
-            Pamiętaj - obwód musi być zamknięty, aby popłynął prąd!
+            <FormattedMessage id="circuit.remember" />
           </p>
           
           {/* Component Palette */}
@@ -119,7 +114,7 @@ export function CircuitBuilder() {
 
         <div className="bg-muted rounded-lg p-6" style={{ height: '400px' }}>
           <h4 className="text-sm font-medium text-muted-foreground mb-4">
-            Obszar budowy obwodu
+            <FormattedMessage id="circuit.buildArea" />
           </h4>
           
           <div
@@ -134,8 +129,8 @@ export function CircuitBuilder() {
               <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
                 <div className="text-center">
                   <Move className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p className="text-sm">Przeciągnij komponenty tutaj</p>
-                  <p className="text-xs opacity-70">aby zbudować obwód</p>
+                  <p className="text-sm"><FormattedMessage id="circuit.dragHere" /></p>
+                  <p className="text-xs opacity-70"><FormattedMessage id="circuit.toBuild" /></p>
                 </div>
               </div>
             ) : (
@@ -156,7 +151,9 @@ export function CircuitBuilder() {
           </div>
           
           <div className="mt-4 flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Status obwodu:</span>
+            <span className="text-sm text-muted-foreground">
+              <FormattedMessage id="circuit.status" />:
+            </span>
             <span 
               className={`px-3 py-1 rounded-full text-xs font-medium ${
                 circuitClosed 
@@ -165,7 +162,7 @@ export function CircuitBuilder() {
               }`}
               data-testid="circuit-status"
             >
-              {circuitClosed ? 'Zamknięty' : 'Otwarty'}
+              <FormattedMessage id={circuitClosed ? 'circuit.closed' : 'circuit.open'} />
             </span>
           </div>
         </div>

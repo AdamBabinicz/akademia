@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Target, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { FormattedMessage } from 'react-intl';
 
 export function BilliardBalls() {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -33,8 +34,7 @@ export function BilliardBalls() {
       <div className="grid lg:grid-cols-2 gap-8">
         <div>
           <p className="text-muted-foreground mb-6">
-            Analogia z kulkami bilardowymi pomaga zrozumieć, jak natychmiastowy sygnał może powstać 
-            przy powolnym ruchu poszczególnych elementów.
+            <FormattedMessage id="billiard.description" />
           </p>
           
           <Button
@@ -44,7 +44,7 @@ export function BilliardBalls() {
             data-testid="trigger-demo-button"
           >
             <PlayCircle className="w-5 h-5" />
-            Popchnij pierwszą kulkę
+            <FormattedMessage id="billiard.pushFirst" />
           </Button>
         </div>
 

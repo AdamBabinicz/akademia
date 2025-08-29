@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'wouter';
 import { FormattedMessage } from 'react-intl';
 import { motion } from 'framer-motion';
+import heroImage from '@assets/generated_images/Interactive_physics_learning_hero_dc15d5c5.png';
 import { 
   Zap, 
   Globe, 
@@ -84,23 +85,37 @@ export default function Home({ language }: HomeProps) {
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-card border-b border-border py-6 px-6 lg:px-12"
+        className="relative bg-card border-b border-border py-12 px-6 lg:px-12 overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/60" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="ml-16 lg:ml-0">
-              <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
+              <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 Interaktywna Nauka
               </h1>
-              <p className="text-muted-foreground mt-2">
+              <p className="text-muted-foreground text-lg mb-6">
                 Odkryj tajniki fizyki przez interaktywne eksperymenty i symulacje
               </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2 bg-muted rounded-lg p-2">
-                <Clock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">Pełny kurs ~4h</span>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 bg-muted rounded-lg p-3">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Pełny kurs ~4h</span>
+                </div>
               </div>
+            </div>
+            
+            <div className="hidden lg:block">
+              <img 
+                src={heroImage} 
+                alt="Interaktywna nauka fizyki" 
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
             </div>
           </div>
         </div>

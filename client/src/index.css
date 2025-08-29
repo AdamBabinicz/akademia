@@ -9,15 +9,15 @@
   --background: hsl(43, 50%, 95%);
   --foreground: hsl(28, 40%, 12%);
   --card: hsl(43, 30%, 92%);
-  --card-foreground: hsl(28, 35%, 15%);
+  --card-foreground: hsl(28, 80%, 8%);
   --popover: hsl(43, 30%, 92%);
-  --popover-foreground: hsl(28, 35%, 15%);
+  --popover-foreground: hsl(28, 80%, 8%);
   --primary: hsl(43, 74%, 45%);
   --primary-foreground: hsl(43, 50%, 95%);
   --secondary: hsl(43, 20%, 85%);
-  --secondary-foreground: hsl(28, 35%, 20%);
+  --secondary-foreground: hsl(28, 90%, 5%);
   --muted: hsl(43, 15%, 88%);
-  --muted-foreground: hsl(28, 40%, 35%);
+  --muted-foreground: hsl(28, 90%, 8%);
   --accent: hsl(43, 84%, 40%);
   --accent-foreground: hsl(43, 50%, 95%);
   --destructive: hsl(0, 72%, 50%);
@@ -31,7 +31,7 @@
   --chart-4: hsl(28, 35%, 55%);
   --chart-5: hsl(43, 64%, 35%);
   --sidebar: hsl(43, 30%, 90%);
-  --sidebar-foreground: hsl(28, 35%, 15%);
+  --sidebar-foreground: hsl(28, 95%, 3%);
   --sidebar-primary: hsl(43, 74%, 45%);
   --sidebar-primary-foreground: hsl(43, 50%, 95%);
   --sidebar-accent: hsl(43, 84%, 40%);
@@ -47,17 +47,17 @@
 /* Dark theme - brązowo-złote odcienie zgodnie z opisem projektu */
 .dark {
   --background: hsl(28, 30%, 8%);
-  --foreground: hsl(43, 20%, 92%);
+  --foreground: hsl(43, 30%, 95%);
   --card: hsl(28, 25%, 12%);
-  --card-foreground: hsl(43, 15%, 90%);
+  --card-foreground: hsl(43, 30%, 95%);
   --popover: hsl(28, 25%, 12%);
-  --popover-foreground: hsl(43, 15%, 90%);
+  --popover-foreground: hsl(43, 30%, 95%);
   --primary: hsl(43, 74%, 66%);
   --primary-foreground: hsl(28, 30%, 8%);
   --secondary: hsl(28, 20%, 18%);
-  --secondary-foreground: hsl(43, 15%, 85%);
+  --secondary-foreground: hsl(43, 30%, 95%);
   --muted: hsl(28, 15%, 15%);
-  --muted-foreground: hsl(43, 20%, 80%);
+  --muted-foreground: hsl(43, 30%, 90%);
   --accent: hsl(43, 84%, 58%);
   --accent-foreground: hsl(28, 30%, 8%);
   --destructive: hsl(0, 62%, 50%);
@@ -71,7 +71,7 @@
   --chart-4: hsl(28, 35%, 45%);
   --chart-5: hsl(43, 64%, 48%);
   --sidebar: hsl(28, 25%, 10%);
-  --sidebar-foreground: hsl(43, 15%, 90%);
+  --sidebar-foreground: hsl(43, 40%, 98%);
   --sidebar-primary: hsl(43, 74%, 66%);
   --sidebar-primary-foreground: hsl(28, 30%, 8%);
   --sidebar-accent: hsl(43, 84%, 58%);

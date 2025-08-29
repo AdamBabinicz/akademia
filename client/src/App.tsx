@@ -22,9 +22,12 @@ import Facts from "@/pages/Facts";
 import Scale from "@/pages/Scale";
 import NotFound from "@/pages/not-found";
 
-function Router() {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>('pl');
-  const { theme, toggleTheme } = useTheme();
+function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
+  currentLanguage: Language;
+  setCurrentLanguage: (lang: Language) => void;
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}) {
 
   return (
     <IntlProvider 
@@ -58,13 +61,19 @@ function Router() {
 
 function App() {
   const { theme, toggleTheme } = useTheme();
+  const [currentLanguage, setCurrentLanguage] = useState<Language>('pl');
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AppContextProvider>
+          <Router 
+            currentLanguage={currentLanguage}
+            setCurrentLanguage={setCurrentLanguage}
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
           <Toaster />
-          <Router />
         </AppContextProvider>
       </TooltipProvider>
     </QueryClientProvider>
