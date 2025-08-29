@@ -91,7 +91,7 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={toggleNav}
+            onClick={closeNav} // Changed to closeNav to close the menu
             aria-hidden="true"
             data-testid="nav-overlay"
           />
@@ -118,32 +118,36 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
               <Atom className="w-6 h-6 text-sidebar-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-sidebar-foreground">Interaktywna Nauka</h1>
-              <p className="text-sm text-muted-foreground">Physics Learning Hub</p>
+              <h1 className="text-xl font-bold text-sidebar-foreground">
+                <FormattedMessage id="app.title" defaultMessage="Interaktywna Nauka" />
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                <FormattedMessage id="app.subtitle" defaultMessage="Physics Learning Hub" />
+              </p>
             </div>
           </div>
 
           {/* Current Section Indicator */}
           <div className="mb-6 p-3 bg-primary/10 rounded-lg border border-primary/20">
             <p className="text-xs font-medium text-primary uppercase tracking-wide">
-              Aktualna sekcja
+              <FormattedMessage id="nav.currentSection" defaultMessage="Aktualna sekcja" />
             </p>
             <p className="text-sm font-semibold text-foreground">
-              {navigationItems.find(item => item.href === location)?.label || 'Strona główna'}
+              {navigationItems.find(item => item.href === location)?.label || <FormattedMessage id="nav.homepage" defaultMessage="Strona główna" />}
             </p>
           </div>
 
           {/* Main Navigation */}
           <div className="space-y-2">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-              Główne sekcje
+              <FormattedMessage id="nav.mainSections" defaultMessage="Główne sekcje" />
             </h3>
             {navigationItems.map((item) => {
               const IconComponent = iconMap[item.icon as keyof typeof iconMap];
               const isActive = location === item.href;
 
               return (
-                <Link key={item.href} href={item.href} onClick={closeNav}>
+                <Link key={item.href} href={item.href} onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
                   <motion.div
                     className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
                       isActive 
@@ -179,10 +183,10 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
           {/* Additional Tools */}
           <div className="mt-8 space-y-2">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-              Dodatkowe narzędzia
+              <FormattedMessage id="nav.additionalTools" defaultMessage="Dodatkowe narzędzia" />
             </h3>
 
-            <Link href="/quiz" onClick={closeNav}>
+            <Link href="/quiz" onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
               <motion.div
                 className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
                   location === '/quiz'
@@ -193,11 +197,13 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                 whileTap={{ scale: 0.98 }}
               >
                 <BookOpen className="w-5 h-5 text-secondary" />
-                <span className="font-medium">Quiz interaktywny</span>
+                <span className="font-medium">
+                  <FormattedMessage id="nav.quiz" defaultMessage="Quiz interaktywny" />
+                </span>
               </motion.div>
             </Link>
 
-            <Link href="/facts" onClick={closeNav}>
+            <Link href="/facts" onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
               <motion.div
                 className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
                   location === '/facts'
@@ -208,11 +214,13 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                 whileTap={{ scale: 0.98 }}
               >
                 <Lightbulb className="w-5 h-5 text-secondary" />
-                <span className="font-medium">Ciekawe fakty</span>
+                <span className="font-medium">
+                  <FormattedMessage id="nav.facts" defaultMessage="Ciekawe fakty" />
+                </span>
               </motion.div>
             </Link>
 
-            <Link href="/scale" onClick={closeNav}>
+            <Link href="/scale" onClick={() => { closeNav(); onLanguageChange(currentLanguage); }}>
               <motion.div
                 className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
                   location === '/scale'
@@ -223,7 +231,9 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
                 whileTap={{ scale: 0.98 }}
               >
                 <Ruler className="w-5 h-5 text-secondary" />
-                <span className="font-medium">Skale wszechświata</span>
+                <span className="font-medium">
+                  <FormattedMessage id="nav.scale" defaultMessage="Skale wszechświata" />
+                </span>
               </motion.div>
             </Link>
           </div>
@@ -233,30 +243,37 @@ export function Navigation({ currentLanguage, onLanguageChange, theme, onThemeTo
             {/* Language Selector */}
             <div className="space-y-2">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                Język / Language
+                <FormattedMessage id="nav.languageLabel" defaultMessage="Język / Language" />
               </label>
               <select 
                 value={currentLanguage} 
-                onChange={(e) => onLanguageChange(e.target.value as Language)}
+                onChange={(e) => {
+                  onLanguageChange(e.target.value as Language);
+                  closeNav(); // Close navigation after changing language
+                }}
                 className="w-full p-3 bg-background border-2 border-border rounded-lg text-foreground text-sm focus:ring-2 focus:ring-primary focus:border-primary appearance-none cursor-pointer"
                 style={{ minHeight: '40px' }}
               >
                 <option value="pl">🇵🇱 Polski</option>
                 <option value="en">🇬🇧 English</option>
+                <option value="hu">🇭🇺 Magyar</option> 
               </select>
             </div>
 
             {/* Theme Toggle */}
             <div className="space-y-2">
               <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                Motyw / Theme
+                <FormattedMessage id="nav.themeLabel" defaultMessage="Motyw / Theme" />
               </label>
               <div className="flex items-center justify-between p-3 bg-background border-2 border-border rounded-lg min-h-[40px]">
                 <span className="text-sm font-medium text-foreground">
-                  {theme === 'dark' ? '🌙 Tryb ciemny' : '☀️ Tryb jasny'}
+                  {theme === 'dark' ? 
+                    <FormattedMessage id="nav.darkTheme" defaultMessage="🌙 Tryb ciemny" /> : 
+                    <FormattedMessage id="nav.lightTheme" defaultMessage="☀️ Tryb jasny" />
+                  }
                 </span>
                 <Button
-                  onClick={onThemeToggle}
+                  onClick={() => { onThemeToggle(); closeNav(); }} // Close navigation after toggling theme
                   variant="outline"
                   size="sm"
                   className="h-8 w-8 p-0 border-2 hover:bg-primary hover:text-primary-foreground"
