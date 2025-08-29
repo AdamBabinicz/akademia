@@ -20,6 +20,11 @@ import Perception from "@/pages/Perception";
 import Quiz from "@/pages/Quiz";
 import Facts from "@/pages/Facts";
 import Scale from "@/pages/Scale";
+import Mechanics from "@/pages/Mechanics";
+import Thermodynamics from "@/pages/Thermodynamics";
+import Electromagnetism from "@/pages/Electromagnetism";
+import Optics from "@/pages/Optics";
+import ModernPhysics from "@/pages/ModernPhysics";
 import NotFound from "@/pages/not-found";
 
 function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
@@ -47,11 +52,11 @@ function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
           <Route path="/" component={() => <Home language={currentLanguage} />} />
           <Route path="/electricity-magnetism" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
           <Route path="/electricity-magnetism/current-basics" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
-          <Route path="/modern-physics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Fizyka Nowoczesna - w przygotowaniu</h1></div>} />
-          <Route path="/optics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Optyka - w przygotowaniu</h1></div>} />
-          <Route path="/electromagnetism" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Elektromagnetyzm - w przygotowaniu</h1></div>} />
-          <Route path="/thermodynamics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Termodynamika - w przygotowaniu</h1></div>} />
-          <Route path="/mechanics" component={() => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Mechanika - w przygotowaniu</h1></div>} />
+          <Route path="/modern-physics" component={() => <ModernPhysics language={currentLanguage} />} />
+          <Route path="/optics" component={() => <Optics language={currentLanguage} />} />
+          <Route path="/electromagnetism" component={() => <Electromagnetism language={currentLanguage} />} />
+          <Route path="/thermodynamics" component={() => <Thermodynamics language={currentLanguage} />} />
+          <Route path="/mechanics" component={() => <Mechanics language={currentLanguage} />} />
           <Route path="/earth-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
           <Route path="/microworld" component={() => <Microworld language={currentLanguage} />} />
           <Route path="/perception" component={() => <Perception language={currentLanguage} />} />
