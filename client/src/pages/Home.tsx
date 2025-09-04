@@ -240,8 +240,7 @@ export default function Home({ language }: HomeProps) {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button
-                      variant="secondary"
-                      className="bg-white text-primary hover:bg-gray-100 w-full sm:w-auto"
+                      className="bg-white text-foreground hover:bg-gray-100 w-full sm:w-auto"
                       data-testid="start-current-basics"
                       onClick={() =>
                         setLocation(
