@@ -158,6 +158,9 @@ export default function ModernPhysics({ language }: ModernPhysicsProps) {
                     min={0}
                     step={0.01}
                     className="w-full"
+                    aria-label={intl.formatMessage({
+                      id: "modernphysics.relativity.velocityAriaLabel",
+                    })}
                   />
                 </div>
 
@@ -324,6 +327,9 @@ export default function ModernPhysics({ language }: ModernPhysicsProps) {
                       min={0.5}
                       step={0.1}
                       className="w-full"
+                      aria-label={intl.formatMessage({
+                        id: "modernphysics.relativity.velocityAriaLabel",
+                      })}
                     />
                   </div>
 

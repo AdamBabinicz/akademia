@@ -855,5 +855,6 @@
   "dailyFacts.astronomyFact.category": "astronomy",
   "dailyFacts.astronomyFact.categoryId": "astronomy",
   "routes.hash.seasons": "seasons",
-  "routes.hash.gravity": "gravity"
+  "routes.hash.gravity": "gravity",
+  "modernphysics.relativity.velocityAriaLabel": "Slider to change relativistic velocity"
 }

@@ -855,5 +855,6 @@
   "dailyFacts.astronomyFact.category": "astronomy",
   "dailyFacts.astronomyFact.categoryId": "astronomy",
   "routes.hash.seasons": "evszakok",
-  "routes.hash.gravity": "gravitacio"
+  "routes.hash.gravity": "gravitacio",
+  "modernphysics.relativity.velocityAriaLabel": "Csúszka a relativisztikus sebesség megváltoztatásához"
 }

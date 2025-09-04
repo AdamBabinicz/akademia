@@ -855,5 +855,6 @@
   "dailyFacts.astronomyFact.category": "astronomy",
   "dailyFacts.astronomyFact.categoryId": "astronomy",
   "routes.hash.seasons": "pory-roku",
-  "routes.hash.gravity": "grawitacja"
+  "routes.hash.gravity": "grawitacja",
+  "modernphysics.relativity.velocityAriaLabel": "Suwak do zmiany prędkości relatywistycznej"
 }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FormattedMessage } from "react-intl";
+import React, { useState, useEffect } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { motion } from "framer-motion";
 import { Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { Slider } from "@/components/ui/slider";
 export function ACCurrent() {
   const [frequency, setFrequency] = useState([50]);
   const [oscillationPhase, setOscillationPhase] = useState(0);
+  const intl = useIntl();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,6 +26,11 @@ export function ACCurrent() {
     const phase = oscillationPhase + index * 30;
     return baseY + Math.sin((phase * Math.PI) / 180) * 15;
   };
+
+  const frequencyLabel = intl.formatMessage({
+    id: "simulation.frequency",
+    defaultMessage: "Częstotliwość",
+  });
 
   return (
     <div
@@ -75,8 +81,8 @@ export function ACCurrent() {
               max={100}
               step={1}
               className="w-full"
-              aria-label="Ustaw częstotliwość prądu zmiennego w hercach"
               data-testid="frequency-slider"
+              aria-label={frequencyLabel}
             />
 
             <div className="grid grid-cols-3 gap-2 text-xs">
@@ -128,9 +134,7 @@ export function ACCurrent() {
             />
           </h4>
 
-          {/* AC Visualization */}
           <div className="relative w-full h-48 border-2 border-border rounded-lg overflow-hidden bg-background">
-            {/* Sine wave background */}
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 400 200"
@@ -174,7 +178,6 @@ export function ACCurrent() {
               />
             </svg>
 
-            {/* Oscillating electrons */}
             {Array.from({ length: 3 }, (_, i) => (
               <motion.div
                 key={i}
