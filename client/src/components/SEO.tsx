@@ -15,13 +15,14 @@ interface SEOProps {
   isHomePage?: boolean;
 }
 
-// UZUPEŁNIJ TE WARTOŚCI!
-const siteUrl = "https://twoja-domena.com"; // <-- WAŻNE: Wpisz tutaj adres URL Twojej strony
-const authorName = "Twoje Imię i Nazwisko"; // <-- Wpisz swoje imię i nazwisko
-const twitterHandle = "@TwojLoginTwitter"; // <-- Wpisz swój login na Twitterze (opcjonalnie)
+const siteUrl = "https://inter-akademia.netlify.app";
+const authorName = "Adam Babinicz";
+const twitterHandle = "@AdamBabinicz";
 
-const siteName = "Interaktywna Akademia";
-const defaultDescription = "Ucz się nauki w nowoczesny sposób";
+const siteName = "Interaktywna Akademia Fizyki";
+const defaultTitle = "Interaktywna Akademia Fizyki | Nauka przez Eksperymenty";
+const defaultDescription =
+  "Odkryj fizykę z interaktywnymi symulacjami. Ucz się mechaniki, optyki, termodynamiki i elektryczności w nowoczesny i przystępny sposób. Zacznij już dziś!";
 const defaultImage = `${siteUrl}/og-image.png`;
 
 export default function SEO({
@@ -37,7 +38,7 @@ export default function SEO({
     ? isHomePage
       ? `${siteName}: ${title}`
       : `${title} - ${siteName}`
-    : `${siteName}: ${defaultDescription}`;
+    : defaultTitle;
 
   const pageDescription = description || defaultDescription;
   const canonicalUrl = `${siteUrl}${location === "/" ? "" : location}`;
