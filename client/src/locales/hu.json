@@ -865,5 +865,7 @@
   "planetaryMotion.playAriaLabel": "Bolygómozgás animáció lejátszása",
   "planetaryMotion.pauseAriaLabel": "Bolygómozgás animáció szüneteltetése",
   "planetaryMotion.resetAriaLabel": "Bolygómozgás animáció visszaállítása",
-  "scaleExplorer.sliderAriaLabel": "Változtassa meg a világegyetem méretarányát"
+  "scaleExplorer.sliderAriaLabel": "Változtassa meg a világegyetem méretarányát",
+  "boiling.temperatureAriaLabel": "Változtassa meg a víz hőmérsékletét",
+  "boiling.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz"
 }

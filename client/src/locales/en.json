@@ -865,5 +865,7 @@
   "planetaryMotion.playAriaLabel": "Play the planetary motion animation",
   "planetaryMotion.pauseAriaLabel": "Pause the planetary motion animation",
   "planetaryMotion.resetAriaLabel": "Reset the planetary motion animation",
-  "scaleExplorer.sliderAriaLabel": "Change the scale of the universe"
+  "scaleExplorer.sliderAriaLabel": "Change the scale of the universe",
+  "boiling.temperatureAriaLabel": "Change the water temperature",
+  "boiling.bookmarkAriaLabel": "Add to bookmarks"
 }

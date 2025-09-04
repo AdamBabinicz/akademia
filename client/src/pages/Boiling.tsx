@@ -40,6 +40,16 @@ export default function Boiling({ language }: BoilingProps) {
   const [temperature, setTemperature] = useState([20]);
   const intl = useIntl();
 
+  const temperatureAriaLabel = intl.formatMessage({
+    id: "boiling.temperatureAriaLabel",
+    defaultMessage: "Zmień temperaturę wody",
+  });
+
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "boiling.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
+
   return (
     <>
       <SEO
@@ -75,7 +85,11 @@ export default function Boiling({ language }: BoilingProps) {
                       ~15 min
                     </span>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={bookmarkAriaLabel}
+                  >
                     <Bookmark className="w-4 h-4" />
                   </Button>
                 </div>
@@ -148,6 +162,7 @@ export default function Boiling({ language }: BoilingProps) {
                     min={0}
                     step={1}
                     className="mt-2"
+                    aria-label={temperatureAriaLabel}
                   />
                 </div>
                 <div className="p-4 bg-muted rounded-lg text-center">

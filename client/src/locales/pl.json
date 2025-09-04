@@ -865,5 +865,7 @@
   "planetaryMotion.playAriaLabel": "Odtwórz animację ruchu planet",
   "planetaryMotion.pauseAriaLabel": "Zatrzymaj animację ruchu planet",
   "planetaryMotion.resetAriaLabel": "Zresetuj animację ruchu planet",
-  "scaleExplorer.sliderAriaLabel": "Zmień skalę wszechświata"
+  "scaleExplorer.sliderAriaLabel": "Zmień skalę wszechświata",
+  "boiling.temperatureAriaLabel": "Zmień temperaturę wody",
+  "boiling.bookmarkAriaLabel": "Dodaj do zakładek"
 }
