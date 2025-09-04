@@ -106,8 +106,10 @@ export function ScaleExplorer() {
                 max={SCALE_LEVELS.length - 1}
                 step={1}
                 className="w-full"
-                aria-labelledby="scale-explorer-slider-label"
                 data-testid="scale-slider"
+                thumbProps={{
+                  "aria-labelledby": "scale-explorer-slider-label",
+                }}
               />
 
               <div className="flex justify-between text-xs text-muted-foreground mt-2">
