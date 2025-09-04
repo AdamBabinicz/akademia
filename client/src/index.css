@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme transition for smooth switching */
 .theme-transition {
   transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease !important;
@@ -16,7 +15,6 @@
 
 @layer base {
   :root {
-    /* Light theme - warm beige and gold */
     --background: 45 20% 96%;
     --foreground: 30 15% 15%;
     --card: 40 15% 94%;
@@ -24,7 +22,7 @@
     --popover: 40 15% 94%;
     --popover-foreground: 30 15% 15%;
     --primary: 43 74% 49%;
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 25 20% 8%;
     --secondary: 40 12% 88%;
     --secondary-foreground: 30 15% 25%;
     --muted: 40 8% 90%;
@@ -38,7 +36,6 @@
     --ring: 43 74% 49%;
     --radius: 0.5rem;
 
-    /* Chart colors for light theme */
     --chart-1: 43 74% 49%;
     --chart-2: 25 65% 55%;
     --chart-3: 35 45% 65%;
@@ -47,7 +44,6 @@
   }
 
   .dark {
-    /* Dark theme - deep browns and warm golds */
     --background: 25 20% 8%;
     --foreground: 45 85% 88%;
     --card: 30 15% 12%;
@@ -68,7 +64,6 @@
     --input: 35 25% 22%;
     --ring: 45 93% 65%;
 
-    /* Chart colors for dark theme */
     --chart-1: 45 93% 65%;
     --chart-2: 25 60% 45%;
     --chart-3: 35 70% 50%;
@@ -94,7 +89,6 @@
     overflow-x: hidden;
   }
 
-  /* Ensure smooth transitions for all interactive elements */
   button,
   input,
   textarea,
@@ -102,7 +96,6 @@
     @apply transition-all duration-200 ease-in-out;
   }
 
-  /* Custom scrollbar for dark theme */
   .dark ::-webkit-scrollbar {
     width: 8px;
   }
@@ -120,7 +113,6 @@
     background: hsl(var(--accent));
   }
 
-  /* Light theme scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -139,7 +131,6 @@
   }
 }
 
-/* Enhanced animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -196,7 +187,6 @@
   animation: pulse-gold 2s infinite;
 }
 
-/* Special theme-aware gradients */
 .bg-gradient-warm {
   background: linear-gradient(
     135deg,
@@ -209,7 +199,6 @@
   background: linear-gradient(135deg, hsl(30 25% 15%) 0%, hsl(40 30% 20%) 100%);
 }
 
-/* Navigation improvements */
 .nav-item-active {
   background: linear-gradient(
     90deg,
@@ -224,7 +213,6 @@
   color: hsl(var(--accent-foreground));
 }
 
-/* Card enhancements */
 .card-interactive {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   border: 1px solid hsl(var(--border));
@@ -246,7 +234,6 @@
   border-color: hsl(45 50% 35%);
 }
 
-/* Button enhancements */
 .btn-primary {
   background: linear-gradient(
     135deg,
@@ -267,7 +254,6 @@
   box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
 }
 
-/* Przyciski w ciemnym motywie */
 .dark .btn-primary {
   background: linear-gradient(135deg, hsl(45 93% 65%) 0%, hsl(40 85% 60%) 100%);
   color: hsl(25 20% 8%);
@@ -280,7 +266,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Interactive module styles */
 .interactive-canvas {
   background: hsl(var(--card));
   border: 2px solid hsl(var(--border));
@@ -291,7 +276,6 @@
   background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--muted)));
 }
 
-/* Status indicators */
 .status-active {
   color: hsl(142 76% 36%);
 }
@@ -304,7 +288,6 @@
   color: hsl(var(--muted-foreground));
 }
 
-/* Progress bars */
 .progress-bar {
   background: linear-gradient(
     90deg,
@@ -313,7 +296,6 @@
   );
 }
 
-/* Special effects for physics simulations */
 .electron-trail {
   box-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5);
 }
@@ -322,7 +304,6 @@
   background: radial-gradient(circle, hsl(var(--primary) / 0.1), transparent);
 }
 
-/* Loading states */
 .loading-shimmer {
   background: linear-gradient(
     90deg,
@@ -343,7 +324,6 @@
   }
 }
 
-/* Responsive text scaling */
 @media (max-width: 640px) {
   .text-responsive {
     font-size: 0.875rem;
@@ -358,13 +338,11 @@
   }
 }
 
-/* Focus states */
 .focus-visible:focus-visible {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
     --border: 30 15% 70%;
@@ -376,7 +354,6 @@
   }
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -387,10 +364,10 @@
   }
 }
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+  display: none;
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
