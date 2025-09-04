@@ -10,10 +10,8 @@ export function ScaleExplorer() {
   const intl = useIntl();
   const scale = SCALE_LEVELS[currentScale[0]];
 
-  const sliderAriaLabel = intl.formatMessage({
-    id: "scaleExplorer.sliderAriaLabel",
-    defaultMessage: "Zmień skalę wszechświata",
-  });
+  // Ta linia nie jest już potrzebna, ponieważ używamy `aria-labelledby`
+  // const sliderAriaLabel = intl.formatMessage({ ... });
 
   const getVisualization = () => {
     switch (scale.visualization) {
@@ -89,7 +87,11 @@ export function ScaleExplorer() {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-card-foreground">
+              {/* ZMIANA 1: Dodajemy `id` do etykiety */}
+              <label
+                id="scale-explorer-slider-label"
+                className="text-sm font-medium text-card-foreground"
+              >
                 <FormattedMessage id="scale.level" defaultMessage="Skala" />
               </label>
               <span
@@ -101,6 +103,7 @@ export function ScaleExplorer() {
             </div>
 
             <div className="relative">
+              {/* ZMIANA 2: Używamy `aria-labelledby` zamiast `aria-label` */}
               <Slider
                 value={currentScale}
                 onValueChange={setCurrentScale}
@@ -108,7 +111,7 @@ export function ScaleExplorer() {
                 max={SCALE_LEVELS.length - 1}
                 step={1}
                 className="w-full"
-                aria-label={sliderAriaLabel}
+                aria-labelledby="scale-explorer-slider-label"
                 data-testid="scale-slider"
               />
 
