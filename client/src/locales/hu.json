@@ -856,5 +856,9 @@
   "dailyFacts.astronomyFact.categoryId": "astronomy",
   "routes.hash.seasons": "evszakok",
   "routes.hash.gravity": "gravitacio",
-  "modernphysics.relativity.velocityAriaLabel": "Csúszka a relativisztikus sebesség megváltoztatásához"
+  "modernphysics.relativity.velocityAriaLabel": "Csúszka a relativisztikus sebesség megváltoztatásához",
+  "electronDrift.voltageAriaLabel": "Feszültség beállítása voltban",
+  "electronDrift.resetAriaLabel": "Az elektronsodródás szimulációjának visszaállítása",
+  "electronDrift.playAriaLabel": "Szimuláció indítása",
+  "electronDrift.pauseAriaLabel": "Szimuláció szüneteltetése"
 }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FormattedMessage } from "react-intl";
+import React, { useState, useEffect } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { motion } from "framer-motion";
 import { Activity, Play, Pause, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ export function ElectronDrift() {
       chaotic: true,
     }))
   );
+  const intl = useIntl();
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -62,6 +63,24 @@ export function ElectronDrift() {
       }))
     );
   };
+
+  const voltageAriaLabel = intl.formatMessage({
+    id: "electronDrift.voltageAriaLabel",
+    defaultMessage: "Ustaw napięcie w woltach",
+  });
+  const resetAriaLabel = intl.formatMessage({
+    id: "electronDrift.resetAriaLabel",
+    defaultMessage: "Zresetuj symulację dryfu elektronów",
+  });
+  const playPauseAriaLabel = isPlaying
+    ? intl.formatMessage({
+        id: "electronDrift.pauseAriaLabel",
+        defaultMessage: "Zatrzymaj symulację",
+      })
+    : intl.formatMessage({
+        id: "electronDrift.playAriaLabel",
+        defaultMessage: "Uruchom symulację",
+      });
 
   return (
     <div
@@ -111,7 +130,7 @@ export function ElectronDrift() {
               max={12}
               step={1}
               className="w-full"
-              aria-label="Ustaw napięcie w woltach"
+              aria-label={voltageAriaLabel}
               data-testid="voltage-slider"
             />
 
@@ -119,7 +138,7 @@ export function ElectronDrift() {
               <Button
                 variant="secondary"
                 onClick={resetSimulation}
-                aria-label="Zresetuj symulację dryfu elektronów"
+                aria-label={resetAriaLabel}
                 data-testid="reset-button"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
@@ -132,9 +151,7 @@ export function ElectronDrift() {
               <Button
                 variant="default"
                 onClick={() => setIsPlaying(!isPlaying)}
-                aria-label={
-                  isPlaying ? "Zatrzymaj symulację" : "Uruchom symulację"
-                }
+                aria-label={playPauseAriaLabel}
                 data-testid="play-pause-button"
               >
                 {isPlaying ? (

@@ -856,5 +856,9 @@
   "dailyFacts.astronomyFact.categoryId": "astronomy",
   "routes.hash.seasons": "seasons",
   "routes.hash.gravity": "gravity",
-  "modernphysics.relativity.velocityAriaLabel": "Slider to change relativistic velocity"
+  "modernphysics.relativity.velocityAriaLabel": "Slider to change relativistic velocity",
+  "electronDrift.voltageAriaLabel": "Set voltage in volts",
+  "electronDrift.resetAriaLabel": "Reset the electron drift simulation",
+  "electronDrift.playAriaLabel": "Play the simulation",
+  "electronDrift.pauseAriaLabel": "Pause the simulation"
 }

@@ -856,5 +856,9 @@
   "dailyFacts.astronomyFact.categoryId": "astronomy",
   "routes.hash.seasons": "pory-roku",
   "routes.hash.gravity": "grawitacja",
-  "modernphysics.relativity.velocityAriaLabel": "Suwak do zmiany prędkości relatywistycznej"
+  "modernphysics.relativity.velocityAriaLabel": "Suwak do zmiany prędkości relatywistycznej",
+  "electronDrift.voltageAriaLabel": "Ustaw napięcie w woltach",
+  "electronDrift.resetAriaLabel": "Zresetuj symulację dryfu elektronów",
+  "electronDrift.playAriaLabel": "Uruchom symulację",
+  "electronDrift.pauseAriaLabel": "Zatrzymaj symulację"
 }
