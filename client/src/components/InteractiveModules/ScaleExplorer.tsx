@@ -10,9 +10,6 @@ export function ScaleExplorer() {
   const intl = useIntl();
   const scale = SCALE_LEVELS[currentScale[0]];
 
-  // Ta linia nie jest już potrzebna, ponieważ używamy `aria-labelledby`
-  // const sliderAriaLabel = intl.formatMessage({ ... });
-
   const getVisualization = () => {
     switch (scale.visualization) {
       case "atom":
@@ -87,7 +84,6 @@ export function ScaleExplorer() {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              {/* ZMIANA 1: Dodajemy `id` do etykiety */}
               <label
                 id="scale-explorer-slider-label"
                 className="text-sm font-medium text-card-foreground"
@@ -103,7 +99,6 @@ export function ScaleExplorer() {
             </div>
 
             <div className="relative">
-              {/* ZMIANA 2: Używamy `aria-labelledby` zamiast `aria-label` */}
               <Slider
                 value={currentScale}
                 onValueChange={setCurrentScale}
