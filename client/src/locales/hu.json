@@ -875,5 +875,11 @@
   "microworld.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
   "microworld.atom.animationToggleAriaLabel": "Elektron animáció be/ki",
   "microworld.dna.zoomAriaLabel": "DNS nagyítási szint módosítása",
-  "microworld.dna.basesToggleAriaLabel": "Nitrogénbázisok megjelenítése vagy elrejtése"
+  "microworld.dna.basesToggleAriaLabel": "Nitrogénbázisok megjelenítése vagy elrejtése",
+  "modernphysics.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "modernphysics.quantum.photonEnergyAriaLabel": "A foton energiájának módosítása",
+  "optics.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "optics.wavelengthAriaLabel": "A fény hullámhosszának módosítása",
+  "optics.refractiveIndexAriaLabel": "A törésmutató módosítása",
+  "optics.lensDistanceAriaLabel": "A tárgy lencsétől való távolságának módosítása"
 }

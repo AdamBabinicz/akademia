@@ -43,6 +43,21 @@ export default function ModernPhysics({ language }: ModernPhysicsProps) {
     calculateRelativistic();
   const { frequency, wavelength } = calculatePhotoelectric();
 
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "modernphysics.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
+
+  const velocityAriaLabel = intl.formatMessage({
+    id: "modernphysics.relativity.velocityAriaLabel",
+    defaultMessage: "Zmień prędkość relatywistyczną",
+  });
+
+  const photonEnergyAriaLabel = intl.formatMessage({
+    id: "modernphysics.quantum.photonEnergyAriaLabel",
+    defaultMessage: "Zmień energię fotonu",
+  });
+
   return (
     <>
       <SEO
@@ -90,7 +105,11 @@ export default function ModernPhysics({ language }: ModernPhysicsProps) {
                       />
                     </span>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={bookmarkAriaLabel}
+                  >
                     <Bookmark className="w-4 h-4" />
                   </Button>
                 </div>
@@ -158,9 +177,7 @@ export default function ModernPhysics({ language }: ModernPhysicsProps) {
                     min={0}
                     step={0.01}
                     className="w-full"
-                    aria-label={intl.formatMessage({
-                      id: "modernphysics.relativity.velocityAriaLabel",
-                    })}
+                    aria-label={velocityAriaLabel}
                   />
                 </div>
 
@@ -327,9 +344,7 @@ export default function ModernPhysics({ language }: ModernPhysicsProps) {
                       min={0.5}
                       step={0.1}
                       className="w-full"
-                      aria-label={intl.formatMessage({
-                        id: "modernphysics.relativity.velocityAriaLabel",
-                      })}
+                      aria-label={photonEnergyAriaLabel}
                     />
                   </div>
 

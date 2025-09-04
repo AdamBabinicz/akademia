@@ -875,5 +875,11 @@
   "microworld.bookmarkAriaLabel": "Dodaj do zakładek",
   "microworld.atom.animationToggleAriaLabel": "Włącz lub wyłącz animację elektronów",
   "microworld.dna.zoomAriaLabel": "Zmień powiększenie DNA",
-  "microworld.dna.basesToggleAriaLabel": "Pokaż lub ukryj zasady azotowe"
+  "microworld.dna.basesToggleAriaLabel": "Pokaż lub ukryj zasady azotowe",
+  "modernphysics.bookmarkAriaLabel": "Dodaj do zakładek",
+  "modernphysics.quantum.photonEnergyAriaLabel": "Zmień energię fotonu",
+  "optics.bookmarkAriaLabel": "Dodaj do zakładek",
+  "optics.wavelengthAriaLabel": "Zmień długość fali światła",
+  "optics.refractiveIndexAriaLabel": "Zmień współczynnik załamania",
+  "optics.lensDistanceAriaLabel": "Zmień odległość obiektu od soczewki"
 }

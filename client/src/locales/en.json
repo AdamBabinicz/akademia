@@ -875,5 +875,11 @@
   "microworld.bookmarkAriaLabel": "Add to bookmarks",
   "microworld.atom.animationToggleAriaLabel": "Toggle electron animation",
   "microworld.dna.zoomAriaLabel": "Change DNA zoom level",
-  "microworld.dna.basesToggleAriaLabel": "Show or hide nitrogenous bases"
+  "microworld.dna.basesToggleAriaLabel": "Show or hide nitrogenous bases",
+  "modernphysics.bookmarkAriaLabel": "Add to bookmarks",
+  "modernphysics.quantum.photonEnergyAriaLabel": "Change the photon energy",
+  "optics.bookmarkAriaLabel": "Add to bookmarks",
+  "optics.wavelengthAriaLabel": "Change the light wavelength",
+  "optics.refractiveIndexAriaLabel": "Change the refractive index",
+  "optics.lensDistanceAriaLabel": "Change the object distance from the lens"
 }

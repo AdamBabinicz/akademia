@@ -55,6 +55,26 @@ export default function Optics({ language }: OpticsProps) {
     defaultMessage: "Abstrakcyjny obraz symbolizujący optykę",
   });
 
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "optics.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
+
+  const wavelengthAriaLabel = intl.formatMessage({
+    id: "optics.wavelengthAriaLabel",
+    defaultMessage: "Zmień długość fali światła",
+  });
+
+  const refractiveIndexAriaLabel = intl.formatMessage({
+    id: "optics.refractiveIndexAriaLabel",
+    defaultMessage: "Zmień współczynnik załamania",
+  });
+
+  const lensDistanceAriaLabel = intl.formatMessage({
+    id: "optics.lensDistanceAriaLabel",
+    defaultMessage: "Zmień odległość od soczewki",
+  });
+
   const imgD = (10 * lensDistance[0]) / (lensDistance[0] - 10);
   const mag = imgD / lensDistance[0];
 
@@ -87,7 +107,11 @@ export default function Optics({ language }: OpticsProps) {
                       ~45 min
                     </span>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={bookmarkAriaLabel}
+                  >
                     <Bookmark className="w-4 h-4" />
                   </Button>
                 </div>
@@ -220,6 +244,7 @@ export default function Optics({ language }: OpticsProps) {
                       min={380}
                       step={10}
                       className="w-full"
+                      aria-label={wavelengthAriaLabel}
                     />
                   </div>
                   <div className="bg-muted p-4 rounded-lg">
@@ -266,6 +291,7 @@ export default function Optics({ language }: OpticsProps) {
                       min={1.0}
                       step={0.01}
                       className="w-full"
+                      aria-label={refractiveIndexAriaLabel}
                     />
                   </div>
                   <div className="flex items-center justify-center p-4 rounded-lg bg-background border">
@@ -403,6 +429,7 @@ export default function Optics({ language }: OpticsProps) {
                       min={5}
                       step={1}
                       className="w-full"
+                      aria-label={lensDistanceAriaLabel}
                     />
                   </div>
                   <div className="flex items-center justify-center">
