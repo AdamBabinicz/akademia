@@ -1,5 +1,5 @@
 import { Switch, Route } from "wouter";
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from "react-intl";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,11 +7,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppContextProvider } from "@/contexts/AppContext";
 import { Navigation } from "@/components/Navigation";
 import { useTheme } from "@/hooks/useTheme";
-import { messages } from "@/lib/i18n";
+import { messages, MessagesType } from "@/lib/i18n";
 import { Language } from "@/types/education";
-import { useState, useRef } from "react";
+import { useState, ComponentType } from "react";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 
-// Pages
 import Home from "@/pages/Home";
 import ElectricityMagnetism from "@/pages/ElectricityMagnetism";
 import EarthSpace from "@/pages/EarthSpace";
@@ -22,24 +23,48 @@ import Facts from "@/pages/Facts";
 import Scale from "@/pages/Scale";
 import Mechanics from "@/pages/Mechanics";
 import Thermodynamics from "@/pages/Thermodynamics";
-import Electromagnetism from "@/pages/Electromagnetism";
 import Optics from "@/pages/Optics";
 import ModernPhysics from "@/pages/ModernPhysics";
+import Terms from "@/pages/Terms";
+import Privacy from "@/pages/Privacy";
 import NotFound from "@/pages/not-found";
+import Boiling from "@/pages/Boiling";
+import Taste from "@/pages/Taste";
 
-function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
+const routeConfig: {
+  key: keyof MessagesType;
+  component: ComponentType<{ language: Language }>;
+}[] = [
+  { key: "routes.modernPhysics", component: ModernPhysics },
+  { key: "routes.optics", component: Optics },
+  { key: "routes.thermodynamics", component: Thermodynamics },
+  { key: "routes.mechanics", component: Mechanics },
+  { key: "routes.earthSpace", component: EarthSpace },
+  { key: "routes.microworld", component: Microworld },
+  { key: "routes.perception", component: Perception },
+  { key: "routes.boiling", component: Boiling },
+  { key: "routes.taste", component: Taste },
+  { key: "routes.quiz", component: Quiz },
+  { key: "routes.facts", component: Facts },
+  { key: "routes.scale", component: Scale },
+  { key: "routes.terms", component: Terms },
+  { key: "routes.privacy", component: Privacy },
+];
+
+function Router({
+  currentLanguage,
+  setCurrentLanguage,
+  theme,
+  toggleTheme,
+}: {
   currentLanguage: Language;
   setCurrentLanguage: (lang: Language) => void;
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   toggleTheme: () => void;
 }) {
-
   return (
-    <IntlProvider
-      locale={currentLanguage}
-      messages={messages[currentLanguage]}
-      defaultLocale="pl"
-    >
+    <>
+      <ScrollToTop />
       <div className="min-h-screen bg-background text-foreground">
         <Navigation
           currentLanguage={currentLanguage}
@@ -47,45 +72,82 @@ function Router({ currentLanguage, setCurrentLanguage, theme, toggleTheme }: {
           theme={theme}
           onThemeToggle={toggleTheme}
         />
-
-        <Switch>
-          <Route path="/" component={() => <Home language={currentLanguage} />} />
-          <Route path="/electricity-magnetism" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
-          <Route path="/electricity-magnetism/current-basics" component={(props) => <ElectricityMagnetism {...props} language={currentLanguage} />} />
-          <Route path="/modern-physics" component={() => <ModernPhysics language={currentLanguage} />} />
-          <Route path="/optics" component={() => <Optics language={currentLanguage} />} />
-          <Route path="/electromagnetism" component={() => <Electromagnetism language={currentLanguage} />} />
-          <Route path="/thermodynamics" component={() => <Thermodynamics language={currentLanguage} />} />
-          <Route path="/mechanics" component={() => <Mechanics language={currentLanguage} />} />
-          <Route path="/earth-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
-          <Route path="/earth-and-space" component={(props) => <EarthSpace {...props} language={currentLanguage} />} />
-          <Route path="/microworld" component={() => <Microworld language={currentLanguage} />} />
-          <Route path="/perception" component={() => <Perception language={currentLanguage} />} />
-          <Route path="/quiz" component={() => <Quiz language={currentLanguage} />} />
-          <Route path="/facts" component={() => <Facts language={currentLanguage} />} />
-          <Route path="/scale" component={() => <Scale language={currentLanguage} />} />
-          <Route component={NotFound} />
-        </Switch>
+        <main>
+          <Switch>
+            <Route
+              path="/"
+              component={() => <Home language={currentLanguage} />}
+            />
+            {Object.keys(messages).map((lang) => (
+              <Route
+                key={`electricity-${lang}`}
+                path={`${
+                  messages[lang as Language]["routes.electricityMagnetism"]
+                }/:rest*?`}
+                component={() => (
+                  <ElectricityMagnetism language={currentLanguage} />
+                )}
+              />
+            ))}
+            {routeConfig.flatMap(({ key, component: PageComponent }) =>
+              Object.keys(messages).map((lang) => (
+                <Route
+                  key={`${key}-${lang}`}
+                  path={messages[lang as Language][key]}
+                  component={() => <PageComponent language={currentLanguage} />}
+                />
+              ))
+            )}
+            <Route component={NotFound} />
+          </Switch>
+        </main>
       </div>
-    </IntlProvider>
+    </>
   );
 }
 
+const getInitialLanguage = (): Language => {
+  const supportedLocales: Language[] = ["pl", "en", "hu"];
+  const storedLanguage = localStorage.getItem("language") as Language;
+  if (storedLanguage && supportedLocales.includes(storedLanguage)) {
+    return storedLanguage;
+  }
+  const browserLanguage = navigator.language.split("-")[0] as Language;
+  if (supportedLocales.includes(browserLanguage)) {
+    return browserLanguage;
+  }
+  return "pl";
+};
+
 function App() {
   const { theme, toggleTheme } = useTheme();
-  const [currentLanguage, setCurrentLanguage] = useState<Language>('pl');
+  const [currentLanguage, setCurrentLanguage] =
+    useState<Language>(getInitialLanguage);
+
+  const handleLanguageChange = (lang: Language) => {
+    setCurrentLanguage(lang);
+    localStorage.setItem("language", lang);
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AppContextProvider>
-          <Router
-            currentLanguage={currentLanguage}
-            setCurrentLanguage={setCurrentLanguage}
-            theme={theme}
-            toggleTheme={toggleTheme}
-          />
+          <IntlProvider
+            locale={currentLanguage}
+            messages={messages[currentLanguage]}
+            defaultLocale="pl"
+          >
+            <Router
+              key={currentLanguage}
+              currentLanguage={currentLanguage}
+              setCurrentLanguage={handleLanguageChange}
+              theme={theme}
+              toggleTheme={toggleTheme}
+            />
+          </IntlProvider>
           <Toaster />
+          <ScrollToTopButton />
         </AppContextProvider>
       </TooltipProvider>
     </QueryClientProvider>

@@ -1,8 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Play, Pause, RotateCcw, Zap } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Play, Pause, RotateCcw, Zap } from "lucide-react";
+import { FormattedMessage } from "react-intl";
 
 interface Ball {
   id: number;
@@ -20,21 +27,22 @@ interface BilliardBallsProps {
   height?: number;
 }
 
-export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps) {
+export function BilliardBalls({
+  width = 400,
+  height = 300,
+}: BilliardBallsProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const [isRunning, setIsRunning] = useState(false);
   const [balls, setBalls] = useState<Ball[]>([]);
   const [signalSpeed, setSignalSpeed] = useState(0);
 
-  // Inicjalizacja kulek
   useEffect(() => {
     const initBalls = () => {
       const newBalls: Ball[] = [];
       const ballRadius = 15;
       const spacing = 35;
 
-      // Tworzymy rząd kulek reprezentujących atomy
       for (let i = 0; i < 10; i++) {
         newBalls.push({
           id: i,
@@ -43,12 +51,11 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
           vx: 0,
           vy: 0,
           radius: ballRadius,
-          color: '#94a3b8', // szary - atomy
-          isElectron: false
+          color: "#94a3b8",
+          isElectron: false,
         });
       }
 
-      // Dodajemy "elektron" - czerwoną kulkę
       newBalls.push({
         id: 10,
         x: 20,
@@ -56,8 +63,8 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
         vx: 2,
         vy: 0,
         radius: 12,
-        color: '#ef4444', // czerwony - elektron
-        isElectron: true
+        color: "#ef4444",
+        isElectron: true,
       });
 
       setBalls(newBalls);
@@ -66,35 +73,35 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
     initBalls();
   }, [height]);
 
-  // Animacja
   useEffect(() => {
     if (!isRunning) return;
 
     const animate = () => {
-      setBalls(prevBalls => {
+      setBalls((prevBalls) => {
         const newBalls = [...prevBalls];
 
-        // Aktualizuj pozycje kulek
         newBalls.forEach((ball) => {
           ball.x += ball.vx;
           ball.y += ball.vy;
-
-          // Tłumienie
           ball.vx *= 0.999;
           ball.vy *= 0.999;
 
-          // Odbicie od ścian
           if (ball.x <= ball.radius || ball.x >= width - ball.radius) {
             ball.vx *= -0.8;
-            ball.x = Math.max(ball.radius, Math.min(width - ball.radius, ball.x));
+            ball.x = Math.max(
+              ball.radius,
+              Math.min(width - ball.radius, ball.x)
+            );
           }
           if (ball.y <= ball.radius || ball.y >= height - ball.radius) {
             ball.vy *= -0.8;
-            ball.y = Math.max(ball.radius, Math.min(height - ball.radius, ball.y));
+            ball.y = Math.max(
+              ball.radius,
+              Math.min(height - ball.radius, ball.y)
+            );
           }
         });
 
-        // Kolizje między kulkami
         for (let i = 0; i < newBalls.length; i++) {
           for (let j = i + 1; j < newBalls.length; j++) {
             const ball1 = newBalls[i];
@@ -104,25 +111,21 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < ball1.radius + ball2.radius) {
-              // Kolizja! Transfer energii
               const angle = Math.atan2(dy, dx);
               const sin = Math.sin(angle);
               const cos = Math.cos(angle);
 
-              // Prędkości przed kolizją
               const vx1 = ball1.vx * cos + ball1.vy * sin;
               const vy1 = ball1.vy * cos - ball1.vx * sin;
               const vx2 = ball2.vx * cos + ball2.vy * sin;
               const vy2 = ball2.vy * cos - ball2.vx * sin;
 
-              // Transfer prędkości (uproszczony)
               const tempVx1 = vx1;
               ball1.vx = (vx2 * cos - vy1 * sin) * 0.8;
               ball1.vy = (vy1 * cos + vx2 * sin) * 0.8;
               ball2.vx = (tempVx1 * cos - vy2 * sin) * 0.8;
               ball2.vy = (vy2 * cos + tempVx1 * sin) * 0.8;
 
-              // Rozdziel kulki
               const overlap = ball1.radius + ball2.radius - distance;
               const moveX = overlap * 0.5 * cos;
               const moveY = overlap * 0.5 * sin;
@@ -132,9 +135,8 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
               ball2.x += moveX;
               ball2.y += moveY;
 
-              // Symulacja szybkości sygnału
               if (ball1.isElectron || ball2.isElectron) {
-                setSignalSpeed(prev => prev + 1);
+                setSignalSpeed((prev) => prev + 1);
               }
             }
           }
@@ -157,49 +159,40 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
     };
   }, [isRunning, width, height, balls.length]);
 
-  // Rysowanie kulek
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     ctx.clearRect(0, 0, width, height);
 
-    balls.forEach(ball => {
+    balls.forEach((ball) => {
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
       ctx.fillStyle = ball.color;
       ctx.fill();
-      ctx.strokeStyle = ball.isElectron ? '#dc2626' : '#475569';
+      ctx.strokeStyle = ball.isElectron ? "#dc2626" : "#475569";
       ctx.lineWidth = 2;
       ctx.stroke();
 
       if (ball.isElectron) {
-        // Dodaj świecenie dla elektronu
         ctx.shadowBlur = 10;
-        ctx.shadowColor = '#ef4444';
+        ctx.shadowColor = "#ef4444";
         ctx.fill();
         ctx.shadowBlur = 0;
       }
     });
   }, [balls, width, height]);
 
-  const handleStart = () => {
-    setIsRunning(true);
-  };
-
-  const handlePause = () => {
-    setIsRunning(false);
-  };
-
+  const handleStart = () => setIsRunning(true);
+  const handlePause = () => setIsRunning(false);
   const handleReset = () => {
     setIsRunning(false);
     setSignalSpeed(0);
 
-    // Reset pozycji kulek
-    setBalls(prevBalls => {
+    setBalls((prevBalls) => {
       const newBalls = [...prevBalls];
       newBalls.forEach((ball, index) => {
         if (ball.isElectron) {
@@ -219,9 +212,9 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
   };
 
   const pushElectron = () => {
-    setBalls(prevBalls => {
+    setBalls((prevBalls) => {
       const newBalls = [...prevBalls];
-      const electron = newBalls.find(ball => ball.isElectron);
+      const electron = newBalls.find((ball) => ball.isElectron);
       if (electron) {
         electron.vx += 3;
       }
@@ -234,52 +227,66 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Zap className="w-5 h-5 text-primary" />
-          Eksperyment z kulkami bilardowymi
+          <FormattedMessage
+            id="billiards.title"
+            defaultMessage="Eksperyment z kulkami bilardowymi"
+          />
         </CardTitle>
         <CardDescription>
-          Analogia ruchu elektronów w przewodniku - kulki reprezentują atomy, czerwona kulka to elektron
+          <FormattedMessage
+            id="billiards.description"
+            defaultMessage="Analogia ruchu elektronów w przewodniku - kulki reprezentują atomy, czerwona kulka to elektron"
+          />
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-wrap gap-2">
-          <Button 
-            onClick={handleStart} 
+          <Button
+            onClick={handleStart}
             disabled={isRunning}
             className="flex items-center gap-2"
           >
             <Play className="w-4 h-4" />
-            Start
+            <FormattedMessage id="controls.start" defaultMessage="Start" />
           </Button>
-          <Button 
-            onClick={handlePause} 
+          <Button
+            onClick={handlePause}
             disabled={!isRunning}
             variant="outline"
             className="flex items-center gap-2"
           >
             <Pause className="w-4 h-4" />
-            Pauza
+            <FormattedMessage id="controls.pause" defaultMessage="Pauza" />
           </Button>
-          <Button 
+          <Button
             onClick={handleReset}
             variant="outline"
             className="flex items-center gap-2"
           >
             <RotateCcw className="w-4 h-4" />
-            Reset
+            <FormattedMessage id="controls.reset" defaultMessage="Reset" />
           </Button>
-          <Button 
+          <Button
             onClick={pushElectron}
             variant="secondary"
             className="flex items-center gap-2"
           >
             <Zap className="w-4 h-4" />
-            Popchnij elektron
+            <FormattedMessage
+              id="controls.pushElectron"
+              defaultMessage="Popchnij elektron"
+            />
           </Button>
         </div>
 
         <div className="bg-muted p-3 rounded-lg">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium">Szybkość sygnału:</span>
+            <span className="text-sm font-medium">
+              <FormattedMessage
+                id="billiards.signalSpeed"
+                defaultMessage="Szybkość sygnału:"
+              />
+            </span>
             <Badge variant="secondary">{signalSpeed}</Badge>
           </div>
         </div>
@@ -290,17 +297,42 @@ export function BilliardBalls({ width = 400, height = 300 }: BilliardBallsProps)
             width={width}
             height={height}
             className="interactive-canvas w-full"
-            style={{ background: 'hsl(var(--card))' }}
+            style={{ background: "hsl(var(--card))" }}
           />
         </div>
 
         <div className="bg-muted p-4 rounded-lg text-sm">
-          <h4 className="font-semibold mb-2">Jak to działa:</h4>
+          <h4 className="font-semibold mb-2">
+            <FormattedMessage
+              id="billiards.howItWorks"
+              defaultMessage="Jak to działa:"
+            />
+          </h4>
           <ul className="space-y-1 text-muted-foreground">
-            <li>• Szare kulki = atomy w przewodniku</li>
-            <li>• Czerwona kulka = elektron</li>
-            <li>• Kolizje = transfer energii między elektronami</li>
-            <li>• Sygnał rozchodzi się szybko, elektrony powoli</li>
+            <li>
+              <FormattedMessage
+                id="billiards.legend.atoms"
+                defaultMessage="• Szare kulki = atomy w przewodniku"
+              />
+            </li>
+            <li>
+              <FormattedMessage
+                id="billiards.legend.electron"
+                defaultMessage="• Czerwona kulka = elektron"
+              />
+            </li>
+            <li>
+              <FormattedMessage
+                id="billiards.legend.collisions"
+                defaultMessage="• Kolizje = transfer energii między elektronami"
+              />
+            </li>
+            <li>
+              <FormattedMessage
+                id="billiards.legend.signal"
+                defaultMessage="• Sygnał rozchodzi się szybko, elektrony powoli"
+              />
+            </li>
           </ul>
         </div>
       </CardContent>

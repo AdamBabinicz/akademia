@@ -1,81 +1,140 @@
-
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Eye, Volume2, Hand, Palette, Clock, Bookmark, Play, Pause } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
-import { DailyFact } from '@/components/DailyFact';
-import { Language } from '@/types/education';
+import React, { useState, useEffect, useRef } from "react";
+import { useIntl, FormattedMessage } from "react-intl";
+import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
+import {
+  Eye,
+  Volume2,
+  Hand,
+  Palette,
+  Clock,
+  Bookmark,
+  Play,
+  Pause,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { DailyFact } from "@/components/DailyFact";
+import { Language } from "@/types/education";
+import heroImage from "@assets/generated_images/18.png";
 
 interface PerceptionProps {
   language: Language;
 }
 
-// Color Vision Module
-function ColorVisionModule() {
-  const [selectedColor, setSelectedColor] = useState('#ff0000');
+interface ModuleProps {
+  intl: ReturnType<typeof useIntl>;
+}
+
+function ColorVisionModule({ intl }: ModuleProps) {
+  const [selectedColor, setSelectedColor] = useState("#ff0000");
   const [showDaltonism, setShowDaltonism] = useState(false);
-  
+
   const colors = [
-    { name: 'Czerwony', hex: '#ff0000' },
-    { name: 'Zielony', hex: '#00ff00' },
-    { name: 'Niebieski', hex: '#0000ff' },
-    { name: 'Żółty', hex: '#ffff00' },
-    { name: 'Fioletowy', hex: '#ff00ff' },
-    { name: 'Cyjan', hex: '#00ffff' }
+    {
+      name: intl.formatMessage({ id: "perception.color.name.red" }),
+      hex: "#ff0000",
+    },
+    {
+      name: intl.formatMessage({ id: "perception.color.name.green" }),
+      hex: "#00ff00",
+    },
+    {
+      name: intl.formatMessage({ id: "perception.color.name.blue" }),
+      hex: "#0000ff",
+    },
+    {
+      name: intl.formatMessage({ id: "perception.color.name.yellow" }),
+      hex: "#ffff00",
+    },
+    {
+      name: intl.formatMessage({ id: "perception.color.name.purple" }),
+      hex: "#ff00ff",
+    },
+    {
+      name: intl.formatMessage({ id: "perception.color.name.cyan" }),
+      hex: "#00ffff",
+    },
   ];
-  
+
+  const getTextColorForBackground = (hexColor: string) => {
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.5 ? "text-black" : "text-white";
+  };
+
   const getDaltonismFilter = (color: string) => {
     if (!showDaltonism) return color;
-    // Simulate protanopia (red-blind)
-    if (color === '#ff0000') return '#999999';
-    if (color === '#00ff00') return '#ffff00';
+    if (color === "#ff0000") return "#999999";
+    if (color === "#00ff00") return "#ffff00";
     return color;
   };
-  
+
   return (
     <Card className="card-interactive">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Palette className="w-5 h-5 text-primary" />
-          Percepcja Kolorów
+          <FormattedMessage id="perception.color.title" />
         </CardTitle>
         <CardDescription>
-          Odkryj jak oko ludzkie postrzega kolory i jak działa daltonizm
+          <FormattedMessage id="perception.color.description" />
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex items-center gap-2">
-          <Switch
-            checked={showDaltonism}
-            onCheckedChange={setShowDaltonism}
-          />
-          <span className="text-sm">Symulacja daltonizmu</span>
+          <Switch checked={showDaltonism} onCheckedChange={setShowDaltonism} />
+          <span className="text-sm">
+            <FormattedMessage id="perception.color.daltonismLabel" />
+          </span>
         </div>
-        
         <div className="grid grid-cols-3 gap-3">
-          {colors.map((color) => (
-            <div
-              key={color.hex}
-              className="aspect-square rounded-lg border-2 border-border cursor-pointer transition-all hover:scale-105"
-              style={{ backgroundColor: getDaltonismFilter(color.hex) }}
-              onClick={() => setSelectedColor(color.hex)}
-            >
-              <div className="w-full h-full flex items-center justify-center text-white font-semibold text-xs">
-                {color.name}
+          {colors.map((color) => {
+            const displayedColor = getDaltonismFilter(color.hex);
+            const textColorClass = getTextColorForBackground(displayedColor);
+            return (
+              <div
+                key={color.hex}
+                className="aspect-square rounded-lg border-2 border-border cursor-pointer transition-all hover:scale-105"
+                style={{ backgroundColor: displayedColor }}
+                onClick={() => setSelectedColor(color.hex)}
+              >
+                <div
+                  className={`w-full h-full flex items-center justify-center font-semibold text-xs ${textColorClass}`}
+                >
+                  {color.name}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-        
         <div className="p-4 bg-muted rounded-lg">
-          <h4 className="font-semibold mb-2">Wybrany kolor: {selectedColor}</h4>
+          <h4 className="font-semibold mb-2">
+            <FormattedMessage
+              id="perception.color.selected"
+              values={{ selectedColor }}
+            />
+          </h4>
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p>• Oko ludzkie ma 3 typy fotoreceptorów (stożki)</p>
-            <p>• Każdy typ reaguje na inne długości fal światła</p>
-            <p>• Daltonizm to niedobór jednego z typów stożków</p>
+            <p>
+              <FormattedMessage id="perception.color.fact1" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.color.fact2" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.color.fact3" />
+            </p>
           </div>
         </div>
       </CardContent>
@@ -83,27 +142,84 @@ function ColorVisionModule() {
   );
 }
 
-// Sound Frequency Module
-function SoundModule() {
+function SoundModule({ intl }: ModuleProps) {
   const [frequency, setFrequency] = useState([440]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState([50]);
-  
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const oscillatorRef = useRef<OscillatorNode | null>(null);
+  const gainRef = useRef<GainNode | null>(null);
+
+  useEffect(() => {
+    if (isPlaying) {
+      audioContextRef.current = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      oscillatorRef.current = audioContextRef.current.createOscillator();
+      gainRef.current = audioContextRef.current.createGain();
+      oscillatorRef.current.type = "sine";
+      oscillatorRef.current.frequency.setValueAtTime(
+        frequency[0],
+        audioContextRef.current.currentTime
+      );
+      gainRef.current.gain.setValueAtTime(
+        volume[0] / 100,
+        audioContextRef.current.currentTime
+      );
+      oscillatorRef.current.connect(gainRef.current);
+      gainRef.current.connect(audioContextRef.current.destination);
+      oscillatorRef.current.start();
+    }
+    return () => {
+      if (oscillatorRef.current) {
+        oscillatorRef.current.stop();
+      }
+      if (
+        audioContextRef.current &&
+        audioContextRef.current.state !== "closed"
+      ) {
+        audioContextRef.current.close();
+      }
+    };
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (isPlaying && oscillatorRef.current && audioContextRef.current) {
+      oscillatorRef.current.frequency.setValueAtTime(
+        frequency[0],
+        audioContextRef.current.currentTime
+      );
+    }
+  }, [frequency, isPlaying]);
+
+  useEffect(() => {
+    if (isPlaying && gainRef.current && audioContextRef.current) {
+      gainRef.current.gain.setValueAtTime(
+        volume[0] / 100,
+        audioContextRef.current.currentTime
+      );
+    }
+  }, [volume, isPlaying]);
+
   return (
     <Card className="card-interactive">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Volume2 className="w-5 h-5 text-primary" />
-          Percepcja Dźwięku
+          <FormattedMessage id="perception.sound.title" />
         </CardTitle>
         <CardDescription>
-          Eksploruj jak ucho odbiera różne częstotliwości dźwięku
+          <FormattedMessage id="perception.sound.description" />
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-medium">Częstotliwość: {frequency[0]} Hz</label>
+            <label className="text-sm font-medium">
+              <FormattedMessage
+                id="perception.sound.frequency"
+                values={{ frequency: frequency[0] }}
+              />
+            </label>
             <Slider
               value={frequency}
               onValueChange={setFrequency}
@@ -113,9 +229,13 @@ function SoundModule() {
               className="mt-2"
             />
           </div>
-          
           <div>
-            <label className="text-sm font-medium">Głośność: {volume[0]}%</label>
+            <label className="text-sm font-medium">
+              <FormattedMessage
+                id="perception.sound.volume"
+                values={{ volume: volume[0] }}
+              />
+            </label>
             <Slider
               value={volume}
               onValueChange={setVolume}
@@ -126,7 +246,6 @@ function SoundModule() {
             />
           </div>
         </div>
-        
         <div className="flex items-center justify-center">
           <Button
             onClick={() => setIsPlaying(!isPlaying)}
@@ -136,23 +255,30 @@ function SoundModule() {
             {isPlaying ? (
               <>
                 <Pause className="w-4 h-4 mr-2" />
-                Zatrzymaj
+                <FormattedMessage id="common.pause" />
               </>
             ) : (
               <>
                 <Play className="w-4 h-4 mr-2" />
-                Odtwórz
+                <FormattedMessage id="common.play" />
               </>
             )}
           </Button>
         </div>
-        
         <div className="p-4 bg-muted rounded-lg">
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p>• Człowiek słyszy częstotliwości od 20 Hz do 20 kHz</p>
-            <p>• Wysokość dźwięku zależy od częstotliwości</p>
-            <p>• Głośność zależy od amplitudy fali dźwiękowej</p>
-            <p>• Ucho środkowe wzmacnia dźwięki o 20-30 dB</p>
+            <p>
+              <FormattedMessage id="perception.sound.fact1" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.sound.fact2" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.sound.fact3" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.sound.fact4" />
+            </p>
           </div>
         </div>
       </CardContent>
@@ -160,33 +286,57 @@ function SoundModule() {
   );
 }
 
-// Touch Sensitivity Module
-function TouchModule() {
+function TouchModule({ intl }: ModuleProps) {
   const [sensitivity, setSensitivity] = useState([50]);
   const [activeZone, setActiveZone] = useState<string | null>(null);
-  
+
   const bodyZones = [
-    { id: 'fingertip', name: 'Opuszek palca', sensitivity: 95 },
-    { id: 'palm', name: 'Dłoń', sensitivity: 70 },
-    { id: 'arm', name: 'Ramię', sensitivity: 40 },
-    { id: 'back', name: 'Plecy', sensitivity: 25 },
-    { id: 'leg', name: 'Noga', sensitivity: 30 }
+    {
+      id: "fingertip",
+      name: intl.formatMessage({ id: "perception.touch.zone.fingertip" }),
+      sensitivity: 95,
+    },
+    {
+      id: "palm",
+      name: intl.formatMessage({ id: "perception.touch.zone.palm" }),
+      sensitivity: 70,
+    },
+    {
+      id: "arm",
+      name: intl.formatMessage({ id: "perception.touch.zone.arm" }),
+      sensitivity: 40,
+    },
+    {
+      id: "back",
+      name: intl.formatMessage({ id: "perception.touch.zone.back" }),
+      sensitivity: 25,
+    },
+    {
+      id: "leg",
+      name: intl.formatMessage({ id: "perception.touch.zone.leg" }),
+      sensitivity: 30,
+    },
   ];
-  
+
   return (
     <Card className="card-interactive">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Hand className="w-5 h-5 text-primary" />
-          Czucie Dotykowe
+          <FormattedMessage id="perception.touch.title" />
         </CardTitle>
         <CardDescription>
-          Poznaj różnice w czułości dotykowej różnych części ciała
+          <FormattedMessage id="perception.touch.description" />
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
-          <label className="text-sm font-medium">Próg czucia: {sensitivity[0]}%</label>
+          <label className="text-sm font-medium">
+            <FormattedMessage
+              id="perception.touch.threshold"
+              values={{ sensitivity: sensitivity[0] }}
+            />
+          </label>
           <Slider
             value={sensitivity}
             onValueChange={setSensitivity}
@@ -196,34 +346,43 @@ function TouchModule() {
             className="mt-2"
           />
         </div>
-        
         <div className="grid gap-3">
           {bodyZones.map((zone) => (
             <div
               key={zone.id}
               className={`p-3 rounded-lg border cursor-pointer transition-all ${
                 zone.sensitivity >= sensitivity[0]
-                  ? 'bg-primary/10 border-primary'
-                  : 'bg-muted border-border'
-              } ${activeZone === zone.id ? 'ring-2 ring-primary' : ''}`}
+                  ? "bg-primary/10 border-primary"
+                  : "bg-muted border-border"
+              } ${activeZone === zone.id ? "ring-2 ring-primary" : ""}`}
               onClick={() => setActiveZone(zone.id)}
             >
               <div className="flex justify-between items-center">
                 <span className="font-medium">{zone.name}</span>
                 <span className="text-sm text-muted-foreground">
-                  {zone.sensitivity}% czułości
+                  <FormattedMessage
+                    id="perception.touch.sensitivityLabel"
+                    values={{ sensitivity: zone.sensitivity }}
+                  />
                 </span>
               </div>
             </div>
           ))}
         </div>
-        
         <div className="p-4 bg-muted rounded-lg">
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p>• Opuszki palców są najbardziej czułe na dotyk</p>
-            <p>• Czucie temperatury i bólu to oddzielne receptory</p>
-            <p>• Receptory mechaniczne reagują na nacisk i wibracje</p>
-            <p>• Mózg interpretuje sygnały z różnych receptorów</p>
+            <p>
+              <FormattedMessage id="perception.touch.fact1" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.touch.fact2" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.touch.fact3" />
+            </p>
+            <p>
+              <FormattedMessage id="perception.touch.fact4" />
+            </p>
           </div>
         </div>
       </CardContent>
@@ -232,116 +391,168 @@ function TouchModule() {
 }
 
 export default function Perception({ language }: PerceptionProps) {
+  const intl = useIntl();
+
   return (
-    <div className="min-h-screen transition-all duration-300 ease-in-out" data-testid="perception-page">
-      {/* Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-card border-b border-border py-6 px-6 lg:px-12"
+    <>
+      <SEO
+        title={intl.formatMessage({ id: "perception.header.title" })}
+        description={intl.formatMessage({ id: "perception.header.subtitle" })}
+        schema={{ type: "article" }}
+      />
+      <div
+        className="min-h-screen transition-all duration-300 ease-in-out"
+        data-testid="perception-page"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="ml-16 lg:ml-0">
-              <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
-                Percepcja i Zmysły
-              </h1>
-              <p className="text-muted-foreground mt-2">
-                Odkryj fascynujący świat ludzkich zmysłów i percepcji
+        <motion.header
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative bg-card border-b border-border py-6 px-6 lg:px-12 overflow-hidden"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/60" />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div className="ml-16 lg:ml-0">
+                <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
+                  <FormattedMessage id="perception.header.title" />
+                </h2>
+                <p className="text-muted-foreground mt-2">
+                  <FormattedMessage id="perception.header.subtitle" />
+                </p>
+                <div className="flex items-center gap-4 mt-4">
+                  <div className="hidden md:flex items-center gap-2 bg-muted rounded-lg p-2">
+                    <Clock className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                      <FormattedMessage id="perception.header.readTime" />
+                    </span>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Bookmark className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+              <div className="hidden lg:block">
+                <img
+                  src={heroImage}
+                  alt={intl.formatMessage({
+                    id: "perception.header.imageAlt",
+                  })}
+                  className="w-full h-64 object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.header>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <DailyFact language={language} category="perception" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-8"
+          >
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-foreground mb-4">
+                <FormattedMessage id="perception.modules.title" />
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                <FormattedMessage id="perception.modules.subtitle" />
               </p>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2 bg-muted rounded-lg p-2">
-                <Clock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">~45 min</span>
+            <div className="grid gap-8">
+              <ColorVisionModule intl={intl} />
+              <SoundModule intl={intl} />
+              <TouchModule intl={intl} />
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-gradient-warm p-8 rounded-xl"
+          >
+            <h3 className="text-xl font-bold text-foreground mb-4">
+              <FormattedMessage id="perception.summary.title" />
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-card-foreground mb-2">
+                  <FormattedMessage id="perception.summary.sight.title" />
+                </h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>
+                    <FormattedMessage id="perception.summary.sight.fact1" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.sight.fact2" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.sight.fact3" />
+                  </li>
+                </ul>
               </div>
-              <Button variant="outline" size="sm">
-                <Bookmark className="w-4 h-4" />
-              </Button>
+              <div>
+                <h4 className="font-semibold text-card-foreground mb-2">
+                  <FormattedMessage id="perception.summary.hearing.title" />
+                </h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>
+                    <FormattedMessage id="perception.summary.hearing.fact1" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.hearing.fact2" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.hearing.fact3" />
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-card-foreground mb-2">
+                  <FormattedMessage id="perception.summary.touch.title" />
+                </h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>
+                    <FormattedMessage id="perception.summary.touch.fact1" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.touch.fact2" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.touch.fact3" />
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-card-foreground mb-2">
+                  <FormattedMessage id="perception.summary.tasteSmell.title" />
+                </h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>
+                    <FormattedMessage id="perception.summary.tasteSmell.fact1" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.tasteSmell.fact2" />
+                  </li>
+                  <li>
+                    <FormattedMessage id="perception.summary.tasteSmell.fact3" />
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </motion.header>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 space-y-12">
-        {/* Daily Fact */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <DailyFact language={language} />
-        </motion.div>
-
-        {/* Interactive Modules */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="space-y-8"
-        >
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Interaktywne Moduły
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Eksploruj jak działają nasze zmysły poprzez interaktywne eksperymenty
-            </p>
-          </div>
-          
-          <div className="grid gap-8">
-            <ColorVisionModule />
-            <SoundModule />
-            <TouchModule />
-          </div>
-        </motion.div>
-
-        {/* Summary Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-gradient-warm p-8 rounded-xl"
-        >
-          <h3 className="text-xl font-bold text-foreground mb-4">
-            Podsumowanie - Jak Działają Nasze Zmysły
-          </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-semibold text-card-foreground mb-2">Wzrok</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Oko przekształca światło w sygnały elektryczne</li>
-                <li>• Siatkówka zawiera pręciki i stożki</li>
-                <li>• Mózg interpretuje obrazy w korze wzrokowej</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-card-foreground mb-2">Słuch</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Fale dźwiękowe wprawiają błonę bębenkową w drgania</li>
-                <li>• Kosteczki słuchowe wzmacniają wibracje</li>
-                <li>• Ślimak przekształca drgania w sygnały nerwowe</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-card-foreground mb-2">Dotyk</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Receptory mechaniczne reagują na nacisk</li>
-                <li>• Różne części ciała mają różną czułość</li>
-                <li>• Mózg mapuje powierzchnię ciała</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-card-foreground mb-2">Smak i Zapach</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Kubki smakowe rozpoznają 5 podstawowych smaków</li>
-                <li>• Węch jest tysiące razy czulszy niż smak</li>
-                <li>• Oba zmysły współpracują przy rozpoznawaniu pokarmów</li>
-              </ul>
-            </div>
-          </div>
-        </motion.div>
       </div>
-    </div>
+    </>
   );
 }

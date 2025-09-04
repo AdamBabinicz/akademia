@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 
 export default function NotFound() {
   return (
@@ -9,9 +9,9 @@ export default function NotFound() {
         <CardContent className="pt-6">
           <div className="flex mb-4 gap-2">
             <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-2xl font-bold text-gray-900">
               <FormattedMessage id="error.404" />
-            </h1>
+            </h2>
           </div>
 
           <p className="mt-4 text-sm text-gray-600">

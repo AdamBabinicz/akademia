@@ -1,0 +1,30 @@
+Zbuduj kompletną aplikację edukacyjną „Interaktywna Nauka” jako nowy projekt Next.js 14 (App Router) + TypeScript + Tailwind CSS + next-intl. Projekt ma być modułowy (wiele krótkich plików), łatwy do aktualizacji i bogaty wizualnie. Aplikacja ma prezentować interaktywne przyciski uruchamiające obliczenia, symulacje, interpretacje i zdarzenia losowe. Ma być wielojęzyczna: pl (domyślny), en, hu. Motyw ciemny nie może być czarny — zastosuj brązy i złoto z dobrym kontrastem. Zapewnij wysoki poziom accessibility. Wygeneruj pełne repozytorium z działającym buildem i podstawowym contentem (teksty + obrazy).
+
+Stos technologiczny
+
+Next.js 14 (App Router), TypeScript
+
+Tailwind CSS (bez gotowych presetów; rozbudowa o własne tokeny)
+
+next-intl (i18n: pl, en, hu; domyślny pl; routing /[locale])
+
+framer-motion (animacje), shadcn/ui (komponenty bazowe), lucide-react (ikony)
+
+react-hook-form + zod (walidacje w modułach interaktywnych)
+
+KaTeX (render matematyki), react-aria lub wzorce ARIA do dostępności
+
+remark/rehype dla MDX (krótkie pliki treści)
+
+ESLint + Prettier, Jest + React Testing Library + Playwright (testy), axe-core (a11y)
+
+PWA: manifest + service worker (cache podstawowych assetów)
+
+Firebase Hosting (konfiguracja wdrożenia); Firestore/Functions opcjonalne (wyłączone domyślnie)
+
+Architektura i podział na krótkie pliki
+
+Utwórz strukturę (dużo małych modułów, łatwy refactor):
+Dane strukturalne
+
+Każda strona zawiera dane strukturalne JSON-LD zgodne z schema.org

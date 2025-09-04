@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Theme transition for smooth switching */
 .theme-transition {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease !important;
 }
 
 .theme-transition * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease !important;
 }
 
 @layer base {
@@ -78,14 +80,25 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
   }
 
   /* Ensure smooth transitions for all interactive elements */
-  button, input, textarea, select {
+  button,
+  input,
+  textarea,
+  select {
     @apply transition-all duration-200 ease-in-out;
   }
 
@@ -139,7 +152,8 @@
 }
 
 @keyframes pulse-gold {
-  0%, 100% {
+  0%,
+  100% {
     background-color: hsl(var(--primary));
   }
   50% {
@@ -184,7 +198,11 @@
 
 /* Special theme-aware gradients */
 .bg-gradient-warm {
-  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--muted)) 100%
+  );
 }
 
 .dark .bg-gradient-warm {
@@ -193,7 +211,11 @@
 
 /* Navigation improvements */
 .nav-item-active {
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.8)
+  );
   color: hsl(var(--primary-foreground));
 }
 
@@ -214,24 +236,34 @@
 }
 
 .card-interactive:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .dark .card-interactive:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
   border-color: hsl(45 50% 35%);
 }
 
 /* Button enhancements */
 .btn-primary {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.9));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.9)
+  );
   border: 1px solid hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   font-weight: 500;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--primary) / 0.8));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.9),
+    hsl(var(--primary) / 0.8)
+  );
   box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
 }
 
@@ -274,7 +306,11 @@
 
 /* Progress bars */
 .progress-bar {
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.7));
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.7)
+  );
 }
 
 /* Special effects for physics simulations */
@@ -288,17 +324,23 @@
 
 /* Loading states */
 .loading-shimmer {
-  background: linear-gradient(90deg, 
-    hsl(var(--muted)) 0%, 
-    hsl(var(--accent)) 50%, 
-    hsl(var(--muted)) 100%);
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--accent)) 50%,
+    hsl(var(--muted)) 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* Responsive text scaling */
@@ -336,9 +378,19 @@
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
 }
