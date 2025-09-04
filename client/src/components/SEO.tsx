@@ -23,7 +23,7 @@ const siteName = "Interaktywna Akademia Fizyki";
 const defaultTitle = "Interaktywna Akademia Fizyki | Nauka przez Eksperymenty";
 const defaultDescription =
   "Odkryj fizykę z interaktywnymi symulacjami. Ucz się mechaniki, optyki, termodynamiki i elektryczności w nowoczesny i przystępny sposób. Zacznij już dziś!";
-const defaultImage = `${siteUrl}/og-image.png`;
+const defaultImage = `${siteUrl}/1.png`;
 
 export default function SEO({
   title,
@@ -72,7 +72,7 @@ export default function SEO({
       url: siteUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/logo-192.png`,
+        url: `${siteUrl}/2.png`,
       },
       description: defaultDescription,
     });
@@ -98,7 +98,7 @@ export default function SEO({
             name: siteName,
             logo: {
               "@type": "ImageObject",
-              url: `${siteUrl}/logo-192.png`,
+              url: `${siteUrl}/1.png`,
             },
           },
           mainEntityOfPage: {
