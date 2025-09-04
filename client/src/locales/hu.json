@@ -881,5 +881,12 @@
   "optics.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
   "optics.wavelengthAriaLabel": "A fény hullámhosszának módosítása",
   "optics.refractiveIndexAriaLabel": "A törésmutató módosítása",
-  "optics.lensDistanceAriaLabel": "A tárgy lencsétől való távolságának módosítása"
+  "optics.lensDistanceAriaLabel": "A tárgy lencsétől való távolságának módosítása",
+  "perception.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "perception.color.daltonismToggleAriaLabel": "Színtévesztés szimuláció be/ki",
+  "perception.sound.frequencyAriaLabel": "Hangfrekvencia módosítása",
+  "perception.sound.volumeAriaLabel": "Hangerő módosítása",
+  "perception.sound.playAriaLabel": "Hang lejátszása",
+  "perception.sound.pauseAriaLabel": "Hang szüneteltetése",
+  "perception.touch.sensitivityAriaLabel": "Érintésérzékenységi küszöb módosítása"
 }

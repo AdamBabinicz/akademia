@@ -38,6 +38,11 @@ function ColorVisionModule({ intl }: ModuleProps) {
   const [selectedColor, setSelectedColor] = useState("#ff0000");
   const [showDaltonism, setShowDaltonism] = useState(false);
 
+  const daltonismToggleAriaLabel = intl.formatMessage({
+    id: "perception.color.daltonismToggleAriaLabel",
+    defaultMessage: "Włącz symulację daltonizmu",
+  });
+
   const colors = [
     {
       name: intl.formatMessage({ id: "perception.color.name.red" }),
@@ -93,7 +98,11 @@ function ColorVisionModule({ intl }: ModuleProps) {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex items-center gap-2">
-          <Switch checked={showDaltonism} onCheckedChange={setShowDaltonism} />
+          <Switch
+            checked={showDaltonism}
+            onCheckedChange={setShowDaltonism}
+            aria-label={daltonismToggleAriaLabel}
+          />
           <span className="text-sm">
             <FormattedMessage id="perception.color.daltonismLabel" />
           </span>
@@ -105,9 +114,15 @@ function ColorVisionModule({ intl }: ModuleProps) {
             return (
               <div
                 key={color.hex}
+                role="button"
+                tabIndex={0}
+                aria-label={color.name}
                 className="aspect-square rounded-lg border-2 border-border cursor-pointer transition-all hover:scale-105"
                 style={{ backgroundColor: displayedColor }}
                 onClick={() => setSelectedColor(color.hex)}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && setSelectedColor(color.hex)
+                }
               >
                 <div
                   className={`w-full h-full flex items-center justify-center font-semibold text-xs ${textColorClass}`}
@@ -149,6 +164,24 @@ function SoundModule({ intl }: ModuleProps) {
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
   const gainRef = useRef<GainNode | null>(null);
+
+  const frequencyAriaLabel = intl.formatMessage({
+    id: "perception.sound.frequencyAriaLabel",
+    defaultMessage: "Zmień częstotliwość dźwięku",
+  });
+  const volumeAriaLabel = intl.formatMessage({
+    id: "perception.sound.volumeAriaLabel",
+    defaultMessage: "Zmień głośność dźwięku",
+  });
+  const playPauseAriaLabel = isPlaying
+    ? intl.formatMessage({
+        id: "perception.sound.pauseAriaLabel",
+        defaultMessage: "Zatrzymaj dźwięk",
+      })
+    : intl.formatMessage({
+        id: "perception.sound.playAriaLabel",
+        defaultMessage: "Odtwórz dźwięk",
+      });
 
   useEffect(() => {
     if (isPlaying) {
@@ -227,6 +260,7 @@ function SoundModule({ intl }: ModuleProps) {
               min={100}
               step={10}
               className="mt-2"
+              aria-label={frequencyAriaLabel}
             />
           </div>
           <div>
@@ -243,6 +277,7 @@ function SoundModule({ intl }: ModuleProps) {
               min={0}
               step={5}
               className="mt-2"
+              aria-label={volumeAriaLabel}
             />
           </div>
         </div>
@@ -251,6 +286,7 @@ function SoundModule({ intl }: ModuleProps) {
             onClick={() => setIsPlaying(!isPlaying)}
             size="lg"
             className="btn-primary"
+            aria-label={playPauseAriaLabel}
           >
             {isPlaying ? (
               <>
@@ -289,6 +325,11 @@ function SoundModule({ intl }: ModuleProps) {
 function TouchModule({ intl }: ModuleProps) {
   const [sensitivity, setSensitivity] = useState([50]);
   const [activeZone, setActiveZone] = useState<string | null>(null);
+
+  const sensitivityAriaLabel = intl.formatMessage({
+    id: "perception.touch.sensitivityAriaLabel",
+    defaultMessage: "Zmień próg czułości dotyku",
+  });
 
   const bodyZones = [
     {
@@ -344,18 +385,23 @@ function TouchModule({ intl }: ModuleProps) {
             min={0}
             step={5}
             className="mt-2"
+            aria-label={sensitivityAriaLabel}
           />
         </div>
         <div className="grid gap-3">
           {bodyZones.map((zone) => (
             <div
               key={zone.id}
+              role="button"
+              tabIndex={0}
+              aria-label={zone.name}
               className={`p-3 rounded-lg border cursor-pointer transition-all ${
                 zone.sensitivity >= sensitivity[0]
                   ? "bg-primary/10 border-primary"
                   : "bg-muted border-border"
               } ${activeZone === zone.id ? "ring-2 ring-primary" : ""}`}
               onClick={() => setActiveZone(zone.id)}
+              onKeyDown={(e) => e.key === "Enter" && setActiveZone(zone.id)}
             >
               <div className="flex justify-between items-center">
                 <span className="font-medium">{zone.name}</span>
@@ -392,6 +438,11 @@ function TouchModule({ intl }: ModuleProps) {
 
 export default function Perception({ language }: PerceptionProps) {
   const intl = useIntl();
+
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "perception.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
 
   return (
     <>
@@ -430,7 +481,11 @@ export default function Perception({ language }: PerceptionProps) {
                       <FormattedMessage id="perception.header.readTime" />
                     </span>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={bookmarkAriaLabel}
+                  >
                     <Bookmark className="w-4 h-4" />
                   </Button>
                 </div>

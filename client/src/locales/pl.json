@@ -881,5 +881,12 @@
   "optics.bookmarkAriaLabel": "Dodaj do zakładek",
   "optics.wavelengthAriaLabel": "Zmień długość fali światła",
   "optics.refractiveIndexAriaLabel": "Zmień współczynnik załamania",
-  "optics.lensDistanceAriaLabel": "Zmień odległość obiektu od soczewki"
+  "optics.lensDistanceAriaLabel": "Zmień odległość obiektu od soczewki",
+  "perception.bookmarkAriaLabel": "Dodaj do zakładek",
+  "perception.color.daltonismToggleAriaLabel": "Włącz lub wyłącz symulację daltonizmu",
+  "perception.sound.frequencyAriaLabel": "Zmień częstotliwość dźwięku",
+  "perception.sound.volumeAriaLabel": "Zmień głośność dźwięku",
+  "perception.sound.playAriaLabel": "Odtwórz dźwięk",
+  "perception.sound.pauseAriaLabel": "Zatrzymaj dźwięk",
+  "perception.touch.sensitivityAriaLabel": "Zmień próg czułości dotyku"
 }

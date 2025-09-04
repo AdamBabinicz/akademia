@@ -881,5 +881,12 @@
   "optics.bookmarkAriaLabel": "Add to bookmarks",
   "optics.wavelengthAriaLabel": "Change the light wavelength",
   "optics.refractiveIndexAriaLabel": "Change the refractive index",
-  "optics.lensDistanceAriaLabel": "Change the object distance from the lens"
+  "optics.lensDistanceAriaLabel": "Change the object distance from the lens",
+  "perception.bookmarkAriaLabel": "Add to bookmarks",
+  "perception.color.daltonismToggleAriaLabel": "Toggle color blindness simulation",
+  "perception.sound.frequencyAriaLabel": "Change the sound frequency",
+  "perception.sound.volumeAriaLabel": "Change the sound volume",
+  "perception.sound.playAriaLabel": "Play sound",
+  "perception.sound.pauseAriaLabel": "Pause sound",
+  "perception.touch.sensitivityAriaLabel": "Change the touch sensitivity threshold"
 }
