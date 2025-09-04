@@ -39,6 +39,16 @@ export default function Thermodynamics({ language }: ThermodynamicsProps) {
     vy: (Math.random() - 0.5) * moleculeSpeed,
   }));
 
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "thermodynamics.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
+
+  const temperatureAriaLabel = intl.formatMessage({
+    id: "thermodynamics.temperatureAriaLabel",
+    defaultMessage: "Zmień temperaturę cząsteczek",
+  });
+
   return (
     <>
       <SEO
@@ -81,7 +91,11 @@ export default function Thermodynamics({ language }: ThermodynamicsProps) {
                     />
                   </span>
                 </div>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  aria-label={bookmarkAriaLabel}
+                >
                   <Bookmark className="w-4 h-4" />
                 </Button>
               </div>
@@ -260,6 +274,7 @@ export default function Thermodynamics({ language }: ThermodynamicsProps) {
                     step={1}
                     value={temperature}
                     onValueChange={setTemperature}
+                    aria-label={temperatureAriaLabel}
                   />
                 </div>
               </CardContent>

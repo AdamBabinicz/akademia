@@ -888,5 +888,7 @@
   "perception.sound.volumeAriaLabel": "Hangerő módosítása",
   "perception.sound.playAriaLabel": "Hang lejátszása",
   "perception.sound.pauseAriaLabel": "Hang szüneteltetése",
-  "perception.touch.sensitivityAriaLabel": "Érintésérzékenységi küszöb módosítása"
+  "perception.touch.sensitivityAriaLabel": "Érintésérzékenységi küszöb módosítása",
+  "thermodynamics.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "thermodynamics.temperatureAriaLabel": "A molekulák hőmérsékletének módosítása"
 }

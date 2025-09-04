@@ -888,5 +888,7 @@
   "perception.sound.volumeAriaLabel": "Change the sound volume",
   "perception.sound.playAriaLabel": "Play sound",
   "perception.sound.pauseAriaLabel": "Pause sound",
-  "perception.touch.sensitivityAriaLabel": "Change the touch sensitivity threshold"
+  "perception.touch.sensitivityAriaLabel": "Change the touch sensitivity threshold",
+  "thermodynamics.bookmarkAriaLabel": "Add to bookmarks",
+  "thermodynamics.temperatureAriaLabel": "Change the temperature of the molecules"
 }
