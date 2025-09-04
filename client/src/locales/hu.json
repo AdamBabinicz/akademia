@@ -860,5 +860,10 @@
   "electronDrift.voltageAriaLabel": "Feszültség beállítása voltban",
   "electronDrift.resetAriaLabel": "Az elektronsodródás szimulációjának visszaállítása",
   "electronDrift.playAriaLabel": "Szimuláció indítása",
-  "electronDrift.pauseAriaLabel": "Szimuláció szüneteltetése"
+  "electronDrift.pauseAriaLabel": "Szimuláció szüneteltetése",
+  "planetaryMotion.speedAriaLabel": "A bolygómozgás animáció sebességének beállítása",
+  "planetaryMotion.playAriaLabel": "Bolygómozgás animáció lejátszása",
+  "planetaryMotion.pauseAriaLabel": "Bolygómozgás animáció szüneteltetése",
+  "planetaryMotion.resetAriaLabel": "Bolygómozgás animáció visszaállítása",
+  "scaleExplorer.sliderAriaLabel": "Változtassa meg a világegyetem méretarányát"
 }

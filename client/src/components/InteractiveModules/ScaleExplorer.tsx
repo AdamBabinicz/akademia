@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { motion } from "framer-motion";
 import { Maximize } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { SCALE_LEVELS } from "@/lib/constants";
-import { useIntl } from "react-intl"; // Już tutaj masz useIntl, super!
 
 export function ScaleExplorer() {
   const [currentScale, setCurrentScale] = useState([3]);
   const intl = useIntl();
   const scale = SCALE_LEVELS[currentScale[0]];
 
-  // To console.log pokazywało klucz, bo 'scale.level.molecule.name' to był klucz, nie przetłumaczony tekst
-  // console.log(intl.formatMessage({ id: "scale.level.molecule.name" }));
+  const sliderAriaLabel = intl.formatMessage({
+    id: "scaleExplorer.sliderAriaLabel",
+    defaultMessage: "Zmień skalę wszechświata",
+  });
 
   const getVisualization = () => {
     switch (scale.visualization) {
@@ -95,7 +96,6 @@ export function ScaleExplorer() {
                 className="text-primary font-mono text-sm"
                 data-testid="scale-name"
               >
-                {/* TUTAJ ZMIANA: użyj intl.formatMessage */}
                 {intl.formatMessage({ id: scale.name as any })}
               </span>
             </div>
@@ -108,11 +108,10 @@ export function ScaleExplorer() {
                 max={SCALE_LEVELS.length - 1}
                 step={1}
                 className="w-full"
-                aria-label="scaleExplorer.slider"
+                aria-label={sliderAriaLabel}
                 data-testid="scale-slider"
               />
 
-              {/* Markery skali - są już ok, bo używają FormattedMessage */}
               <div className="flex justify-between text-xs text-muted-foreground mt-2">
                 <span>
                   <FormattedMessage id="scale.quark" defaultMessage="Kwark" />
@@ -172,7 +171,6 @@ export function ScaleExplorer() {
                 className="text-sm text-foreground font-medium"
                 data-testid="scale-description"
               >
-                {/* TUTAJ ZMIANA: użyj intl.formatMessage */}
                 {intl.formatMessage({ id: scale.description as any })}
               </p>
               <p

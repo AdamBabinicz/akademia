@@ -860,5 +860,10 @@
   "electronDrift.voltageAriaLabel": "Set voltage in volts",
   "electronDrift.resetAriaLabel": "Reset the electron drift simulation",
   "electronDrift.playAriaLabel": "Play the simulation",
-  "electronDrift.pauseAriaLabel": "Pause the simulation"
+  "electronDrift.pauseAriaLabel": "Pause the simulation",
+  "planetaryMotion.speedAriaLabel": "Adjust the animation speed of planetary motion",
+  "planetaryMotion.playAriaLabel": "Play the planetary motion animation",
+  "planetaryMotion.pauseAriaLabel": "Pause the planetary motion animation",
+  "planetaryMotion.resetAriaLabel": "Reset the planetary motion animation",
+  "scaleExplorer.sliderAriaLabel": "Change the scale of the universe"
 }

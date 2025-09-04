@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Play, Pause, RotateCcw, Globe } from "lucide-react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 interface Planet {
   nameId: string;
@@ -51,6 +51,7 @@ export function PlanetaryMotion() {
       angle: 0,
     },
   ]);
+  const intl = useIntl();
 
   useEffect(() => {
     let animationId: number;
@@ -81,6 +82,24 @@ export function PlanetaryMotion() {
     setIsRunning(false);
   };
 
+  const speedAriaLabel = intl.formatMessage({
+    id: "planetaryMotion.speedAriaLabel",
+    defaultMessage: "Dostosuj prędkość animacji",
+  });
+  const playPauseAriaLabel = isRunning
+    ? intl.formatMessage({
+        id: "planetaryMotion.pauseAriaLabel",
+        defaultMessage: "Zatrzymaj animację",
+      })
+    : intl.formatMessage({
+        id: "planetaryMotion.playAriaLabel",
+        defaultMessage: "Odtwórz animację",
+      });
+  const resetAriaLabel = intl.formatMessage({
+    id: "planetaryMotion.resetAriaLabel",
+    defaultMessage: "Zresetuj animację",
+  });
+
   return (
     <Card className="interactive-module" data-testid="planetary-motion-module">
       <CardHeader>
@@ -105,9 +124,7 @@ export function PlanetaryMotion() {
           />
         </div>
 
-        {/* Wizualizacja układu słonecznego */}
         <div className="relative w-full h-80 bg-gradient-to-b from-slate-900 to-black rounded-lg overflow-hidden flex items-center justify-center">
-          {/* Słońce */}
           <div
             className="absolute w-8 h-8 bg-yellow-400 rounded-full shadow-lg"
             style={{
@@ -115,7 +132,6 @@ export function PlanetaryMotion() {
             }}
           />
 
-          {/* Orbity */}
           {planets.map((planet, index) => (
             <div
               key={`orbit-${index}`}
@@ -127,28 +143,31 @@ export function PlanetaryMotion() {
             />
           ))}
 
-          {/* Planety */}
-          {planets.map((planet, index) => (
-            <div
-              key={`planet-${index}`}
-              className="absolute rounded-full transition-all duration-75"
-              style={{
-                width: planet.size,
-                height: planet.size,
-                backgroundColor: planet.color,
-                left: "50%",
-                top: "50%",
-                transform: `translate(-50%, -50%) translate(${
-                  planet.distance * Math.cos(planet.angle)
-                }px, ${planet.distance * Math.sin(planet.angle)}px)`,
-                boxShadow: `0 0 ${planet.size}px ${planet.color}50`,
-              }}
-              title={planet.nameId}
-            />
-          ))}
+          {planets.map((planet, index) => {
+            const planetName = intl.formatMessage({ id: planet.nameId });
+            return (
+              <div
+                key={`planet-${index}`}
+                className="absolute rounded-full transition-all duration-75"
+                style={{
+                  width: planet.size,
+                  height: planet.size,
+                  backgroundColor: planet.color,
+                  left: "50%",
+                  top: "50%",
+                  transform: `translate(-50%, -50%) translate(${
+                    planet.distance * Math.cos(planet.angle)
+                  }px, ${planet.distance * Math.sin(planet.angle)}px)`,
+                  boxShadow: `0 0 ${planet.size}px ${planet.color}50`,
+                }}
+                title={planetName}
+                aria-label={planetName}
+                role="img"
+              />
+            );
+          })}
         </div>
 
-        {/* Kontrolki */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium">
@@ -167,7 +186,7 @@ export function PlanetaryMotion() {
             min={0.1}
             step={0.1}
             className="w-full"
-            aria-label="Prędkość animacji"
+            aria-label={speedAriaLabel}
             data-testid="speed-slider"
           />
 
@@ -177,6 +196,7 @@ export function PlanetaryMotion() {
               variant="default"
               size="sm"
               data-testid="play-pause-button"
+              aria-label={playPauseAriaLabel}
             >
               {isRunning ? (
                 <>
@@ -196,6 +216,7 @@ export function PlanetaryMotion() {
               variant="outline"
               size="sm"
               data-testid="reset-button"
+              aria-label={resetAriaLabel}
             >
               <RotateCcw className="w-4 h-4 mr-2" />
               <FormattedMessage id="common.reset" defaultMessage="Reset" />
@@ -203,7 +224,6 @@ export function PlanetaryMotion() {
           </div>
         </div>
 
-        {/* Informacje o planetach */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
           {planets.map((planet, index) => (
             <div
