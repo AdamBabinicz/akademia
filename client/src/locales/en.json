@@ -871,5 +871,9 @@
   "earthSpace.bookmarkAriaLabel": "Add to bookmarks",
   "earthSpace.earthTiltAriaLabel": "Change the Earth's axis tilt",
   "earthSpace.distanceFromSunAriaLabel": "Change the Earth's distance from the Sun",
-  "earthSpace.timeOfDayAriaLabel": "Change the time of day"
+  "earthSpace.timeOfDayAriaLabel": "Change the time of day",
+  "microworld.bookmarkAriaLabel": "Add to bookmarks",
+  "microworld.atom.animationToggleAriaLabel": "Toggle electron animation",
+  "microworld.dna.zoomAriaLabel": "Change DNA zoom level",
+  "microworld.dna.basesToggleAriaLabel": "Show or hide nitrogenous bases"
 }

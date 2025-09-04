@@ -871,5 +871,9 @@
   "earthSpace.bookmarkAriaLabel": "Dodaj do zakładek",
   "earthSpace.earthTiltAriaLabel": "Zmień nachylenie osi Ziemi",
   "earthSpace.distanceFromSunAriaLabel": "Zmień odległość Ziemi od Słońca",
-  "earthSpace.timeOfDayAriaLabel": "Zmień porę dnia"
+  "earthSpace.timeOfDayAriaLabel": "Zmień porę dnia",
+  "microworld.bookmarkAriaLabel": "Dodaj do zakładek",
+  "microworld.atom.animationToggleAriaLabel": "Włącz lub wyłącz animację elektronów",
+  "microworld.dna.zoomAriaLabel": "Zmień powiększenie DNA",
+  "microworld.dna.basesToggleAriaLabel": "Pokaż lub ukryj zasady azotowe"
 }

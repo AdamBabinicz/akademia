@@ -871,5 +871,9 @@
   "earthSpace.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
   "earthSpace.earthTiltAriaLabel": "A Föld tengelyferdeségének módosítása",
   "earthSpace.distanceFromSunAriaLabel": "A Föld Naptól való távolságának módosítása",
-  "earthSpace.timeOfDayAriaLabel": "A napszak módosítása"
+  "earthSpace.timeOfDayAriaLabel": "A napszak módosítása",
+  "microworld.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "microworld.atom.animationToggleAriaLabel": "Elektron animáció be/ki",
+  "microworld.dna.zoomAriaLabel": "DNS nagyítási szint módosítása",
+  "microworld.dna.basesToggleAriaLabel": "Nitrogénbázisok megjelenítése vagy elrejtése"
 }

@@ -25,6 +25,12 @@ function AtomicStructureModule() {
   const [electronShells] = useState([2, 8, 1]);
   const [isAnimated, setIsAnimated] = useState(true);
   const baseRadius = 29;
+  const intl = useIntl();
+
+  const animationToggleAriaLabel = intl.formatMessage({
+    id: "microworld.atom.animationToggleAriaLabel",
+    defaultMessage: "Włącz lub wyłącz animację elektronów",
+  });
 
   return (
     <Card className="card-interactive">
@@ -39,7 +45,11 @@ function AtomicStructureModule() {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex items-center gap-4">
-          <Switch checked={isAnimated} onCheckedChange={setIsAnimated} />
+          <Switch
+            checked={isAnimated}
+            onCheckedChange={setIsAnimated}
+            aria-label={animationToggleAriaLabel}
+          />
           <span className="text-sm">
             <FormattedMessage id="microworld.atom.animationToggle" />
           </span>
@@ -111,6 +121,16 @@ function AtomicStructureModule() {
 function DNAStructureModule() {
   const [zoom, setZoom] = useState([1]);
   const [showBases, setShowBases] = useState(true);
+  const intl = useIntl();
+
+  const zoomAriaLabel = intl.formatMessage({
+    id: "microworld.dna.zoomAriaLabel",
+    defaultMessage: "Zmień powiększenie DNA",
+  });
+  const basesToggleAriaLabel = intl.formatMessage({
+    id: "microworld.dna.basesToggleAriaLabel",
+    defaultMessage: "Pokaż lub ukryj zasady azotowe",
+  });
 
   return (
     <Card className="card-interactive">
@@ -139,11 +159,16 @@ function DNAStructureModule() {
               min={0.5}
               step={0.1}
               className="mt-2"
+              aria-label={zoomAriaLabel}
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Switch checked={showBases} onCheckedChange={setShowBases} />
+            <Switch
+              checked={showBases}
+              onCheckedChange={setShowBases}
+              aria-label={basesToggleAriaLabel}
+            />
             <span className="text-sm">
               <FormattedMessage id="microworld.dna.basesToggle" />
             </span>
@@ -214,6 +239,7 @@ function CellStructureModule() {
   const [selectedOrganelle, setSelectedOrganelle] = useState<string | null>(
     null
   );
+  const intl = useIntl();
 
   const organelles = [
     { id: "nucleus", x: 50, y: 50, size: 20, color: "bg-purple-500" },
@@ -237,24 +263,37 @@ function CellStructureModule() {
       <CardContent className="space-y-6">
         <div className="relative w-full max-w-[300px] aspect-square mx-auto bg-gray-100 dark:bg-gray-800 rounded-full border-4 border-gray-300 dark:border-gray-600 overflow-hidden">
           <div className="absolute inset-2 rounded-full border-2 border-dashed border-gray-400" />
-          {organelles.map((organelle) => (
-            <div
-              key={organelle.id}
-              className={`absolute rounded-full cursor-pointer transition-all hover:scale-110 ${
-                organelle.color
-              } ${
-                selectedOrganelle === organelle.id ? "ring-4 ring-primary" : ""
-              }`}
-              style={{
-                left: `${organelle.x}%`,
-                top: `${organelle.y}%`,
-                width: `${organelle.size * 2}px`,
-                height: `${organelle.size * 2}px`,
-                transform: "translate(-50%, -50%)",
-              }}
-              onClick={() => setSelectedOrganelle(organelle.id)}
-            />
-          ))}
+          {organelles.map((organelle) => {
+            const organelleName = intl.formatMessage({
+              id: `microworld.cell.organelle.${organelle.id}`,
+            });
+            return (
+              <div
+                key={organelle.id}
+                className={`absolute rounded-full cursor-pointer transition-all hover:scale-110 ${
+                  organelle.color
+                } ${
+                  selectedOrganelle === organelle.id
+                    ? "ring-4 ring-primary"
+                    : ""
+                }`}
+                style={{
+                  left: `${organelle.x}%`,
+                  top: `${organelle.y}%`,
+                  width: `${organelle.size * 2}px`,
+                  height: `${organelle.size * 2}px`,
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={() => setSelectedOrganelle(organelle.id)}
+                role="button"
+                tabIndex={0}
+                aria-label={organelleName}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && setSelectedOrganelle(organelle.id)
+                }
+              />
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-1 gap-2">
@@ -267,6 +306,11 @@ function CellStructureModule() {
                   : "bg-muted border-border hover:bg-muted/80"
               }`}
               onClick={() => setSelectedOrganelle(organelle.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) =>
+                e.key === "Enter" && setSelectedOrganelle(organelle.id)
+              }
             >
               <div className="flex items-center gap-2">
                 <div className={`w-4 h-4 rounded-full ${organelle.color}`} />
@@ -293,6 +337,11 @@ function CellStructureModule() {
 
 export default function Microworld({ language }: MicroworldProps) {
   const intl = useIntl();
+
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "microworld.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
 
   return (
     <>
@@ -332,7 +381,11 @@ export default function Microworld({ language }: MicroworldProps) {
                       <FormattedMessage id="microworld.readTime" />
                     </span>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={bookmarkAriaLabel}
+                  >
                     <Bookmark className="w-4 h-4" />
                   </Button>
                 </div>
