@@ -68,6 +68,23 @@ export default function EarthSpace({ language }: EarthSpaceProps) {
     return angle;
   };
 
+  const bookmarkAriaLabel = intl.formatMessage({
+    id: "earthSpace.bookmarkAriaLabel",
+    defaultMessage: "Dodaj do zakładek",
+  });
+  const earthTiltAriaLabel = intl.formatMessage({
+    id: "earthSpace.earthTiltAriaLabel",
+    defaultMessage: "Zmień nachylenie osi Ziemi",
+  });
+  const distanceFromSunAriaLabel = intl.formatMessage({
+    id: "earthSpace.distanceFromSunAriaLabel",
+    defaultMessage: "Zmień odległość Ziemi od Słońca",
+  });
+  const timeOfDayAriaLabel = intl.formatMessage({
+    id: "earthSpace.timeOfDayAriaLabel",
+    defaultMessage: "Zmień porę dnia",
+  });
+
   return (
     <>
       <SEO
@@ -114,7 +131,11 @@ export default function EarthSpace({ language }: EarthSpaceProps) {
                       />
                     </span>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={bookmarkAriaLabel}
+                  >
                     <Bookmark className="w-4 h-4" />
                   </Button>
                 </div>
@@ -193,6 +214,7 @@ export default function EarthSpace({ language }: EarthSpaceProps) {
                     min={0}
                     step={0.5}
                     className="w-full"
+                    aria-label={earthTiltAriaLabel}
                   />
                 </div>
 
@@ -417,6 +439,7 @@ export default function EarthSpace({ language }: EarthSpaceProps) {
                       min={50}
                       step={5}
                       className="w-full"
+                      aria-label={distanceFromSunAriaLabel}
                     />
                   </div>
 
@@ -675,6 +698,7 @@ export default function EarthSpace({ language }: EarthSpaceProps) {
                     min={0}
                     step={1}
                     className="w-full"
+                    aria-label={timeOfDayAriaLabel}
                   />
                 </div>
 

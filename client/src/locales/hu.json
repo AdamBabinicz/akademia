@@ -867,5 +867,9 @@
   "planetaryMotion.resetAriaLabel": "Bolygómozgás animáció visszaállítása",
   "scaleExplorer.sliderAriaLabel": "Változtassa meg a világegyetem méretarányát",
   "boiling.temperatureAriaLabel": "Változtassa meg a víz hőmérsékletét",
-  "boiling.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz"
+  "boiling.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "earthSpace.bookmarkAriaLabel": "Hozzáadás a könyvjelzőkhöz",
+  "earthSpace.earthTiltAriaLabel": "A Föld tengelyferdeségének módosítása",
+  "earthSpace.distanceFromSunAriaLabel": "A Föld Naptól való távolságának módosítása",
+  "earthSpace.timeOfDayAriaLabel": "A napszak módosítása"
 }

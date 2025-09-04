@@ -867,5 +867,9 @@
   "planetaryMotion.resetAriaLabel": "Reset the planetary motion animation",
   "scaleExplorer.sliderAriaLabel": "Change the scale of the universe",
   "boiling.temperatureAriaLabel": "Change the water temperature",
-  "boiling.bookmarkAriaLabel": "Add to bookmarks"
+  "boiling.bookmarkAriaLabel": "Add to bookmarks",
+  "earthSpace.bookmarkAriaLabel": "Add to bookmarks",
+  "earthSpace.earthTiltAriaLabel": "Change the Earth's axis tilt",
+  "earthSpace.distanceFromSunAriaLabel": "Change the Earth's distance from the Sun",
+  "earthSpace.timeOfDayAriaLabel": "Change the time of day"
 }
