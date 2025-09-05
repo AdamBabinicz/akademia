@@ -7,7 +7,7 @@ import { ScaleExplorer } from "@/components/InteractiveModules/ScaleExplorer";
 import { Language } from "@/types/education";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
-import scaleHeroImage from "@assets/generated_images/7.png";
+import scaleHeroImage from "@assets/generated_images/7.avif";
 
 interface ScaleProps {
   language: Language;

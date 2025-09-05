@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Atom, Zap, Clock, Bookmark } from "lucide-react";
 import SEO from "@/components/SEO";
-import heroImage from "@assets/generated_images/5.png";
+import heroImage from "@assets/generated_images/5.avif";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";

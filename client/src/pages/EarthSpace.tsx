@@ -11,7 +11,7 @@ import { BilliardBalls } from "@/components/InteractiveModules/BilliardBalls";
 import { PlanetaryMotion } from "@/components/InteractiveModules/PlanetaryMotion";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
-import earthSpaceHeroImage from "@assets/generated_images/6.png";
+import earthSpaceHeroImage from "@assets/generated_images/6.avif";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface EarthSpaceProps {

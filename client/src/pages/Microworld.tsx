@@ -15,7 +15,7 @@ import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
-import heroImage from "@assets/generated_images/9.png";
+import heroImage from "@assets/generated_images/9.avif";
 
 interface MicroworldProps {
   language: Language;

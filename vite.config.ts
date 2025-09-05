@@ -2,24 +2,31 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
+const projectRootDir = import.meta.dirname;
+
 export default defineConfig({
   plugins: [react()],
+
+  assetsInclude: ["**/*.avif"],
+
+  root: path.resolve(projectRootDir, "client"),
+
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@": path.resolve(projectRootDir, "client", "src"),
+      "@shared": path.resolve(projectRootDir, "shared"),
+      "@assets": path.resolve(projectRootDir, "attached_assets"),
     },
   },
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
+
   server: {
     fs: {
-      strict: true,
-      deny: ["**/.*"],
+      allow: [projectRootDir],
     },
+  },
+
+  build: {
+    outDir: path.resolve(projectRootDir, "dist/public"),
+    emptyOutDir: true,
   },
 });

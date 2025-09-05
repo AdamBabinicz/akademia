@@ -26,7 +26,7 @@ import { Badge } from "@/components/ui/badge";
 import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
 import { SCIENCE_FACTS, ScienceFact } from "@/lib/constants";
-import factsHeroImage from "@assets/generated_images/8.png";
+import factsHeroImage from "@assets/generated_images/8.avif";
 
 interface FactsProps {
   language: Language;

@@ -7,7 +7,7 @@ import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
-import heroImage1 from "@assets/generated_images/2.png";
+import heroImage1 from "@assets/generated_images/2.avif";
 
 interface ElectromagnetismProps {
   language: Language;

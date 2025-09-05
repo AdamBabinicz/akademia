@@ -24,7 +24,7 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
-import heroImage from "@assets/generated_images/18.png";
+import heroImage from "@assets/generated_images/18.avif";
 
 interface PerceptionProps {
   language: Language;

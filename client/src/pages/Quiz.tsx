@@ -6,7 +6,7 @@ import { AdaptiveQuiz } from "@/components/InteractiveModules/AdaptiveQuiz";
 import { Language } from "@/types/education";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
-import quizHeroImage from "@assets/generated_images/10.png";
+import quizHeroImage from "@assets/generated_images/10.avif";
 
 interface QuizProps {
   language: Language;

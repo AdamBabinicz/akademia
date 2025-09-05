@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { FormattedMessage, useIntl } from "react-intl";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
-import heroImage from "@assets/generated_images/Interactive_physics_learning_hero_dc15d5c5.png";
+import heroImage from "@assets/generated_images/19.avif";
 import {
   Zap,
   Globe,

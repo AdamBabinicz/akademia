@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
-import heroImage from "@assets/generated_images/15.png";
+import heroImage from "@assets/generated_images/15.avif";
 
 interface TasteProps {
   language: Language;

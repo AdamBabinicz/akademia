@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
-import heroImage from "@assets/generated_images/11.png";
+import heroImage from "@assets/generated_images/11.avif";
 
 interface BoilingProps {
   language: Language;

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
 import { Clock, Bookmark, ChevronRight } from "lucide-react";
-import electricityImage from "@assets/generated_images/2.png";
+import electricityImage from "@assets/generated_images/2.avif";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DailyFact } from "@/components/DailyFact";

@@ -14,7 +14,7 @@ import { DailyFact } from "@/components/DailyFact";
 import { Language } from "@/types/education";
 import { FormattedMessage, useIntl } from "react-intl";
 import SEO from "@/components/SEO";
-import heroImage from "@assets/generated_images/1.jpeg";
+import heroImage from "@assets/generated_images/1.avif";
 
 interface MechanicsProps {
   language: Language;
